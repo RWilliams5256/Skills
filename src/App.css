@@ -10,12 +10,12 @@
 .App-logo2 {
   text-align: left;
   height: 80px;  
-  display: inline-table;
+  float: left;
 }
 
 .App-header {
   background-color: #EFE3D8;
-  height: 150px;
+  height: 100px;
   padding: 20px;
   color: white;
 }

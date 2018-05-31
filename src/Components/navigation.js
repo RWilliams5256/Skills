@@ -9,7 +9,8 @@ class Navigation extends React.Component{
    render() {
         return (
         <div>
-            <h2 id="Nav-Item"> Recruiting </h2> &nbsp;&nbsp;
+
+             &nbsp;&nbsp; &nbsp;&nbsp;<h2 id="Nav-Item"> Recruiting </h2> &nbsp;&nbsp;
             <h2 id="Nav-Item"> Search </h2>&nbsp;&nbsp;
             <h2 id="Nav-Item"> Upload </h2> 
         </div>
