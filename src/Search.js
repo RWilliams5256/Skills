@@ -51,12 +51,6 @@ class Search extends Component {
     return (
       <div className='search'>
         <div className='row'>
-
-          <div className='col s12'>
-            <h5>Filter On:</h5>
-            <Accordion/>
-          </div>
-
           <div className='col s12'>
             <h5>Current Criteria:</h5>
             <div className='row'>
@@ -66,6 +60,11 @@ class Search extends Component {
                 }
               </div>
             </div>
+          </div>
+
+          <div className='col s12'>
+            <h5>Filter On:</h5>
+            <Accordion/>
           </div>
 
           <div className='col s12'>
