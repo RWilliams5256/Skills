@@ -13,7 +13,7 @@ const ResourceCard = props => (
                 <p>{props.status}</p>
             </div>
             <div className="card-action">
-                <a href="#">Resume</a>
+                <a href="">Resume</a>
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Accordion from './Components/Accordion';
-import ResourceCard from './Components/ResourceCard';
-import './search.css';
+import Accordion from '../Subcomponents/Accordion';
+import ResourceCard from '../Subcomponents/ResourceCard';
+import './Search.css';
 
 
 class Search extends Component {
