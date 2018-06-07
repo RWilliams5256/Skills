@@ -1,3 +1,9 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
 .App {
   text-align: left;
 }
@@ -9,7 +15,7 @@
 
 .App-logo2 {
   text-align: left;
-  height: 80px;  
+  height: 80px;
   float: left;
 }
 
