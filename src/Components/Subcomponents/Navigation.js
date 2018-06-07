@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import logo2 from '../../Images/logo2.png';
+import logo2 from '../../images/logo2.png';
 import './Navigation.css';
 
 
@@ -9,13 +8,13 @@ class Navigation extends Component{
    render() {
         return (
         <div>
-            <Link to='/'>
+            <a href='/'>
                 <img src={logo2} className="App-logo2" alt="logo2"/>
-            </Link>
+            </a>
 
-             &nbsp;&nbsp; &nbsp;&nbsp;<h2 id="Nav-Item"><Link to='/recruiting'>Recruiting </Link></h2> &nbsp;&nbsp;
-            <h2 id="Nav-Item"><Link to='/search'>Search </Link></h2>&nbsp;&nbsp;
-            <h2 id="Nav-Item"><Link to='/import'>Upload </Link></h2>
+             &nbsp;&nbsp; &nbsp;&nbsp;<a id="Nav-Item" href ='/recruiting'><h4>Recruiting</h4></a> &nbsp;&nbsp;
+            <a id="Nav-Item" href='/'><h4>Search </h4></a>&nbsp;&nbsp;
+            <a id="Nav-Item" href='/import'><h4>Upload </h4></a>
         </div>
                );
     }
