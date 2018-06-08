@@ -6,6 +6,7 @@ class Recruiting extends Component {
     return (
 
       <h5>welcome to the Recruiting page!</h5>
+      
     )
   };
 }
