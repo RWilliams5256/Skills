@@ -14,9 +14,11 @@ class Upload extends Component{
 
     render() {
         return(
-            <form>
-                <label for="upload">Choose file to upload</label>
-                <input name="upload" type="file" accept=".csv" />
+            <form>  
+                <label id="#bb">Choose file to upload              
+                    <input type="file" id="file" size="60" accept=".csv"/>
+               </label>
+               <p/>
                 <div>
                     <button>Submit</button>
                 </div>

@@ -6,7 +6,7 @@ class Import extends Component {
   render() {
     return (
       <div>
-          <h5>welcome to the import page!</h5>      
+        <p/>             
         <Upload />
       </div>
     )
