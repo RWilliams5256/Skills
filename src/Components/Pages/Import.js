@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import './Import.css';
+import Upload from'../subcomponents/Upload';
 
 class Import extends Component {
   render() {
     return (
-
-      <h5>welcome to the import page!</h5>
+      <div>
+        <p/>             
+        <Upload />
+      </div>
     )
   };
 }
