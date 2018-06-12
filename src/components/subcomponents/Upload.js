@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import Papa from 'papaparse';
 import './Upload.css';
+
 
 class Upload extends Component{
      
@@ -7,6 +9,7 @@ class Upload extends Component{
         super(props);   
       
         this.handleFiles = this.handleFiles.bind(this);
+        this.processUpload = this.processUpload.bind(this); 
 
         }
 
@@ -26,6 +29,15 @@ class Upload extends Component{
 
     }  
 
+    processUpload = data => {
+        var file = document.getElementById("myFile").files[0];
+        Papa.parse(file,  {
+            complete: function(results) {
+                alert(results.data);
+            }
+        });
+    }
+
     render() {
         return(
             <form>
@@ -39,8 +51,11 @@ class Upload extends Component{
                     <p>Please select a file to upload </p>
                </div>
                 <div>
-                    <button classname="uploadButton">Upload</button>
-                </div>
+                    <button classname="uploadButton" onClick={this.processUpload}>Upload</button>
+                </div>  
+                <div id="results">
+
+                </div>             
             </form>
 
         );
