@@ -1,0 +1,10 @@
+div{
+    text-align: center;
+    margin: auto;
+}
+upload{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;  
+}

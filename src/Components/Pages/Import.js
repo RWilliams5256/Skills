@@ -5,9 +5,9 @@ import Upload from'../subcomponents/Upload';
 class Import extends Component {
   render() {
     return (
-      <div>
+      <div >
         <p/>             
-        <Upload />
+        <Upload classname="upload" />
       </div>
     )
   };
