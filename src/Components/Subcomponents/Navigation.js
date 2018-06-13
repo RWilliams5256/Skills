@@ -18,6 +18,6 @@ class Navigation extends Component{
         </div>
                );
     }
-}
+} 
 
 export default Navigation;

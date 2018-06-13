@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { Row, Col, Tag } from 'react-materialize';
+import $ from 'jquery';
+
 import Accordion from '../subcomponents/Accordion';
 import ResourceCard from '../subcomponents/ResourceCard';
 import './Search.css';
@@ -6,8 +9,9 @@ import './Search.css';
 
 class Search extends Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+    this.criteriaList =[]
     this.state = {
       resources: [
         {
@@ -16,7 +20,7 @@ class Search extends Component {
           position: 'BA',
           email: 'ryanrodwell@gmail.com',
           phone: '12346789',
-          school: 'Gerogia Tech',
+          school: 'Georgia Tech',
           status: 'employee',
 
         },
@@ -26,56 +30,50 @@ class Search extends Component {
           position: 'Developer',
           email: 'jdoe@gmail.com',
           phone: '12346789',
-          school: 'Gerogia Southern',
+          school: 'Georgia Southern',
           status: 'employee',
 
         },
       ],
-      criteriaList: [
-        {
-          uKey: 0,
-          name: 'Javascript'
-        },
-        {
-          uKey: 1,
-          name: 'React'
-        },
-        {
-          uKey: 2,
-          name: 'Firebase'
-        }
-      ]
-    }
+      criteriaList: [], 
+    };
+
+    this.handler = this.handler.bind(this);
   }
+
+  handler() {
+    console.log(this.name)
+  }
+
   render() {
     return (
       <div className='search'>
-        <div className='row'>
-          <div className='col s12'>
+        <Row>
+          <Col s={12}>
             <h5>Current Criteria:</h5>
-            <div className='row'>
-              <div className='col s12'>
+            <Row>
+              <Col s={12}>
                 {
-                  this.state.criteriaList.map(criteria => <a className='btn' key={criteria.uKey}>{criteria.name}</a>)
+                  this.state.criteriaList.map(criteria => <Tag>{criteria}</Tag>)
                 }
-              </div>
-            </div>
-          </div>
+              </Col>
+            </Row>
+          </Col>
 
-          <div className='col s12'>
+          <Col s={12}>
             <h5>Filter On:</h5>
-            <Accordion/>
-          </div>
+            <Accordion handler={this.handler}/>
+          </Col>
 
-          <div className='col s12'>
+          <Col s={12}>
             <h5>Matching Resources:</h5>
-            <div className='row'>
+            <Row>
               {
                 this.state.resources.map(resource => <ResourceCard key={resource.uKey} name={resource.name} email={resource.email} phone={resource.phone} school={resource.school} position={resource.position} status={resource.status}/>)
               }
-            </div>
-          </div>
-        </div>
+            </Row>
+          </Col>
+        </Row>
       </div>
     );
 
