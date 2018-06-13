@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Tag } from 'react-materialize';
+import $ from 'jquery';
 
 import Accordion from '../subcomponents/Accordion';
 import ResourceCard from '../subcomponents/ResourceCard';
@@ -8,8 +9,9 @@ import './Search.css';
 
 class Search extends Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+    this.criteriaList =[]
     this.state = {
       resources: [
         {
@@ -33,14 +35,15 @@ class Search extends Component {
 
         },
       ],
-      criteriaList: ['Javascript','React','Firebase'], 
-    }
+      criteriaList: [], 
+    };
+
+    this.handler = this.handler.bind(this);
   }
 
-  componentDidUpdate() {
-
+  handler() {
+    console.log(this.name)
   }
-
 
   render() {
     return (
@@ -59,7 +62,7 @@ class Search extends Component {
 
           <Col s={12}>
             <h5>Filter On:</h5>
-            <Accordion/>
+            <Accordion handler={this.handler}/>
           </Col>
 
           <Col s={12}>
