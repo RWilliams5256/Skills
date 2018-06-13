@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-materialize';
+import { Row, Col, Tag } from 'react-materialize';
 
 import Accordion from '../subcomponents/Accordion';
 import ResourceCard from '../subcomponents/ResourceCard';
@@ -18,7 +18,7 @@ class Search extends Component {
           position: 'BA',
           email: 'ryanrodwell@gmail.com',
           phone: '12346789',
-          school: 'Gerogia Tech',
+          school: 'Georgia Tech',
           status: 'employee',
 
         },
@@ -28,27 +28,20 @@ class Search extends Component {
           position: 'Developer',
           email: 'jdoe@gmail.com',
           phone: '12346789',
-          school: 'Gerogia Southern',
+          school: 'Georgia Southern',
           status: 'employee',
 
         },
       ],
-      criteriaList: [
-        {
-          uKey: 0,
-          name: 'Javascript'
-        },
-        {
-          uKey: 1,
-          name: 'React'
-        },
-        {
-          uKey: 2,
-          name: 'Firebase'
-        }
-      ], 
+      criteriaList: ['Javascript','React','Firebase'], 
     }
   }
+
+  componentDidUpdate() {
+
+  }
+
+
   render() {
     return (
       <div className='search'>
@@ -58,7 +51,7 @@ class Search extends Component {
             <Row>
               <Col s={12}>
                 {
-                  this.state.criteriaList.map(criteria => <a className='btn' key={criteria.uKey}>{criteria.name}</a>)
+                  this.state.criteriaList.map(criteria => <Tag>{criteria}</Tag>)
                 }
               </Col>
             </Row>
