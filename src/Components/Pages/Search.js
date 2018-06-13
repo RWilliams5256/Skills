@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Row, Col } from 'react-materialize';
+
 import Accordion from '../subcomponents/Accordion';
 import ResourceCard from '../subcomponents/ResourceCard';
 import './Search.css';
@@ -44,38 +46,38 @@ class Search extends Component {
           uKey: 2,
           name: 'Firebase'
         }
-      ]
+      ], 
     }
   }
   render() {
     return (
       <div className='search'>
-        <div className='row'>
-          <div className='col s12'>
+        <Row>
+          <Col s={12}>
             <h5>Current Criteria:</h5>
-            <div className='row'>
-              <div className='col s12'>
+            <Row>
+              <Col s={12}>
                 {
                   this.state.criteriaList.map(criteria => <a className='btn' key={criteria.uKey}>{criteria.name}</a>)
                 }
-              </div>
-            </div>
-          </div>
+              </Col>
+            </Row>
+          </Col>
 
-          <div className='col s12'>
+          <Col s={12}>
             <h5>Filter On:</h5>
             <Accordion/>
-          </div>
+          </Col>
 
-          <div className='col s12'>
+          <Col s={12}>
             <h5>Matching Resources:</h5>
-            <div className='row'>
+            <Row>
               {
                 this.state.resources.map(resource => <ResourceCard key={resource.uKey} name={resource.name} email={resource.email} phone={resource.phone} school={resource.school} position={resource.position} status={resource.status}/>)
               }
-            </div>
-          </div>
-        </div>
+            </Row>
+          </Col>
+        </Row>
       </div>
     );
 
