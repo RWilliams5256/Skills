@@ -21,7 +21,7 @@ class Accordion extends Component {
               {this.state.roles.map((role) =>
                 <p>
                     <label>
-                        <input type="checkbox" />
+                        <input type="checkbox" class="filled-in"/>
                         <span>{role}</span>
                     </label>
                 </p>
