@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Row, Col, Collapsible, CollapsibleItem } from 'react-materialize';
 import $ from 'jquery';
 
+import './Accordion.css';
+
+
 class Accordion extends Component {
   constructor() {
     super();
