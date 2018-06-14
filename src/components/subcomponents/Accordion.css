@@ -1,3 +1,7 @@
+.collapsible-body {
+    text-align: left;
+}
+
 .collapsible-body p {
     margin: 5px;
     display: inline-block;
