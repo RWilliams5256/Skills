@@ -50,7 +50,7 @@ class Upload extends Component{
                     // [12] = majors
                     // [15] = applied to name
                 }
-                
+
 
             }
         });
@@ -67,7 +67,8 @@ class Upload extends Component{
 
  
     render() {
-        return(
+        return(           
+
             <form>
                 <div> 
                     <label id="#bb">Choose file to upload              
