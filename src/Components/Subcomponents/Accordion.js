@@ -4,6 +4,9 @@ import $ from 'jquery';
 import { DB_CONFIG } from '../../config/db_config';
 import firebase from 'firebase';
 
+import './Accordion.css';
+
+
 class Accordion extends Component {
   constructor() {
     super();
