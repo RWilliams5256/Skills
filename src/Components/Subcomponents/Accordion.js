@@ -33,6 +33,7 @@ class Accordion extends Component {
 		this.db.collection('lists').onSnapshot(function(querySnapshot) {
 			querySnapshot.forEach(function(doc) {
 
+        console.log(doc.data())
         var listName = doc._document.data.internalValue.root.value.internalValue;
         var name = doc._document.data.internalValue.root.right.value.internalValue;
 
@@ -48,9 +49,9 @@ class Accordion extends Component {
 			});
     });
 
-    console.log(allSkills);
-    console.log(allStatuses);
-    console.log(allRoles);
+    // console.log(allSkills);
+    // console.log(allStatuses);
+    // console.log(allRoles);
 
     this.setState(() => ({
       skills: allSkills,
@@ -62,7 +63,7 @@ class Accordion extends Component {
 	}
 
   componentDidMount() {
-    console.log('update',this.state)
+    // console.log('update',this.state)
   }
 	// addPerson(person) {
 	// 	//this.db.push().set({firstName:person,lastName:person});
