@@ -1,28 +1,96 @@
 import React, { Component } from 'react';
 import { Row, Col, Collapsible, CollapsibleItem } from 'react-materialize';
 import $ from 'jquery';
+import { DB_CONFIG } from '../../config/db_config';
+import firebase from 'firebase';
 
 class Accordion extends Component {
   constructor() {
     super();
     this.state = {
-      roles: [
-        'Manager',
-        'Sr. Consultant',
-        'Jr. Consultant',
-        'Analyst/Developer'
-      ],
-      skills: ['Java', 'Javascript', 'React', 'Firebase', 'NodeJS'],
-      experienceLevel: [
-        'New Hire',
-        'Junior',
-        'Mid-level',
-        'Senior',
-        'College Graduate'
-      ],
-      statuses: ['Active', 'Inactive']
+      roles: [],
+      skills: [],
+      experienceLevel: [],
+      statuses: []
     };
+
+    if (!firebase.apps.length) {
+			firebase.initializeApp(DB_CONFIG);
+		}
+		this.db = firebase.firestore();
+		const settings = { timestampsInSnapshots: true };
+		this.db.settings(settings);
   }
+
+  componentWillMount() {
+    var allSkills = [];
+    var allStatuses = [];
+    var allRoles = [];
+		this.db.collection('lists').onSnapshot(function(querySnapshot) {
+			querySnapshot.forEach(function(doc) {
+
+        var listName = doc._document.data.internalValue.root.value.internalValue;
+        var name = doc._document.data.internalValue.root.right.value.internalValue;
+
+        if(listName === "skills") {
+          allSkills.push(name)
+        } else if (listName === "status") {
+          allStatuses.push(name)
+        } else if (listName === "roles") {
+          allRoles.push(name)
+        }
+			});
+    });
+
+    console.log(allSkills);
+    console.log(allStatuses);
+    console.log(allRoles);
+
+    this.setState(() => ({
+      skills: allSkills,
+      roles: allRoles,
+      statuses: allStatuses
+		}));
+
+    console.log(this.state)
+	}
+
+  componentDidMount() {
+    console.log("update",this.state)
+  }
+	// addPerson(person) {
+	// 	//this.db.push().set({firstName:person,lastName:person});
+	// 	this.db
+	// 		.collection('people')
+	// 		.doc(person.personId)
+	// 		.set({
+	// 			firstName: person.firstName,
+	// 			lastName: person.lastName
+	// 		})
+	// 		.then(function() {
+	// 			console.log('Successfully added person: ' + person.firstName);
+	// 			const allPeople = this.state.people;
+
+	// 			var currentSnap = snap => {
+	// 				allPeople.push({
+	// 					personId: snap.key,
+	// 					firstName: snap.val().firstName,
+	// 					lastName: snap.val().lastName
+	// 				}).then(
+	// 					this.setState({
+	// 						people: allPeople
+	// 					}));
+	// 			};
+	// 		})
+	// 		.catch(function(error) {
+	// 			console.error('Error writing document :', error);
+	// 		});
+	// }
+
+	removePerson(personId) {
+		//this.db.child(personId).remove();
+	}
+
 
   handleEvent() {
     // $('input[type="checkbox"]').change(function () {
@@ -44,6 +112,8 @@ class Accordion extends Component {
   sendToParent(value){
     this.props.handler(value);
   }
+
+
 
   render() {
     return (
