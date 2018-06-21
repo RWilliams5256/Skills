@@ -29,18 +29,21 @@ class Accordion extends Component {
     var allSkills = [];
     var allStatuses = [];
     var allRoles = [];
+    var allLevels =[];
 		this.db.collection('lists').onSnapshot(function(querySnapshot) {
 			querySnapshot.forEach(function(doc) {
 
         var listName = doc._document.data.internalValue.root.value.internalValue;
         var name = doc._document.data.internalValue.root.right.value.internalValue;
 
-        if(listName === "skills") {
+        if(listName === 'skills') {
           allSkills.push(name)
-        } else if (listName === "status") {
+        } else if (listName === 'status') {
           allStatuses.push(name)
-        } else if (listName === "roles") {
+        } else if (listName === 'roles') {
           allRoles.push(name)
+        } else if (listName === 'experience level') {
+          allLevels.push(name)
         }
 			});
     });
@@ -59,7 +62,7 @@ class Accordion extends Component {
 	}
 
   componentDidMount() {
-    console.log("update",this.state)
+    console.log('update',this.state)
   }
 	// addPerson(person) {
 	// 	//this.db.push().set({firstName:person,lastName:person});
@@ -96,9 +99,9 @@ class Accordion extends Component {
 
 
   handleEvent() {
-    // $('input[type="checkbox"]').change(function () {
-    //     if ($('input[type="checkbox"]:checked')) {
-    //         // $('input[type="checkbox"]:checked').each(function(){
+    // $('input[type='checkbox']').change(function () {
+    //     if ($('input[type='checkbox']:checked')) {
+    //         // $('input[type='checkbox']:checked').each(function(){
     //         //     console.log(this.name);
     //         // });
     //         // console.log(this.name);
@@ -109,7 +112,7 @@ class Accordion extends Component {
         selected.push($(this).attr('name'));
     });
 
-    console.log("selected", selected)
+    console.log('selected', selected)
   }
 
   sendToParent(value){
