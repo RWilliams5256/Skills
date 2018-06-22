@@ -26,36 +26,37 @@ class Accordion extends Component {
   }
 
   componentWillMount() {
-    var allSkills = [];
-    var allStatuses = [];
-    var allRoles = [];
-    var allLevels =[];
+    // var allSkills = [];
+    // var allStatuses = [];
+    // var allRoles = [];
+    // var allLevels =[];
+
 		this.db.collection('lists').onSnapshot(function(querySnapshot) {
 			querySnapshot.forEach(function(doc) {
 
         console.log(doc.data())
-        var listName = doc._document.data.internalValue.root.value.internalValue;
-        var name = doc._document.data.internalValue.root.right.value.internalValue;
+    //     var listName = doc._document.data.internalValue.root.value.internalValue;
+    //     var name = doc._document.data.internalValue.root.right.value.internalValue;
 
-        if(listName === 'skills') {
-          allSkills.push(name)
-        } else if (listName === 'status') {
-          allStatuses.push(name)
-        } else if (listName === 'roles') {
-          allRoles.push(name)
-        } else if (listName === 'experience level') {
-          allLevels.push(name)
-        }
+    //     if(listName === 'skills') {
+    //       allSkills.push(name)
+    //     } else if (listName === 'status') {
+    //       allStatuses.push(name)
+    //     } else if (listName === 'roles') {
+    //       allRoles.push(name)
+    //     } else if (listName === 'experience level') {
+    //       allLevels.push(name)
+    //     }
 			});
     });
 
-    this.setState(() => ({
-      skills: allSkills,
-      roles: allRoles,
-      statuses: allStatuses
-		}));
+    // this.setState(() => ({
+    //   skills: allSkills,
+    //   roles: allRoles,
+    //   statuses: allStatuses
+		// }));
 
-    console.log(this.state)
+    // console.log(this.state)
 	}
 
   handleEvent() {
