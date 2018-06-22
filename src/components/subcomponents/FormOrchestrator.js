@@ -2,31 +2,31 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PersonInfoForm from '../subcomponents/PersonInfoForm'
-import SkillsForm from '../subcomponents/SkillsForm'
-import ResumeForm from '../subcomponents/ResumeForm'
+import PersonInfoForm from './PersonInfoForm'
+import SkillsForm from './SkillsForm'
+import ResumeForm from './ResumeForm'
 // import WizardForm from "./Recruiting";
 
 
 class FormOrchestrator extends Component {
 
-constructor(props){
-  super(props);
-  this.nextPage = this.nextPage.bind(this)
-    this.previousPage = this.previousPage.bind(this)
-    this.state = {
-      page: 1
-    }
+  constructor(props){
+    super(props);
+    this.nextPage = this.nextPage.bind(this)
+      this.previousPage = this.previousPage.bind(this)
+      this.state = {
+        page: 1
+      }
 
-}
+  }
 
-nextPage() {
-  this.setState({ page: this.state.page + 1 })
-}
+  nextPage() {
+    this.setState({ page: this.state.page + 1 })
+  }
 
-previousPage() {
-  this.setState({ page: this.state.page - 1 })
-}
+  previousPage() {
+    this.setState({ page: this.state.page - 1 })
+  }
 
   render() {
     const { onSubmit } = this.props
@@ -41,6 +41,7 @@ previousPage() {
     )
   };
 }
+
 FormOrchestrator.propTypes = {
   onSubmit: PropTypes.func.isRequired
 }
