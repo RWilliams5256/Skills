@@ -49,10 +49,6 @@ class Accordion extends Component {
 			});
     });
 
-    // console.log(allSkills);
-    // console.log(allStatuses);
-    // console.log(allRoles);
-
     this.setState(() => ({
       skills: allSkills,
       roles: allRoles,
@@ -61,43 +57,6 @@ class Accordion extends Component {
 
     console.log(this.state)
 	}
-
-  componentDidMount() {
-    // console.log('update',this.state)
-  }
-	// addPerson(person) {
-	// 	//this.db.push().set({firstName:person,lastName:person});
-	// 	this.db
-	// 		.collection('people')
-	// 		.doc(person.personId)
-	// 		.set({
-	// 			firstName: person.firstName,
-	// 			lastName: person.lastName
-	// 		})
-	// 		.then(function() {
-	// 			console.log('Successfully added person: ' + person.firstName);
-	// 			const allPeople = this.state.people;
-
-	// 			var currentSnap = snap => {
-	// 				allPeople.push({
-	// 					personId: snap.key,
-	// 					firstName: snap.val().firstName,
-	// 					lastName: snap.val().lastName
-	// 				}).then(
-	// 					this.setState({
-	// 						people: allPeople
-	// 					}));
-	// 			};
-	// 		})
-	// 		.catch(function(error) {
-	// 			console.error('Error writing document :', error);
-	// 		});
-	// }
-
-	removePerson(personId) {
-		//this.db.child(personId).remove();
-	}
-
 
   handleEvent() {
     // $('input[type='checkbox']').change(function () {
