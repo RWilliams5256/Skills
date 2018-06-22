@@ -5,11 +5,7 @@ import PropTypes from 'prop-types';
 import PersonInfoForm from '../subcomponents/PersonInfoForm'
 import SkillsForm from '../subcomponents/SkillsForm'
 import ResumeForm from '../subcomponents/ResumeForm'
-import { Provider } from "react-redux";
-import { Values } from "redux-form-website-template";
-import store from "../subcomponents/store";
-import showResults from "../subcomponents/showResults";
-import WizardForm from "./Recruiting";
+// import WizardForm from "./Recruiting";
 
 
 class FormOrchestrator extends Component {

@@ -8,8 +8,8 @@ import './Accordion.css';
 
 
 class Accordion extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       roles: [],
       skills: [],
@@ -48,12 +48,11 @@ class Accordion extends Component {
     console.log(allSkills);
     console.log(allStatuses);
     console.log(allRoles);
-
-    this.setState(() => ({
-      skills: allSkills,
-      roles: allRoles,
-      statuses: allStatuses
-		}));
+    this.setState((prevState) => ({
+      skills: prevState.skills.pus,
+      roles: prevState.roles.concat(allRoles),
+      statuses: prevState.statuses.concat(allStatuses)
+    }));
 
     console.log(this.state)
 	}
