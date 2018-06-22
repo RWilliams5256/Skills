@@ -34,7 +34,7 @@ class Accordion extends Component {
 		this.db.collection('lists').onSnapshot(function(querySnapshot) {
 			querySnapshot.forEach(function(doc) {
 
-        console.log(doc.data())
+        console.log(doc.id, " => ", doc.data());
     //     var listName = doc._document.data.internalValue.root.value.internalValue;
     //     var name = doc._document.data.internalValue.root.right.value.internalValue;
 
