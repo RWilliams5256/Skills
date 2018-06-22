@@ -6,6 +6,7 @@ import Navigation from'./subcomponents/Navigation';
 class App extends Component {
   render() {
     return (
+
       <div className="App">
         <header className="App-header">
           <Navigation />
