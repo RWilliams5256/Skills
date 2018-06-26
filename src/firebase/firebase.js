@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import firebase from 'firebase';
 import 'firebase/auth';
 
 const config = {
@@ -11,12 +11,16 @@ const config = {
     messagingSenderId: "164035676451"
   };
 
-  if(!firebase.apps.length) {
-      firebase.initalzeApp(config);
-  }
+  if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+}
 
   const auth = firebase.auth();
+  const db = firebase.firestore();
+  const settings = { timestampsInSnapshots: true };
+  db.settings(settings);
 
   export {
       auth,
+      db
   };

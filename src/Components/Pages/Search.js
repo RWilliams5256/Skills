@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Tag } from 'react-materialize';
-// import $ from 'jquery';
+import helpers from '../../utils/helpers'
 
 import Accordion from '../subcomponents/Accordion';
 import ResourceCard from '../subcomponents/ResourceCard';
@@ -41,7 +41,15 @@ class Search extends Component {
     this.handler = this.handler.bind(this);
   }
 
-  
+  componentWillMount() {
+    console.log('Search will mount')
+    helpers.dbCallforLists();
+  }
+
+  componentDidMount(){
+    console.log('search mounted')
+  }
+
   handler() {
     console.log(this.name)
   }

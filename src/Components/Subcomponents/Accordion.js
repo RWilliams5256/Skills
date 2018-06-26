@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Collapsible, CollapsibleItem } from 'react-materialize';
 import $ from 'jquery';
-import { DB_CONFIG } from '../../config/db_config';
-import firebase from 'firebase';
 
 import './Accordion.css';
 
@@ -17,47 +15,16 @@ class Accordion extends Component {
       statuses: []
     };
 
-    if (!firebase.apps.length) {
-			firebase.initializeApp(DB_CONFIG);
-		}
-		this.db = firebase.firestore();
-		const settings = { timestampsInSnapshots: true };
-		this.db.settings(settings);
   }
 
   componentWillMount() {
-    // var allSkills = [];
-    // var allStatuses = [];
-    // var allRoles = [];
-    // var allLevels =[];
+    console.log('accordion will mount')
+    console.log(sessionStorage.getItem('allLists'))
+  }
 
-		this.db.collection('lists').onSnapshot(function(querySnapshot) {
-			querySnapshot.forEach(function(doc) {
-
-        console.log(doc.id, " => ", doc.data());
-    //     var listName = doc._document.data.internalValue.root.value.internalValue;
-    //     var name = doc._document.data.internalValue.root.right.value.internalValue;
-
-    //     if(listName === 'skills') {
-    //       allSkills.push(name)
-    //     } else if (listName === 'status') {
-    //       allStatuses.push(name)
-    //     } else if (listName === 'roles') {
-    //       allRoles.push(name)
-    //     } else if (listName === 'experience level') {
-    //       allLevels.push(name)
-    //     }
-			});
-    });
-
-    // this.setState(() => ({
-    //   skills: allSkills,
-    //   roles: allRoles,
-    //   statuses: allStatuses
-		// }));
-
-    // console.log(this.state)
-	}
+  componentDidMount() {
+    console.log('Accordion mounted')
+  }
 
   handleEvent() {
     // $('input[type='checkbox']').change(function () {
