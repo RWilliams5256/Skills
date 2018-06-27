@@ -12,7 +12,8 @@ class Accordion extends Component {
       roles: [],
       skills: [],
       experienceLevel: [],
-      statuses: []
+      statuses: [],
+      allLists: sessionStorage.getItem('allLists')
     };
 
   }
@@ -24,6 +25,7 @@ class Accordion extends Component {
 
   componentDidMount() {
     console.log('Accordion mounted')
+    console.log(this.state.allLists);
   }
 
   handleEvent() {
