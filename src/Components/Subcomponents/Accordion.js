@@ -9,46 +9,32 @@ class Accordion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      roles: [],
+      roles: ['test','test2'],
       skills: [],
       experienceLevel: [],
       statuses: [],
-      allLists: sessionStorage.getItem('allLists')
     };
-
   }
 
   componentWillMount() {
     console.log('accordion will mount')
-    console.log(sessionStorage.getItem('allLists'))
+    var categoryList = sessionStorage.getItem('categories').split(',').sort()
+    this.setState({'allCategories': categoryList})
   }
 
   componentDidMount() {
     console.log('Accordion mounted')
-    console.log(this.state.allLists);
   }
 
-  handleEvent() {
-    // $('input[type='checkbox']').change(function () {
-    //     if ($('input[type='checkbox']:checked')) {
-    //         // $('input[type='checkbox']:checked').each(function(){
-    //         //     console.log(this.name);
-    //         // });
-    //         // console.log(this.name);
-    //     }
-    // })
+  handleEvent(e) {
     var selected =[]
-    $('input[type="checkbox"]:checked').each(function () {
-        selected.push($(this).attr('name'));
+    $('input[type="checkbox"]:checked').each( () => {
+        selected.push($(e.target).attr('name'));
     });
 
     console.log('selected', selected)
+    sessionStorage.setItem('currentCriteria', selected)
   }
-
-  sendToParent(value){
-    this.props.handler(value);
-  }
-
 
 
   render() {
@@ -56,46 +42,18 @@ class Accordion extends Component {
       <Row>
         <Col s={12}>
           <Collapsible>
-            <CollapsibleItem header='Role'>
-              {this.state.roles.map(role => (
-                <p>
-                  <label>
-                    <input type='checkbox' className='filled-in' name={role} onChange={this.handleEvent}/>
-                    <span>{role}</span>
-                  </label>
-                </p>
-              ))}
-            </CollapsibleItem>
-            <CollapsibleItem header='Skills'>
-              {this.state.skills.map(skill => (
-                <p>
-                  <label>
-                    <input name='skills' type='checkbox' />
-                    <span>{skill}</span>
-                  </label>
-                </p>
-              ))}
-            </CollapsibleItem>
-            <CollapsibleItem header='Experience Level'>
-              {this.state.experienceLevel.map(level => (
-                <p>
-                  <label>
-                    <input type='checkbox' />
-                    <span>{level}</span>
-                  </label>
-                </p>
-              ))}
-            </CollapsibleItem>
-            <CollapsibleItem header='Status'>
-              {this.state.statuses.map(status => (
-                <p>
-                  <label>
-                    <input type='checkbox' />
-                    <span>{status}</span>
-                  </label>
-                </p>
-              ))}
-            </CollapsibleItem>
+            {this.state.allCategories.map((category,i) => (
+              <CollapsibleItem header={category.toUpperCase()} key={i}>
+                {this.state.roles.map((role,i) => (
+                  <p key={i}>
+                    <label>
+                      <input type='checkbox' className='filled-in' id={role} name={role} onClick={this.handleEvent} onChange={this.props.handler}/>
+                      <span>{role}</span>
+                    </label>
+                  </p>
+                ))}
+              </CollapsibleItem>
+            ))}
           </Collapsible>
         </Col>
       </Row>

@@ -3,7 +3,7 @@ import { db } from '../firebase/firebase';
 const helpers = {
 
     dbCallforLists: function(){
-        var allLists = [];
+        var categories = [];
         // var allRoles = [];
         // var allLevels =[];
 
@@ -11,13 +11,16 @@ const helpers = {
             querySnapshot.forEach(function(doc) {
                 const data = doc.data();
                 // console.log(doc.id,data)
-                if(!allLists.includes(data.listName)){
-                    allLists.push(data.listName)
+                if(data.listName !== undefined) {
+
+                    const categoryName = data.listName.toLowerCase()
+
+                    if(!categories.includes(categoryName)){
+                        categories.push(categoryName)
+                    }
                 }
             });
-            console.log(allLists);
-            console.log(allLists.length)
-            sessionStorage.setItem('allLists', JSON.stringify(allLists))
+            sessionStorage.setItem('categories', categories)
         });
     },
 
