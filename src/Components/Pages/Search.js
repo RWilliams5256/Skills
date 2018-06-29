@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Row, Col, Tag } from 'react-materialize';
-// import $ from 'jquery';
+import { Row, Col, Button } from 'react-materialize';
+import helpers from '../../utils/helpers'
 
 import Accordion from '../subcomponents/Accordion';
 import ResourceCard from '../subcomponents/ResourceCard';
@@ -35,18 +35,27 @@ class Search extends Component {
 
         },
       ],
-      criteriaList: [],
+      criteriaList: []
     };
 
     this.handler = this.handler.bind(this);
   }
 
-  
+  componentWillMount() {
+    console.log('Search will mount')
+    helpers.dbCallforLists();
+  }
+
+  componentDidMount(){
+    console.log('search mounted')
+  }
+
   handler() {
-    console.log(this.name)
+    this.setState({'criteriaList': sessionStorage.getItem('currentCriteria').split(',')})
   }
 
   render() {
+
     return (
       <div className='search'>
         <Row>
@@ -55,7 +64,7 @@ class Search extends Component {
             <Row>
               <Col s={12}>
                 {
-                  this.state.criteriaList.map(criteria => <Tag>{criteria}</Tag>)
+                  this.state.criteriaList.map((criteria,i) => <Button key={i}>{criteria}</Button>)
                 }
               </Col>
             </Row>
