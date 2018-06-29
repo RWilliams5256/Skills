@@ -9,45 +9,31 @@ import renderField from './renderField';
 const PersonInfoForm = (props) => {
     const { handleSubmit } = props
     return (
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>First Name</label>
-            <Field name="firstName" type="text" lable="First Name" component = {renderField} />
-        </div>
-       <div>
-          <label>Last Name</label>
-            <Field name="lastName" type="text" lable="Last Name"  component = {renderField} />
-        </div>
-        <div>
-          <label>Address</label>
-            <Field name="address" type="text" label="Address" component = {renderField} />
-        </div>
-        <div>
-          <label>Address 2</label>
-            <Field name="address2" type="text" lable="Address 2" component = {renderField} />
-        </div>
-        <div>
-          <label>City</label>
-            <Field name="city" type="text" lable="City" component = {renderField} />
-        </div>
-        <div>
-          <label>Zip</label>
-            <Field name="zip" type="text" lable="Zip Code"  component = {renderField} />
-        </div>
-        
-        <div>
-          <button type="submit" className="next">Next</button>
-        </div>
-      </form>
-    ) 
-  }
+        <form onSubmit={handleSubmit}>
+            <Field name="firstName" type="text" label="First Name" component={renderField} />
 
-  export default reduxForm({
-    form: 'wizard',              
-    destroyOnUnmount: false, 
-    forceUnregisterOnUnmount: true,     
+            <Field name="lastName" type="text" label="Last Name" component={renderField} />
+
+            <Field name="address" type="text" label="Address" component={renderField} />
+
+            <Field name="address2" type="text" label="Address 2" component={renderField} />
+
+            <Field name="city" type="text" label="City" component={renderField} />
+
+            <Field name="zip" type="text" label="Zip Code" component={renderField} />
+
+            <button type="submit" className="next">Next</button>
+
+        </form>
+    )
+}
+
+export default reduxForm({
+    form: 'wizard',
+    destroyOnUnmount: false,
+    forceUnregisterOnUnmount: true,
     validate
-  })(PersonInfoForm)
+})(PersonInfoForm)
 
 /*
 class PersonInfoForm extends React.Component{

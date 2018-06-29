@@ -16,7 +16,10 @@ constructor(props){
     this.state = {
       page: 1
     }
+}
 
+onSubmit() {
+  alert('form has been submitted baby!')
 }
 
 nextPage() {
@@ -31,8 +34,7 @@ previousPage() {
     const { onSubmit } = this.props
     const { page } = this.state
     return (
-
-      <div>
+      <div className="container">
        {page === 1 && <PersonInfoForm  onSubmit={this.nextPage} />}
        {page === 2 && <SkillsForm  previousPage={this.previousPage} onSubmit={this.nextPage}  />}
        {page === 3 && <ResumeForm  previousPage={this.previousPage} onSubmit={onSubmit}/>}
