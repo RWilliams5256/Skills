@@ -50,12 +50,19 @@ class Search extends Component {
     console.log('search mounted')
   }
 
-  handler() {
-    this.setState({'criteriaList': sessionStorage.getItem('currentCriteria').split(',')})
+  componentDidUpdate(){
+    console.log("search DB again for employees")
+    console.log('will update:', this.state.criteriaList)
+  }
+
+  handler(arr) {
+    console.log('handler:', this.state.criteriaList)
+    this.setState({'criteriaList':arr})
+    // this.setState({'criteriaList': sessionStorage.getItem('currentCriteria').split(',')})
   }
 
   render() {
-
+    console.log("Search rendered")
     return (
       <div className='search'>
         <Row>
@@ -72,7 +79,7 @@ class Search extends Component {
 
           <Col s={12}>
             <h5>Filter On:</h5>
-            <Accordion handler={this.handler}/>
+            <Accordion handler={this.handler} {...this.state}/>
           </Col>
 
           <Col s={12}>
