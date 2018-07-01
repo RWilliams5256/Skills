@@ -2,7 +2,7 @@ import { db } from '../firebase/firebase';
 
 const helpers = {
 
-    dbCallforLists: function(){
+    dbCallforLists: function(callback){
         var categories = [];
         // var allRoles = [];
         // var allLevels =[];
@@ -21,6 +21,7 @@ const helpers = {
                 }
             });
             sessionStorage.setItem('categories', categories)
+            callback(categories);
         });
     },
 
