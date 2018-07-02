@@ -1,13 +1,11 @@
 import React from 'react';
+import { Row, Input} from 'react-materialize';
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
-  <div>
-    <label>{label}</label>
-    <div>
-      <input {...input} placeholder={label} type={type} />
+    <Row>
+      <Input {...input} placeholder={label} type={type} s={size}/>
       {touched && error && <span>{error}</span>}
-    </div>
-  </div>
+    </Row>
 );
 
 export default renderField;

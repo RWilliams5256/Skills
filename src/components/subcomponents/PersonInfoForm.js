@@ -10,7 +10,7 @@ const PersonInfoForm = (props) => {
     const { handleSubmit } = props
     return (
         <form onSubmit={handleSubmit}>
-            <Field name="firstName" type="text" label="First Name" component={renderField} />
+            <Field name="firstName" type="text" label="First Name" size="6" component={renderField} />
 
             <Field name="lastName" type="text" label="Last Name" component={renderField} />
 
