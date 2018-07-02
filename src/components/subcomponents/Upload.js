@@ -33,41 +33,37 @@ class Upload extends Component{
 
     processUpload() {
         var file = document.getElementById("myFile").files[0];
-        this.console.log("hello");
-      
-
+       
         Papa.parse(file,  { 
             // header: true,             
             complete: function(results) {
              
             //var getDoc = db.firestore().collection('people').doc('sarah-homsi').get().then(doc => doc.data());
             //var peopleRef =  db.firestore().collection('people');
-            db.collection('people').doc('sarah-homsi').get().then(doc => {
-               console.log(doc)
-                // const p = doc.data().firstName
-                // alert("hello" & p.value) 
-             })
+            // db.collection('people').doc('sarah-homsi').get().then(doc => {
+            //      const p = doc.data().firstName
+            //     alert("hello" & p.value) 
+            //  })
 
-                var arrayLength = results.data.length;
-                for(var i =1; i < arrayLength; i++)
+                var arrayLength = results.data.length - 2;
+                console.log(arrayLength);
+                for(var i = 1; i <= arrayLength; i++)
                 { 
                     db.collection('people').add({
                         firstName: results.data[i][4],
                         lastName: results.data[i][5],
-                        college: results.data[i][9]
-                    })                
-                    // [1] = application date (get date only)                    
-                    // [4] = student first name
-                    alert(results.data[i][4]);
-                    // [5] = student last name
-                    // [6] = student email
-                    // [9] = student school
-                    // [11] = student graduation date
-                    // [12] = majors
-                    // [15] = applied to name
+                        college: results.data[i][9],
+                        applicationDate: results.data[i][1], //(get date only) 
+                        major: results.data[i][12],
+                        graduationDate: results.data[i][11],
+                        appliedFor: results.data[i][15],
+                        studentEmail: results.data[i][6]
+                    })                                                                                                                                          
                 }
             }
         });
+
+        alert("Your data has completed uploading");
     }  
     
     saveHandshake(data) {
@@ -94,7 +90,7 @@ class Upload extends Component{
                     <p>Please select a file to upload </p>
                </div>
                 <div>
-                    <button className="uploadButton" onClick={this.processUpload}>Upload</button>
+                    <button type="button" className="uploadButton" onClick={this.processUpload}>Upload</button>
                 </div>  
                 <div id="results">
 
