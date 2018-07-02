@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Papa from 'papaparse';
 import './Upload.css';
+import  { db } from '../../firebase/firebase';
+
 
 
 class Upload extends Component{
@@ -31,16 +33,30 @@ class Upload extends Component{
 
     processUpload() {
         var file = document.getElementById("myFile").files[0];
+        this.console.log("hello");
+      
+
         Papa.parse(file,  { 
             // header: true,             
             complete: function(results) {
              
+            //var getDoc = db.firestore().collection('people').doc('sarah-homsi').get().then(doc => doc.data());
+            //var peopleRef =  db.firestore().collection('people');
+            db.collection('people').doc('sarah-homsi').get().then(doc => {
+               console.log(doc)
+                // const p = doc.data().firstName
+                // alert("hello" & p.value) 
+             })
 
                 var arrayLength = results.data.length;
                 for(var i =1; i < arrayLength; i++)
-                {                   
-                    // [1] = application date (get date only)
-                    alert(results.data[i][1]);
+                { 
+                    db.collection('people').add({
+                        firstName: results.data[i][4],
+                        lastName: results.data[i][5],
+                        college: results.data[i][9]
+                    })                
+                    // [1] = application date (get date only)                    
                     // [4] = student first name
                     alert(results.data[i][4]);
                     // [5] = student last name
@@ -50,8 +66,6 @@ class Upload extends Component{
                     // [12] = majors
                     // [15] = applied to name
                 }
-
-
             }
         });
     }  
@@ -61,7 +75,7 @@ class Upload extends Component{
         for(var i =1; i < arrayLength; i++)
         {
            alert(data[i][1]);
-        }
+        }  
        
     }
 
