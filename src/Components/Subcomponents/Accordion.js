@@ -8,12 +8,15 @@ import './Accordion.css';
 class Accordion extends Component {
   constructor(props) {
     super(props);
+    this.handleEvent = this.handleEvent.bind(this)
+
     this.state = {
-      roles: ['test','test2'],
+      roles: ['test','test2','test3'],
       skills: [],
       experienceLevel: [],
       statuses: [],
     };
+
   }
 
   componentWillMount() {
@@ -26,14 +29,13 @@ class Accordion extends Component {
     console.log('Accordion mounted')
   }
 
-  handleEvent(e) {
-    var selected =[]
-    $('input[type="checkbox"]:checked').each( () => {
-        selected.push($(e.target).attr('name'));
+  handleEvent() {
+    var selected = []
+    $('input[type="checkbox"]:checked').each(function() {
+        selected.push($(this).attr('id'));
     });
-
     console.log('selected', selected)
-    sessionStorage.setItem('currentCriteria', selected)
+    this.props.handler(selected)
   }
 
 
@@ -47,7 +49,7 @@ class Accordion extends Component {
                 {this.state.roles.map((role,i) => (
                   <p key={i}>
                     <label>
-                      <input type='checkbox' className='filled-in' id={role} name={role} onClick={this.handleEvent} onChange={this.props.handler}/>
+                      <input type='checkbox' className='filled-in' id={role} name={role} onChange={this.handleEvent} />
                       <span>{role}</span>
                     </label>
                   </p>
