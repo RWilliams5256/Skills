@@ -36,24 +36,18 @@ class Upload extends Component{
        
         Papa.parse(file,  { 
             // header: true,             
-            complete: function(results) {
-             
-            //var getDoc = db.firestore().collection('people').doc('sarah-homsi').get().then(doc => doc.data());
-            //var peopleRef =  db.firestore().collection('people');
-            // db.collection('people').doc('sarah-homsi').get().then(doc => {
-            //      const p = doc.data().firstName
-            //     alert("hello" & p.value) 
-            //  })
+            complete: function(results) {           
 
                 var arrayLength = results.data.length - 2;
                 console.log(arrayLength);
                 for(var i = 1; i <= arrayLength; i++)
                 { 
+                    var d = new Date(results.data[i][1])
                     db.collection('people').add({
                         firstName: results.data[i][4],
                         lastName: results.data[i][5],
                         college: results.data[i][9],
-                        applicationDate: results.data[i][1], //(get date only) 
+                        applicationDate: d.toString(), //(get date only) 
                         major: results.data[i][12],
                         graduationDate: results.data[i][11],
                         appliedFor: results.data[i][15],
