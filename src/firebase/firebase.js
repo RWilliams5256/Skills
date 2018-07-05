@@ -1,7 +1,7 @@
 import firebase from 'firebase';
-import 'firebase/auth';
+require ('firebase/firestore')
 
-const config = {
+var config = {
 
     apiKey: "AIzaSyCHi8elcWhRSivNszIqI2a__SGIz6tFCZQ",
     authDomain: "shomsi-test.firebaseapp.com",
@@ -11,16 +11,7 @@ const config = {
     messagingSenderId: "164035676451"
   };
 
-  if (!firebase.apps.length) {
-    firebase.initializeApp(config);
-}
+  firebase.initializeApp(config)
 
-  const auth = firebase.auth();
-  const db = firebase.firestore();
-  const settings = { timestampsInSnapshots: true };
-  db.settings(settings);
 
-  export {
-      auth,
-      db
-  };
+  export const db = firebase.firestore()

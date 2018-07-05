@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Papa from 'papaparse';
 import './Upload.css';
+import  { db } from '../../firebase/firebase';
+
 
 
 class Upload extends Component{
@@ -31,29 +33,31 @@ class Upload extends Component{
 
     processUpload() {
         var file = document.getElementById("myFile").files[0];
+       
         Papa.parse(file,  { 
             // header: true,             
-            complete: function(results) {
-             
+            complete: function(results) {           
 
-                var arrayLength = results.data.length;
-                for(var i =1; i < arrayLength; i++)
-                {                   
-                    // [1] = application date (get date only)
-                    alert(results.data[i][1]);
-                    // [4] = student first name
-                    alert(results.data[i][4]);
-                    // [5] = student last name
-                    // [6] = student email
-                    // [9] = student school
-                    // [11] = student graduation date
-                    // [12] = majors
-                    // [15] = applied to name
+                var arrayLength = results.data.length - 2;
+                console.log(arrayLength);
+                for(var i = 1; i <= arrayLength; i++)
+                { 
+                    var d = new Date(results.data[i][1])
+                    db.collection('people').add({
+                        firstName: results.data[i][4],
+                        lastName: results.data[i][5],
+                        college: results.data[i][9],
+                        applicationDate: d.toString(), //(get date only) 
+                        major: results.data[i][12],
+                        graduationDate: results.data[i][11],
+                        appliedFor: results.data[i][15],
+                        studentEmail: results.data[i][6]
+                    })                                                                                                                                          
                 }
-
-
             }
         });
+
+        alert("Your data has completed uploading");
     }  
     
     saveHandshake(data) {
@@ -61,7 +65,7 @@ class Upload extends Component{
         for(var i =1; i < arrayLength; i++)
         {
            alert(data[i][1]);
-        }
+        }  
        
     }
 
@@ -80,7 +84,7 @@ class Upload extends Component{
                     <p>Please select a file to upload </p>
                </div>
                 <div>
-                    <button className="uploadButton" onClick={this.processUpload}>Upload</button>
+                    <button type="button" className="uploadButton" onClick={this.processUpload}>Upload</button>
                 </div>  
                 <div id="results">
 

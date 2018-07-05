@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Button } from 'react-materialize';
+import { Row, Col, Button, Preloader } from 'react-materialize';
 import helpers from '../../utils/helpers'
 
 import Accordion from '../subcomponents/Accordion';
@@ -13,6 +13,7 @@ class Search extends Component {
     super(props)
     this.criteriaList =[]
     this.state = {
+      callToDbComplete: false,
       resources: [
         {
           uKey: 0,
@@ -43,19 +44,44 @@ class Search extends Component {
 
   componentWillMount() {
     console.log('Search will mount')
-    helpers.dbCallforLists();
+    helpers.dbCallforLists(()=>{
+      console.log("callback function")
+      this.setState({'callToDbComplete': true})
+    });
   }
 
   componentDidMount(){
     console.log('search mounted')
   }
 
-  handler() {
-    this.setState({'criteriaList': sessionStorage.getItem('currentCriteria').split(',')})
+  componentDidUpdate(){
+    console.log("search DB again for employees")
+    console.log('will update:', this.state.criteriaList)
   }
 
-  render() {
+  handler(arr) {
+    console.log('handler:', this.state.criteriaList)
+    this.setState({'criteriaList':arr})
+    // this.setState({'criteriaList': sessionStorage.getItem('currentCriteria').split(',')})
+  }
 
+  // callback(arr){
+  //   console.log("callback function")
+  //   this.setState({'callToDbComplete': true})
+  // }
+
+  render() {
+    console.log("Search rendered")
+
+    const dataReturned = this.state.callToDbComplete;
+    let accord;
+
+    if (dataReturned) {
+      accord = <Accordion handler={this.handler} {...this.state}/>;
+    } else {
+      accord = <Preloader />
+    }
+    
     return (
       <div className='search'>
         <Row>
@@ -72,7 +98,7 @@ class Search extends Component {
 
           <Col s={12}>
             <h5>Filter On:</h5>
-            <Accordion handler={this.handler}/>
+            {accord}
           </Col>
 
           <Col s={12}>
