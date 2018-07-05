@@ -71,7 +71,7 @@ class Upload extends Component{
 
             <form>
                 <div> 
-                    <label id="#bb">Choose file to upload              
+                    <label id="bb">Choose file to upload              
                         <input className="file" type="file" id="myFile" size="60" accept=".csv" onChange={this.handleFiles} />
                     </label>
                </div>

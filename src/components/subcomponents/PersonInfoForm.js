@@ -2,6 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import validate from './validate'
 import renderField from './renderField';
+import { Row, Input } from 'react-materialize';
 
 
 
@@ -10,18 +11,37 @@ const PersonInfoForm = (props) => {
     const { handleSubmit } = props
     return (
         <form onSubmit={handleSubmit}>
-            <Field name="firstName" type="text" label="First Name" size="6" component={renderField} />
-
-            <Field name="lastName" type="text" label="Last Name" component={renderField} />
-
-            <Field name="address" type="text" label="Address" component={renderField} />
-
-            <Field name="address2" type="text" label="Address 2" component={renderField} />
-
-            <Field name="city" type="text" label="City" component={renderField} />
-
-            <Field name="zip" type="text" label="Zip Code" component={renderField} />
-
+            <Row>
+                <Field name="firstName" type="text" label="First Name" size={6} className="validate" component={renderField} required />
+                <Field name="lastName" type="text" label="Last Name" size={6} className="validate" component={renderField} required />
+            </Row>
+            <Row>
+                <Field name="address" type="text" label="Address" size={12} component={renderField} />
+            </Row>
+            <Row>
+                <Field name="address2" type="text" label="Address 2" size={12} component={renderField} />
+            </Row>
+            <Row>
+                <Field name="city" type="text" label="City" size={5} component={renderField} />
+                <Field name="state" type="text" label="State" size={3} component={renderField} />
+                <Field name="zip" type="text" label="Zip Code" size={4} component={renderField} />
+            </Row>
+            <hr/>
+            <Row>
+                <Field name="phoneNumber" type="number" label="Phone Number" size={12} component={renderField} />
+            </Row>
+            <hr/>
+            <Row>
+                <Field name="email" type="text" label="Email" size={12} component={renderField} />
+            </Row>
+            <hr/>
+            <Row>
+                <Field name="social" type="text" label="Social Media" size={12} component={renderField} />
+            </Row>
+            <hr/>
+            <Row>
+                <Field name="university" type="text" label="College/University" size={12} component={renderField} />
+            </Row>
             <button type="submit" className="next">Next</button>
 
         </form>
