@@ -18,8 +18,10 @@ constructor(props){
     }
 }
 
-onSubmit() {
-  alert('form has been submitted baby!')
+onSubmit(values) {
+  alert('form has been submitted baby!');
+  console.log(values.firstName);
+
 }
 
 nextPage() {
@@ -37,13 +39,10 @@ previousPage() {
       <div className="container">
        {page === 1 && <PersonInfoForm  onSubmit={this.nextPage} />}
        {page === 2 && <SkillsForm  previousPage={this.previousPage} onSubmit={this.nextPage}  />}
-       {page === 3 && <ResumeForm  previousPage={this.previousPage} onSubmit={onSubmit}/>}
+       {page === 3 && <ResumeForm  previousPage={this.previousPage} onSubmit={this.onSubmit}/>}
       </div>
     )
   };
-}
-Recruiting.propTypes = {
-  onSubmit: PropTypes.func.isRequired
 }
 
 export default Recruiting;
