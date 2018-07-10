@@ -2,7 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import validate from './validate'
 import renderField from './renderField';
-import { Row, Input } from 'react-materialize';
+import { Row } from 'react-materialize';
 
 
 
@@ -76,11 +76,11 @@ class PersonInfoForm extends React.Component{
             //"status": "",
             //"experienceLevel": "",
             //"resumes": "",
-            //"email": [] 
+            //"email": []
         }
 
     }
-    
+
 
 
     change = (e) =>{
@@ -93,62 +93,62 @@ class PersonInfoForm extends React.Component{
 
         return(
 <form >
-    <input 
+    <input
     name='firstName'
     placeholder='First Name'
     value={this.state.firstName}
     onChange={e=>this.change(e)}
     />
-    <input 
+    <input
     name='address'
     placeholder='Street Address'
     value={this.state.address}
     onChange={e=>this.change(e)}
     />
-    <input 
+    <input
     name='address2'
     placeholder='Unit Number'
     value={this.state.address2}
     onChange={e=>this.change(e)}
     />
-        <input 
+        <input
     name='city'
     placeholder='City'
     value={this.state.city}
     onChange={e=>this.change(e)}
     />
-    <input 
+    <input
     name='state'
     placeholder='State'
     value={this.state.state}
     onChange={e=>this.change(e)}
     />
-    <input 
+    <input
     name='zip'
     placeholder='Zip Code'
     value={this.state.zip}
     onChange={e=>this.change(e)}
-    />    
-    <input 
+    />
+    <input
     name='college'
     placeholder='School Name'
     value={this.state.college}
     onChange={e=>this.change(e)}
     />
-    <input 
+    <input
     type= 'date'
     name='graduationDate'
     placeholder='Graduation Date'
     value={this.state.graduationDate}
     onChange={e=>this.change(e)}
     />
-    <input 
+    <input
     name='referedBy'
     placeholder='Refered By'
     value={this.state.referedBy}
     onChange={e=>this.change(e)}
     />
-        <input 
+        <input
     name='phone'
     placeholder='Phone Number'
     value={this.state.phone}
@@ -160,8 +160,8 @@ class PersonInfoForm extends React.Component{
     </form>
         );
     }
-   
 
-    
+
+
 };
 export default PersonInfoForm; */

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Collapsible, CollapsibleItem } from 'react-materialize';
 import $ from 'jquery';
+import Checkbox from './Checkbox';
 
 import './Accordion.css';
 
@@ -10,19 +11,14 @@ class Accordion extends Component {
     super(props);
     this.handleEvent = this.handleEvent.bind(this)
 
-    this.state = {
-      roles: ['test','test2','test3'],
-      skills: [],
-      experienceLevel: [],
-      statuses: [],
-    };
-
   }
 
   componentWillMount() {
     console.log('accordion will mount')
-    var categoryList = sessionStorage.getItem('categories').split(',').sort()
-    this.setState({'allCategories': categoryList})
+    var allCategories = sessionStorage.getItem('allCategories')
+    this.setState({
+      'allItems': JSON.parse(allCategories)
+    })
   }
 
   componentDidMount() {
@@ -40,19 +36,15 @@ class Accordion extends Component {
 
 
   render() {
+
     return (
       <Row>
         <Col s={12}>
           <Collapsible>
-            {this.state.allCategories.map((category,i) => (
-              <CollapsibleItem header={category.toUpperCase()} key={i}>
-                {this.state.roles.map((role,i) => (
-                  <p key={i}>
-                    <label>
-                      <input type='checkbox' className='filled-in' id={role} name={role} onChange={this.handleEvent} />
-                      <span>{role}</span>
-                    </label>
-                  </p>
+            {this.state.allItems.map((category,i) => (
+              <CollapsibleItem header={category.listName.toUpperCase()} key={i}>
+                {category.listItem.map((item,j) => (
+                  <Checkbox key={j} name={item} id={item} span={item} onChange={this.handleEvent} />
                 ))}
               </CollapsibleItem>
             ))}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Input} from 'react-materialize';
+import { Input } from 'react-materialize';
 
 const renderField = ({ input, label, placeholder, type, size, className, required, meta: { touched, error } }) => (
   <div>
