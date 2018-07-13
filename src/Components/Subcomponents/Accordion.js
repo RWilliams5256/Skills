@@ -43,9 +43,11 @@ class Accordion extends Component {
           <Collapsible>
             {this.state.allItems.map((category,i) => (
               <CollapsibleItem header={category.listName.toUpperCase()} key={i}>
+                <Row>
                 {category.listItem.map((item,j) => (
                   <Checkbox key={j} name={item} id={item} span={item} onChange={this.handleEvent} />
                 ))}
+                </Row>
               </CollapsibleItem>
             ))}
           </Collapsible>

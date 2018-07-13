@@ -62,7 +62,8 @@ class Search extends Component {
   handler(arr) {
     console.log('handler:', this.state.criteriaList)
     this.setState({'criteriaList':arr})
-    // this.setState({'criteriaList': sessionStorage.getItem('currentCriteria').split(',')})
+    console.log('handler1:', this.state.criteriaList)
+
   }
 
   // callback(arr){
@@ -81,7 +82,7 @@ class Search extends Component {
     } else {
       accord = <Preloader />
     }
-    
+
     return (
       <div className='search'>
         <Row>

@@ -1,8 +1,8 @@
-.collapsible-body {
-    text-align: left;
-}
-
-.collapsible-body p {
+div.collapsible-body p {
     margin: 5px;
     display: inline-block;
+}
+
+.checkbox-row {
+    text-align: left;
 }
