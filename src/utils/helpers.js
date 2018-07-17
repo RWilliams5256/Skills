@@ -46,9 +46,13 @@ const helpers = {
     },
 
     dbCallforPeople: function(listOfPeople) {
-        for(var i=0; i<listOfPeople.length;i++){
-            console.log(listOfPeople)
-        }
+        console.log('listOfPeople:', listOfPeople)
+
+        db.collection('people').onSnapshot(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                console.log(doc.data())
+            })
+        })
     },
 
 };
