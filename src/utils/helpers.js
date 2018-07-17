@@ -45,6 +45,12 @@ const helpers = {
         });
     },
 
+    dbCallforPeople: function(listOfPeople) {
+        for(var i=0; i<listOfPeople.length;i++){
+            console.log(listOfPeople)
+        }
+    },
+
 };
 
 export default helpers;

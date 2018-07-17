@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Collapsible, CollapsibleItem } from 'react-materialize';
 import $ from 'jquery';
 import Checkbox from './Checkbox';
+import helpers from '../../utils/helpers';
 
 import './Accordion.css';
 
@@ -31,6 +32,7 @@ class Accordion extends Component {
         selected.push($(this).attr('id'));
     });
     console.log('selected', selected)
+    helpers.dbCallforPeople(selected)
     this.props.handler(selected)
   }
 

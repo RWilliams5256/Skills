@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Button, Preloader } from 'react-materialize';
-import helpers from '../../utils/helpers'
-
+import helpers from '../../utils/helpers';
 import Accordion from '../subcomponents/Accordion';
 import ResourceCard from '../subcomponents/ResourceCard';
 import './Search.css';
@@ -62,14 +61,8 @@ class Search extends Component {
   handler(arr) {
     console.log('handler:', this.state.criteriaList)
     this.setState({'criteriaList':arr})
-    console.log('handler1:', this.state.criteriaList)
-
   }
 
-  // callback(arr){
-  //   console.log("callback function")
-  //   this.setState({'callToDbComplete': true})
-  // }
 
   render() {
     console.log("Search rendered")
