@@ -49,8 +49,15 @@ const helpers = {
         console.log('listOfCriteria:', listOfCriteria)
 
         const matchingPeople = [];
-
         const peopleRef = db.collection('people');
+
+        // let queryStr = peopleRef;
+
+        // for(let i =0;i<listOfCriteria.length;i++){
+        //     queryStr.concat()
+        // }
+
+
         const query = peopleRef.where('college','==','Georgia State University')
 
         query.get().then(people => {
