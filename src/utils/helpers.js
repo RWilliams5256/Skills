@@ -45,14 +45,22 @@ const helpers = {
         });
     },
 
-    dbCallforPeople: function(listOfPeople) {
-        console.log('listOfPeople:', listOfPeople)
+    dbCallforPeople: function(listOfCriteria) {
+        console.log('listOfCriteria:', listOfCriteria)
 
-        db.collection('people').onSnapshot(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
-                console.log(doc.data())
+        const matchingPeople = [];
+
+        const peopleRef = db.collection('people');
+        const query = peopleRef.where('college','==','Georgia State University')
+
+        query.get().then(people => {
+            people.forEach(doc => {
+                const data = doc.data()
+                matchingPeople.push(data)
             })
         })
+
+        console.log('matchingPeople:', matchingPeople)
     },
 
 };
