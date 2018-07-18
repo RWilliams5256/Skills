@@ -40,7 +40,7 @@ class Accordion extends Component {
     });
     console.log('selectedCriteria', listOfCriteria)
     helpers.dbCallforPeople(listOfCriteria)
-    // this.props.handler(listOfCriteria)
+    this.props.handler(listOfCriteria)
   }
 
 

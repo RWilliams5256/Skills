@@ -84,7 +84,7 @@ class Search extends Component {
             <Row>
               <Col s={12}>
                 {
-                  this.state.criteriaList.map((criteria,i) => <Button key={i}>{criteria}</Button>)
+                  this.state.criteriaList.map((criteria,i) => <Button key={i}>{criteria.value}</Button>)
                 }
               </Col>
             </Row>
