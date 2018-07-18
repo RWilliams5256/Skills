@@ -27,13 +27,20 @@ class Accordion extends Component {
   }
 
   handleEvent() {
-    var selected = []
+    var listOfCriteria = []
+
     $('input[type="checkbox"]:checked').each(function() {
-        selected.push($(this).attr('id'));
+
+        var selectedItem = {
+          'value': $(this).attr('id'),
+          'category': $(this).attr('data-category')
+        }
+
+        listOfCriteria.push(selectedItem);
     });
-    console.log('selected', selected)
-    helpers.dbCallforPeople(selected)
-    this.props.handler(selected)
+    console.log('selectedCriteria', listOfCriteria)
+    helpers.dbCallforPeople(listOfCriteria)
+    // this.props.handler(listOfCriteria)
   }
 
 
@@ -47,7 +54,7 @@ class Accordion extends Component {
               <CollapsibleItem header={category.listName.toUpperCase()} key={i}>
                 <Row>
                 {category.listItem.map((item,j) => (
-                  <Checkbox key={j} name={item} id={item} span={item} onChange={this.handleEvent} />
+                  <Checkbox key={j} name={item} id={item} span={item} onChange={this.handleEvent} category={category.listName}/>
                 ))}
                 </Row>
               </CollapsibleItem>
