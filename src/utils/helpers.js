@@ -58,7 +58,8 @@ const helpers = {
         // }
 
 
-        const query = peopleRef.where('college', '==', 'Georgia State University').where('firstName','==','Adam')
+        const query = peopleRef.where('college', '==', 'Georgia State University')
+        //.where('firstName','==','Adam')
 
         query.get().then(people => {
             people.forEach(doc => {
