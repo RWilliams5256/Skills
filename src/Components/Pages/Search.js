@@ -34,7 +34,8 @@ class Search extends Component {
 
         },
       ],
-      criteriaList: []
+      criteriaList: [],
+      resourceList: [],
     };
 
     this.handler = this.handler.bind(this);
@@ -54,12 +55,15 @@ class Search extends Component {
 
   componentDidUpdate(){
     console.log("search DB again for employees")
-    console.log('will update:', this.state.criteriaList)
+    console.log('will update:', this.state.criteriaList, this.state.resourceList)
   }
 
-  handler(arr) {
-    console.log('handler:', this.state.criteriaList)
-    this.setState({'criteriaList':arr})
+  handler(criteria, resources) {
+    console.log('initial resource:', resources)
+    this.setState({'criteriaList': criteria})
+    this.setState({'resourceList': resources})
+
+    console.log('resourceList:',this.state.resourceList)
   }
 
 
@@ -98,7 +102,8 @@ class Search extends Component {
             <h5>Matching Resources:</h5>
             <Row>
               {
-                this.state.resources.map(resource => <ResourceCard key={resource.uKey} name={resource.name} email={resource.email} phone={resource.phone} school={resource.school} position={resource.position} status={resource.status}/>)
+                this.state.resourceList.map(
+                  (resource,i) => <ResourceCard key={i+resource.lastName} name={resource.firstName} email={resource.studentEmail}  school={resource.college} position={resource.appliedFor} status={resource.applicationDate}/>)
               }
             </Row>
           </Col>

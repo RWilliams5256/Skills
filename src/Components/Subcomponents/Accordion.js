@@ -38,11 +38,17 @@ class Accordion extends Component {
 
         listOfCriteria.push(selectedItem);
     });
+
     console.log('selectedCriteria', listOfCriteria)
-    helpers.dbCallforPeople((listOfCriteria) => {
-      console.log('callback for matching people')
+
+    var listOfResources;
+
+    helpers.dbCallforPeople(listOfCriteria, function(matchingPeople){
+      listOfResources = matchingPeople
     })
-    this.props.handler(listOfCriteria)
+    
+    this.props.handler(listOfCriteria, listOfResources)
+    console.log('accordion matching people:',listOfResources)
   }
 
 

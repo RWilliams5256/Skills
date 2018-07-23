@@ -45,7 +45,7 @@ const helpers = {
         });
     },
 
-    dbCallforPeople: function(listOfCriteria) {
+    dbCallforPeople: function(listOfCriteria, callback) {
         console.log('listOfCriteria:', listOfCriteria)
 
         const matchingPeople = [];
@@ -69,7 +69,7 @@ const helpers = {
         })
 
         console.log('matchingPeople:', matchingPeople)
-        // callback(matchingPeople)
+        callback(matchingPeople)
     },
 
 };
