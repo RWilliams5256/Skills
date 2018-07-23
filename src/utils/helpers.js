@@ -41,7 +41,7 @@ const helpers = {
             });
 
             sessionStorage.setItem('allCategories', JSON.stringify(allCategories))
-            callback(allCategories);
+            callback();
         });
     },
 
@@ -58,7 +58,7 @@ const helpers = {
         // }
 
 
-        const query = peopleRef.where('college','==','Georgia State University')
+        const query = peopleRef.where('college', '==', 'Georgia State University').where('firstName','==','Adam')
 
         query.get().then(people => {
             people.forEach(doc => {
@@ -68,6 +68,7 @@ const helpers = {
         })
 
         console.log('matchingPeople:', matchingPeople)
+        // callback(matchingPeople)
     },
 
 };

@@ -39,7 +39,9 @@ class Accordion extends Component {
         listOfCriteria.push(selectedItem);
     });
     console.log('selectedCriteria', listOfCriteria)
-    helpers.dbCallforPeople(listOfCriteria)
+    helpers.dbCallforPeople((listOfCriteria) => {
+      console.log('callback for matching people')
+    })
     this.props.handler(listOfCriteria)
   }
 

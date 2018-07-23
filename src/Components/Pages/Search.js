@@ -10,7 +10,6 @@ class Search extends Component {
 
   constructor(props) {
     super(props)
-    this.criteriaList =[]
     this.state = {
       callToDbComplete: false,
       resources: [
@@ -43,7 +42,7 @@ class Search extends Component {
 
   componentWillMount() {
     console.log('Search will mount')
-    helpers.dbCallforLists(()=>{
+    helpers.dbCallforLists(() => {
       console.log("callback function")
       this.setState({'callToDbComplete': true})
     });
