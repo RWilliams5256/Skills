@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Row, Col, Button, Preloader } from 'react-materialize';
 import helpers from '../../utils/helpers';
-import Accordion from '../Subcomponents/Accordion';
-import ResourceCard from '../Subcomponents/ResourceCard';
+import Accordion from '../subcomponents/Accordion';
+import ResourceCard from '../subcomponents/ResourceCard';
 import './Search.css';
 
 
@@ -86,7 +86,7 @@ class Search extends Component {
     console.log('rendering search:', this.state.resourceList)
 
     const resor = this.state.resourceList;
-    console.log('resor:',)
+    console.log('resor:', resor.length)
 
 
     return (

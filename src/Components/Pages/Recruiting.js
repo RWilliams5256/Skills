@@ -2,9 +2,9 @@ import { db } from '../../firebase/firebase';
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PersonInfoForm from '../Subcomponents/PersonInfoForm'
-import SkillsForm from '../Subcomponents/SkillsForm'
-import ResumeForm from '../Subcomponents/ResumeForm'
+import PersonInfoForm from '../subcomponents/PersonInfoForm'
+import SkillsForm from '../subcomponents/SkillsForm'
+import ResumeForm from '../subcomponents/ResumeForm'
 
 
 class Recruiting extends Component {
