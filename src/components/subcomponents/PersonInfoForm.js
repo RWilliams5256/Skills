@@ -10,41 +10,43 @@ import { Row } from 'react-materialize';
 const PersonInfoForm = (props) => {
     const { handleSubmit } = props
     return (
-        <form onSubmit={handleSubmit}>
-            <Row>
-                <Field name="firstName" type="text" label="First Name" size={6} className="validate" component={renderField} required />
-                <Field name="lastName" type="text" label="Last Name" size={6} className="validate" component={renderField} required />
-            </Row>
-            <Row>
-                <Field name="address" type="text" label="Address" size={12} component={renderField} />
-            </Row>
-            <Row>
-                <Field name="address2" type="text" label="Address 2" size={12} component={renderField} />
-            </Row>
-            <Row>
-                <Field name="city" type="text" label="City" size={5} component={renderField} />
-                <Field name="state" type="text" label="State" size={3} component={renderField} />
-                <Field name="zip" type="text" label="Zip Code" size={4} component={renderField} />
-            </Row>
-            <hr/>
-            <Row>
-                <Field name="phoneNumber" type="number" label="Phone Number" size={12} component={renderField} />
-            </Row>
-            <hr/>
-            <Row>
-                <Field name="email" type="text" label="Email" size={12} component={renderField} />
-            </Row>
-            <hr/>
-            <Row>
-                <Field name="social" type="text" label="Social Media" size={12} component={renderField} />
-            </Row>
-            <hr/>
-            <Row>
-                <Field name="university" type="text" label="College/University" size={12} component={renderField} />
-            </Row>
-            <button type="submit" className="next">Next</button>
+        <div className="card">
+            <div className="card-title">Person Info Form</div>
+            <div className="card-content">
+                <form onSubmit={handleSubmit}>
+                    <Row>
+                        <Field name="firstName" type="text" label="First Name" placeholder="John" size={6} className="validate" component={renderField} required />
+                        <Field name="lastName" type="text" label="Last Name" size={6} className="validate" component={renderField} required />
+                    
+                        <Field name="address" type="text" label="Address" size={12} component={renderField} />
+                    
+                        <Field name="address2" type="text" label="Address 2" size={12} component={renderField} />
+                   
+                        <Field name="city" type="text" label="City" size={5} component={renderField} />
+                        <Field name="state" type="text" label="State" size={3} component={renderField} />
+                        <Field name="zip" type="text" label="Zip Code" size={4} component={renderField} />
+                    </Row>
+                    <hr />
+                    <Row>
+                        <Field name="phoneNumber" type="number" label="Phone Number" size={12} component={renderField} />
+                    </Row>
+                    <hr />
+                    <Row>
+                        <Field name="email" type="text" label="Email" size={12} component={renderField} />
+                    </Row>
+                    <hr />
+                    <Row>
+                        <Field name="social" type="text" label="Social Media" size={12} component={renderField} />
+                    </Row>
+                    <hr />
+                    <Row>
+                        <Field name="university" type="text" label="College/University" size={12} component={renderField} />
+                    </Row>
+                    <button type="submit" className="next">Next</button>
 
-        </form>
+                </form>
+            </div>
+        </div>
     )
 }
 
