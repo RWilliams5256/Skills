@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './DocumentViewer.css';
 import FileViewer from 'react-file-viewer';
-import Image from './Test resume.pdf';
+import file from './pdfresume.pdf';
 
 const type = 'pdf';
 
@@ -10,7 +10,7 @@ class DocumentViewer extends Component{
         return (
       <FileViewer
         fileType={type}
-        filePath={Image}
+        filePath={file}
         />
     );
 
