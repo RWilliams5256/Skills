@@ -10,7 +10,6 @@ class Search extends Component {
 
   constructor(props) {
     super(props)
-    this.criteriaList =[]
     this.state = {
       callToDbComplete: false,
       resources: [
@@ -35,7 +34,8 @@ class Search extends Component {
 
         },
       ],
-      criteriaList: []
+      criteriaList: [],
+      resourceList: [],
     };
 
     this.handler = this.handler.bind(this);
@@ -43,7 +43,7 @@ class Search extends Component {
 
   componentWillMount() {
     console.log('Search will mount')
-    helpers.dbCallforLists(()=>{
+    helpers.dbCallforLists(() => {
       console.log("callback function")
       this.setState({'callToDbComplete': true})
     });
@@ -55,12 +55,18 @@ class Search extends Component {
 
   componentDidUpdate(){
     console.log("search DB again for employees")
-    console.log('will update:', this.state.criteriaList)
+    console.log('did update:', this.state.criteriaList)
+    console.log(this.state.resourceList)
   }
 
-  handler(arr) {
-    console.log('handler:', this.state.criteriaList)
-    this.setState({'criteriaList':arr})
+  handler(criteria, resources) {
+    // console.log('initial resource:', resources)
+    this.setState({
+      'criteriaList': criteria, 
+      'resourceList': resources
+    })
+
+    console.log('resourceList:',this.state.resourceList)
   }
 
 
@@ -68,6 +74,7 @@ class Search extends Component {
     console.log("Search rendered")
 
     const dataReturned = this.state.callToDbComplete;
+
     let accord;
 
     if (dataReturned) {
@@ -75,6 +82,12 @@ class Search extends Component {
     } else {
       accord = <Preloader />
     }
+
+    console.log('rendering search:', this.state.resourceList)
+
+    const resor = this.state.resourceList;
+    console.log('resor:',)
+
 
     return (
       <div className='search'>
@@ -84,7 +97,7 @@ class Search extends Component {
             <Row>
               <Col s={12}>
                 {
-                  this.state.criteriaList.map((criteria,i) => <Button key={i}>{criteria}</Button>)
+                  this.state.criteriaList.map((criteria,i) => <Button key={i}>{criteria.value}</Button>)
                 }
               </Col>
             </Row>
@@ -99,7 +112,8 @@ class Search extends Component {
             <h5>Matching Resources:</h5>
             <Row>
               {
-                this.state.resources.map(resource => <ResourceCard key={resource.uKey} name={resource.name} email={resource.email} phone={resource.phone} school={resource.school} position={resource.position} status={resource.status}/>)
+                resor.map(
+                  (resource,i) => <ResourceCard key={i} name={resource.firstName} email={resource.studentEmail}  school={resource.college} position={resource.appliedFor} status={resource.applicationDate}/>)
               }
             </Row>
           </Col>
