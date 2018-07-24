@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form'
 import validate from './validate'
 import renderField from './renderField';
@@ -7,48 +7,93 @@ import { Row } from 'react-materialize';
 
 
 
-const PersonInfoForm = (props) => {
-    const { handleSubmit } = props
-    return (
-        <div className="card">
-            <div className="card-title">Person Info Form</div>
-            <div className="card-content">
-                <form onSubmit={handleSubmit}>
-                    <Row>
-                        <Field name="firstName" type="text" label="First Name" placeholder="John" size={6} className="validate" component={renderField} required />
-                        <Field name="lastName" type="text" label="Last Name" size={6} className="validate" component={renderField} required />
-                    
-                        <Field name="address" type="text" label="Address" size={12} component={renderField} />
-                    
-                        <Field name="address2" type="text" label="Address 2" size={12} component={renderField} />
-                   
-                        <Field name="city" type="text" label="City" size={5} component={renderField} />
-                        <Field name="state" type="text" label="State" size={3} component={renderField} />
-                        <Field name="zip" type="text" label="Zip Code" size={4} component={renderField} />
-                    </Row>
-                    <hr />
-                    <Row>
-                        <Field name="phoneNumber" type="number" label="Phone Number" size={12} component={renderField} />
-                    </Row>
-                    <hr />
-                    <Row>
-                        <Field name="email" type="text" label="Email" size={12} component={renderField} />
-                    </Row>
-                    <hr />
-                    <Row>
-                        <Field name="social" type="text" label="Social Media" size={12} component={renderField} />
-                    </Row>
-                    <hr />
-                    <Row>
-                        <Field name="university" type="text" label="College/University" size={12} component={renderField} />
-                    </Row>
-                    <button type="submit" className="next">Next</button>
+class PersonInfoForm extends Component {
+    constructor(props) {
+        super(props)
+        this.handleSubmit = props.handleSubmit;
+        this.state = {
+            social: [],
+            phoneNumber: [],
+            email: [],
+        }
+    }
 
-                </form>
+    render() {
+        return (
+            <div className="card">
+                <div className="card-title">Person Info Form</div>
+                <div className="card-content">
+                    <form onSubmit={this.handleSubmit}>
+                        <Row>
+                            <Field name="firstName" type="text" label="First Name" placeholder="John" size={6} className="validate" component={renderField} required />
+                            <Field name="lastName" type="text" label="Last Name" size={6} className="validate" component={renderField} required />
+
+                            <Field name="address" type="text" label="Address" size={12} component={renderField} />
+
+                            <Field name="address2" type="text" label="Address 2" size={12} component={renderField} />
+
+                            <Field name="city" type="text" label="City" size={5} component={renderField} />
+                            <Field name="state" type="text" label="State" size={3} component={renderField} />
+                            <Field name="zip" type="text" label="Zip Code" size={4} component={renderField} />
+                        </Row>
+                        <hr />
+                        <Row>
+                            <button className="btn" type="button" onClick={this.addPhoneNumber.bind(this)}>Add Phone Number</button>
+                            <Field key="0" name="phoneNumber[0]" type="number" label="Phone Number" size={12} component={renderField} />
+                            {
+                                this.state.phoneNumber.map((phoneNumber, index) => (
+                                    <Field key={`${index + 1}`} name={`phoneNumber[${index + 1}]`} type="number" label="Phone Number" size={12} component={renderField} />
+                                ))
+                            }
+                        </Row>
+                        <hr />
+                        <Row>
+                            <button className="btn" type="button" onClick={this.addEmail.bind(this)}>Add Email</button>
+                            <Field key="0" name="email[0]" type="text" label="Email" size={12} component={renderField} />
+                            {
+                                this.state.email.map((email, index) => (
+                                    <Field key={`${index + 1}`} name={`email[${index + 1}]`} type="text" label="Email" size={12} component={renderField} />
+                                ))
+                            }
+                        </Row>
+                        <hr />
+                        <Row className="social">
+                            <button className="btn" type="button" onClick={this.addSocial.bind(this)}>Add Social</button>
+                            <Field key="0" name="social[0]" type="text" label="Social Media" size={12} component={renderField} />
+                            {
+                                this.state.social.map((social, index) => (
+                                    <Field key={`${index + 1}`} name={`social[${index + 1}]`} type="text" label="Social Media" size={12} component={renderField} />
+                                ))
+                            }
+                        </Row>
+                        <hr />
+                        <Row>
+                            <Field name="university" type="text" label="College/University" size={12} component={renderField} />
+                        </Row>
+                        <button type="submit" className="next">Next</button>
+
+                    </form>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
+
+    addSocial() {
+        this.setState({ social: this.state.social.concat('') });
+    }
+
+    addPhoneNumber() {
+        this.setState({ phoneNumber: this.state.phoneNumber.concat('') });
+    }
+
+    addEmail() {
+        this.setState({ email: this.state.email.concat('') });
+    }
+
+
 }
+
+
 
 export default reduxForm({
     form: 'wizard',

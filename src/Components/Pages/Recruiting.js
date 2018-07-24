@@ -31,8 +31,9 @@ class Recruiting extends Component {
         state: values.state,
         zip: values.zip
       },
+      social: values.social,
       college: values.university,
-      applicationDate: d.toString(), //(get date only) 
+      applicationDate: d.getTime().toString(), //(get date only) 
       skills: values.skills,
       email: values.email,
       phoneNumber: values.phoneNumber
