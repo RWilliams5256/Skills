@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Row, Col, Button, Preloader } from 'react-materialize';
 import helpers from '../../utils/helpers';
-import Accordion from '../subcomponents/Accordion';
-import ResourceCard from '../subcomponents/ResourceCard';
+import Accordion from '../Subcomponents/Accordion';
+import ResourceCard from '../Subcomponents/ResourceCard';
 import './Search.css';
 
 
