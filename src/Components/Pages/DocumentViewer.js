@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './DocumentViewer.css';
 import FileViewer from 'react-file-viewer';
-import Image from './Zachary.docx';
+import Image from './Test resume.pdf';
 
-const type = 'docx';
+const type = 'pdf';
 
 class DocumentViewer extends Component{
     render(){
