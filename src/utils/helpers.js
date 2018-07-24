@@ -5,8 +5,6 @@ const helpers = {
     dbCallforLists: function(callback){
         let categories = []
         let allCategories = [];
-        // let allRoles = [];
-        // let allLevels =[];
 
         db.collection('lists').onSnapshot(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
@@ -48,7 +46,7 @@ const helpers = {
     dbCallforPeople: function(listOfCriteria, callback) {
         console.log('listOfCriteria:', listOfCriteria)
 
-        const matchingPeople = [];
+        let matchingPeople = [];
         const peopleRef = db.collection('people');
 
         // let queryStr = peopleRef;
@@ -64,11 +62,16 @@ const helpers = {
         query.get().then(people => {
             people.forEach(doc => {
                 const data = doc.data()
+                // const peep = {
+                //     'firstName': data.firstName,
+                //     'lastName': data.lastName
+                // }
+                // console.log('peep:', peep)
                 matchingPeople.push(data)
             })
         })
 
-        console.log('matchingPeople:', matchingPeople)
+        console.log('matchingPeople:',matchingPeople)
         callback(matchingPeople)
     },
 

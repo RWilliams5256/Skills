@@ -55,13 +55,16 @@ class Search extends Component {
 
   componentDidUpdate(){
     console.log("search DB again for employees")
-    console.log('will update:', this.state.criteriaList, this.state.resourceList)
+    console.log('did update:', this.state.criteriaList)
+    console.log(this.state.resourceList)
   }
 
   handler(criteria, resources) {
-    console.log('initial resource:', resources)
-    this.setState({'criteriaList': criteria})
-    this.setState({'resourceList': resources})
+    // console.log('initial resource:', resources)
+    this.setState({
+      'criteriaList': criteria, 
+      'resourceList': resources
+    })
 
     console.log('resourceList:',this.state.resourceList)
   }
@@ -71,6 +74,7 @@ class Search extends Component {
     console.log("Search rendered")
 
     const dataReturned = this.state.callToDbComplete;
+
     let accord;
 
     if (dataReturned) {
@@ -78,6 +82,12 @@ class Search extends Component {
     } else {
       accord = <Preloader />
     }
+
+    console.log('rendering search:', this.state.resourceList)
+
+    const resor = this.state.resourceList;
+    console.log('resor:',)
+
 
     return (
       <div className='search'>
@@ -102,8 +112,8 @@ class Search extends Component {
             <h5>Matching Resources:</h5>
             <Row>
               {
-                this.state.resourceList.map(
-                  (resource,i) => <ResourceCard key={i+resource.lastName} name={resource.firstName} email={resource.studentEmail}  school={resource.college} position={resource.appliedFor} status={resource.applicationDate}/>)
+                resor.map(
+                  (resource,i) => <ResourceCard key={i} name={resource.firstName} email={resource.studentEmail}  school={resource.college} position={resource.appliedFor} status={resource.applicationDate}/>)
               }
             </Row>
           </Col>
