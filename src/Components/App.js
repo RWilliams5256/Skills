@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Navigation from'./subcomponents/Navigation';
+import Navigation from'./Subcomponents/Navigation';
+import DocumentViewer from'./Pages/DocumentViewer';
 
 
 class App extends Component {
@@ -12,7 +13,8 @@ class App extends Component {
         </header>
 
         <main>
-          {this.props.children}
+          <DocumentViewer/>
+          
         </main>
 
       </div>

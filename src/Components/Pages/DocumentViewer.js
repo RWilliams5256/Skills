@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import './DocumentViewer.css';
 import FileViewer from 'react-file-viewer';
+import Image from './Zachary.docx';
 
-const file = '..';
-const type = 'pdf';
+const type = 'docx';
 
 class DocumentViewer extends Component{
     render(){
         return (
       <FileViewer
         fileType={type}
-        filePath={file}
+        filePath={Image}
         />
     );
 
     };
 }
+
+export default DocumentViewer;

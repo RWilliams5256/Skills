@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import App from './../components/App';
-import Import from '../components/pages/Import';
-import Search from '../components/pages/Search';
-import Recruiting from '../components/pages/Recruiting';
+import App from './../Components/App';
+import Import from '../Components/Pages/Import';
+import Search from '../Components/Pages/Search';
+import Recruiting from '../Components/Pages/Recruiting';
 
 
 const routes = (
