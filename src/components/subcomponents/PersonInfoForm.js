@@ -17,14 +17,11 @@ const PersonInfoForm = (props) => {
                     <Row>
                         <Field name="firstName" type="text" label="First Name" placeholder="John" size={6} className="validate" component={renderField} required />
                         <Field name="lastName" type="text" label="Last Name" size={6} className="validate" component={renderField} required />
-                    </Row>
-                    <Row>
+                    
                         <Field name="address" type="text" label="Address" size={12} component={renderField} />
-                    </Row>
-                    <Row>
+                    
                         <Field name="address2" type="text" label="Address 2" size={12} component={renderField} />
-                    </Row>
-                    <Row>
+                   
                         <Field name="city" type="text" label="City" size={5} component={renderField} />
                         <Field name="state" type="text" label="State" size={3} component={renderField} />
                         <Field name="zip" type="text" label="Zip Code" size={4} component={renderField} />
