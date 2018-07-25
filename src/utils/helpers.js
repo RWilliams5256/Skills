@@ -62,17 +62,53 @@ const helpers = {
         query.get().then(people => {
             people.forEach(doc => {
                 const data = doc.data()
-                // const peep = {
-                //     'firstName': data.firstName,
-                //     'lastName': data.lastName
-                // }
-                // console.log('peep:', peep)
-                matchingPeople.push(data)
+                const peep = {
+                    'firstName': data.firstName,
+                    'lastName': data.lastName
+                }
+                console.log('peep:', peep.firstName)
+                matchingPeople.push(peep)
             })
         })
 
-        console.log('matchingPeople:',matchingPeople)
         callback(matchingPeople)
+
+
+        // var peopleRef = db.collection('people');
+        // var data;
+        // var query = peopleRef;
+        // //console.log('req',req.body);
+        // var college = ['Georgia State University'];
+        // var firstName = 'Adam';
+        // //console.log('skill',skill);
+        // if (college.length > 0) {
+        //     for (var i in college) {
+        //         query = query.where('college.' + college[i], '==', true)
+        //         console.log('i is',i)
+        //     }
+        // }
+        // if (college !== null) {
+        //     //for(i in college){
+        //     query = query.where('firstName', "==", firstName)
+        //     //  }
+        // }
+        // //  query = query.orderBy('skill.'+ skill[0])
+        // //  console.log('query is', query);
+        // query.get().then(snapshot => {
+        //         if (snapshot.empty) {
+        //             console.log('No documents found');
+        //         } else {
+        //             data = snapshot.docs.map(documentSnapshot => {
+        //                 return documentSnapshot.data();
+        //             })
+        //             console.log('Doc is', data);
+        //         }
+        //         return (JSON.stringify(data));
+        //     })
+        //     .catch(err => {
+        //         console.log('Oops! Something went wrong.');
+        //         throw new Error(err);
+        //     });
     },
 
 };

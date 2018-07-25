@@ -66,7 +66,7 @@ class Search extends Component {
       'resourceList': resources
     })
 
-    console.log('resourceList:',this.state.resourceList)
+    // console.log('resourceList:',typeof(this.state.resourceList))
   }
 
 
@@ -83,7 +83,7 @@ class Search extends Component {
       accord = <Preloader />
     }
 
-    console.log('rendering search:', this.state.resourceList)
+    console.log('rendering search resource list:', this.state.resourceList.length)
 
     const resor = this.state.resourceList;
     console.log('resor:',)
