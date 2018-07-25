@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Navigation from'./Subcomponents/Navigation';
-import DocumentViewer from'./Pages/DocumentViewer';
+import Navigation from'./subcomponents/Navigation';
+import DocumentViewer from'./pages/DocumentViewer';
 
 
 class App extends Component {
