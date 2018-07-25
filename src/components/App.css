@@ -1,0 +1,73 @@
+/* 
+*  Hosted Fonts
+*/
+@font-face {
+  font-family: 'Manus';
+  src: url('/fonts/Manus.otf');
+}
+
+@font-face{
+  font-family: 'Tungsten-SemiBold';
+  src: url('/fonts/TungstenRnd-Semibold.otf');
+}
+
+@font-face{
+  font-family: 'Tungsten-Light';
+  src: url('/fonts/TungstenRnd-Light.otf');
+}
+
+@font-face {
+  font-family: 'Pitch';
+  src: url('/fonts/Pitch-Regular.otf');
+}
+
+@font-face {
+  font-family: 'Pitch-Bold';
+  src: url('/fonts/Pitch-Bold.otf');
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.App {
+  text-align: left;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-logo2 {
+  text-align: left;
+  height: 80px;
+  float: left;
+}
+
+.App-header {
+  background-color: #EFE3D8;
+  height: 100px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+label {
+  background-color: white;
+  color: black;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
