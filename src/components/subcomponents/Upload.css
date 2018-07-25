@@ -1,10 +1,19 @@
-label{
+#bb{
     background:  #f04e30;
     color: #ffffff;
     display: table;   
     padding: 10px;
+    margin: 0 auto;
 }
 
 input[type="file"] {
     display: none;
+}
+
+button{
+    background: #f04e30;
+    color: #ffffff;
+    padding: 10px;
+    border: #f04e30;
+
 }
