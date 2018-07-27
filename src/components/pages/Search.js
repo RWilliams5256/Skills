@@ -6,7 +6,7 @@ import ResourceCard from '../subcomponents/ResourceCard';
 import './Search.css';
 
 import { db } from '../../firebase/firebase';
-import DocumentViewer from './DocumentViewer';
+
 
 
 
@@ -135,7 +135,7 @@ class Search extends Component {
                 }
             </Row>
           </Col>
-          <div><DocumentViewer/>></div>
+          
         </Row>
       </div>
     );

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Import.css';
 import Upload from'../subcomponents/Upload';
+import DocumentViewer from './DocumentViewer';
 
 class Import extends Component {
   render() {
@@ -8,7 +9,9 @@ class Import extends Component {
       <div >
         <p/>             
         <Upload classname="upload" />
+        <DocumentViewer/>
       </div>
+      
     )
   };
 }
