@@ -62,7 +62,6 @@ export default class extends Component {
           file={this.state.file}
           height="300"
           onLoadSuccess={this.onDocumentLoadSuccess}
-          
           >
           {
                 Array.from(

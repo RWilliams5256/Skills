@@ -4,15 +4,16 @@ import FileComponent from '../subcomponents/FileComponent';
 
 
 //Because we are using a local file, we have to import the path
-//TODO: pass path into this component as prop
-import file from "./pdfresume.pdf";
+//TODO: pass path into this component fom db
+import file from "./pdfresume.extradot.pdf";
 
-//the FileComponent component takes in a path and a 'type' string.
-//TODO: separete 'file' string at period and use the extension as 'type' so we dont have to store that in DB
-const type = 'pdf';
+
 
 class DocumentViewer extends Component{
     render(){
+        var filePathArray = file.split(".");
+        const type = filePathArray[filePathArray.length-1];
+
         return (
       <FileComponent
         fileType={type}
