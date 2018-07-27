@@ -15,7 +15,7 @@ class Accordion extends Component {
   }
 
   componentWillMount() {
-    console.log('accordion will mount')
+    // console.log('accordion will mount')
     var allCategories = sessionStorage.getItem('allCategories')
     this.setState({
       'allItems': JSON.parse(allCategories)
@@ -23,7 +23,7 @@ class Accordion extends Component {
   }
 
   componentDidMount() {
-    console.log('Accordion mounted')
+    // console.log('Accordion mounted')
   }
 
   handleEvent() {
@@ -39,14 +39,14 @@ class Accordion extends Component {
         listOfCriteria.push(selectedItem);
     });
 
-    console.log('selectedCriteria', listOfCriteria)
+    // console.log('selectedCriteria', listOfCriteria)
 
     var listOfResources;
 
     helpers.dbCallforPeople(listOfCriteria, function(matchingPeople){
       listOfResources = matchingPeople
     })
-    
+
     this.props.handler(listOfCriteria, listOfResources)
     console.log('accordion matching people:',listOfResources)
   }
