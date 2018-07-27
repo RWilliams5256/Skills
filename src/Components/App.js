@@ -12,9 +12,7 @@ class App extends Component {
           <Navigation />
         </header>
 
-        <main>
-          <DocumentViewer/>
-          
+        <main>  
         </main>
 
       </div>
