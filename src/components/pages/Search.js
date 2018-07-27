@@ -19,21 +19,21 @@ class Search extends Component {
       resources: [
         {
           uKey: 0,
-          name: 'Ryan Rodwell',
+          firstName: 'Ryan Rodwell',
           position: 'BA',
-          email: 'ryanrodwell@gmail.com',
+          studentEmail: 'ryanrodwell@gmail.com',
           phone: '12346789',
-          school: 'Georgia Tech',
+          college: 'Georgia Tech',
           status: 'employee',
 
         },
         {
           uKey: 1,
-          name: 'John Doe',
+          firstName: 'John Doe',
           position: 'Developer',
-          email: 'jdoe@gmail.com',
+          studentEmail: 'jdoe@gmail.com',
           phone: '12346789',
-          school: 'Georgia Southern',
+          college: 'Georgia Southern',
           status: 'employee',
 
         },
@@ -66,8 +66,8 @@ class Search extends Component {
   handler(criteria, resources) {
     console.log('initial resource:', resources)
     this.setState({'criteriaList': criteria})
-    this.setState({'resourceList': resources})
-    // this.setState({'returnedMatches':true})
+    // this.setState({'resourceList': resources})
+    this.setState({'returnedMatches':true})
     // this.setState({''})
 
     // console.log('resourceList:',typeof(this.state.resourceList))
@@ -88,6 +88,7 @@ class Search extends Component {
 
     // console.log('rendering search resource list:', this.state.resourceList[0])
 
+
     if(!this.state.returnedMatches) {
       let allPeople = [];
       db.collection('people').onSnapshot(people => {
@@ -95,7 +96,7 @@ class Search extends Component {
             const data = doc.data()
             allPeople.push(data)
         })
-        // console.log('matches:',allPeople)
+        console.log('matches:',allPeople)
         this.setState({'resourceList': allPeople})
       })
 

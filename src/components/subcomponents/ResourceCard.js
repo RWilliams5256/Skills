@@ -2,7 +2,7 @@ import React from 'react';
 
 const ResourceCard = props => (
 
-    <div className="col s6">
+    <div className="col s4">
         <div className="card">
             <div className="card-content" style={{'height':'200px'}}>
                 <span className="card-title">{props.name}</span>
