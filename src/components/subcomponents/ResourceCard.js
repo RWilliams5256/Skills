@@ -1,4 +1,6 @@
 import React from 'react';
+import { Modal, Button } from 'react-materialize';
+import DocumentViewer from '../pages/DocumentViewer'
 
 const ResourceCard = props => (
 
@@ -13,7 +15,11 @@ const ResourceCard = props => (
                 <p>{props.status}</p>
             </div>
             <div className="card-action">
-                <a href="">Resume</a>
+                <Modal
+                    header='Modal Header'
+                    trigger={<Button>View Resume</Button>}>
+                    <DocumentViewer/>
+                </Modal>
             </div>
         </div>
     </div>
