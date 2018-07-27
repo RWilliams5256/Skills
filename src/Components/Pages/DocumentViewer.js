@@ -5,7 +5,7 @@ import pdfComponent from '../subcomponents/pdfComponent';
 
 //Because we are using a local file, we have to import the path
 //TODO: pass path into this component fom db
-import file from "./docxresume.docx";
+import file from "./pdfresume.pdf";
 
 class DocumentViewer extends Component {
 
