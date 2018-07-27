@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './DocumentViewer.css';
 import docxComponent from '../subcomponents/docxComponent';
 import pdfComponent from '../subcomponents/pdfComponent';
 
