@@ -5,16 +5,13 @@ const helpers = {
     dbCallforLists: function(callback){
         let categories = []
         let allCategories = [];
+        const listRef =  db.collection('lists')
 
-        db.collection('lists').onSnapshot(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
+        listRef.onSnapshot(querySnapshot => {
+            querySnapshot.forEach(doc => {
                 const data = doc.data();
-                // console.log('data',data)
-
                 if(data.listName !== undefined) {
-
                     const categoryName = data.listName.toLowerCase()
-
                     if(!categories.includes(categoryName)){
                         categories.push(categoryName)
                         const cat = {
@@ -26,7 +23,7 @@ const helpers = {
                 }
             });
 
-            querySnapshot.forEach(function(doc) {
+            querySnapshot.forEach(doc => {
                 const data = doc.data();
                 if(data.listName !== undefined) {
                     const categoryName = data.listName.toLowerCase()
@@ -48,7 +45,6 @@ const helpers = {
 
         let matchingPeople = [];
         const peopleRef = db.collection('people');
-
         // let queryStr = peopleRef;
 
         // for(let i =0;i<listOfCriteria.length;i++){
@@ -59,19 +55,14 @@ const helpers = {
         const query = peopleRef.where('college', '==', 'Georgia State University')
         //.where('firstName','==','Adam')
 
-        query.get().then(people => {
+        query.onSnapshot(people => {
             people.forEach(doc => {
                 const data = doc.data()
-                const peep = {
-                    'firstName': data.firstName,
-                    'lastName': data.lastName
-                }
-                console.log('peep:', peep.firstName)
-                matchingPeople.push(peep)
+                matchingPeople.push(data)
             })
+            console.log('matches:',matchingPeople)
+            callback(matchingPeople)
         })
-
-        callback(matchingPeople)
 
 
         // var peopleRef = db.collection('people');
