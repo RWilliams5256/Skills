@@ -18,7 +18,7 @@ const ResourceCard = props => (
                 <Modal
                     header='Modal Header'
                     trigger={<Button>View Resume</Button>}>
-                    <DocumentViewer/>
+                    <DocumentViewer file={props.resume}/>
                 </Modal>
             </div>
         </div>
