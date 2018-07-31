@@ -26,7 +26,7 @@ class pdfComponent extends Component {
               <Page
                 key={`page_${index + 1}`}
                 pageNumber={index + 1}
-                scale={1.5}
+                scale={0.9}
               />
             ),
           )

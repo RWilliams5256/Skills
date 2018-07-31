@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import docxComponent from '../subcomponents/docxComponent';
 import pdfComponent from '../subcomponents/pdfComponent';
+import errorComponent from '../subcomponents/documentErrorComponent';
 
 class DocumentViewer extends Component {
 
@@ -18,7 +19,7 @@ class DocumentViewer extends Component {
                 return docxComponent;
             }
             default: {
-                return;
+                return errorComponent;
             }
         }
     }

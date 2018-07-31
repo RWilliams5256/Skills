@@ -131,7 +131,7 @@ class Search extends Component {
             <Row>
               {
                 this.state.resourceList.map(
-                  (resource,i) => <ResourceCard key={i} name={resource.firstName} email={resource.studentEmail}  school={resource.college} position={resource.appliedFor} status={resource.applicationDate} resume={resource.resume}/>)
+                  (resource,i) => <ResourceCard key={i} name={resource.firstName} email={resource.email[0]}  school={resource.colleges[0].name} position={resource.currentProject} status={resource.status} resume={resource.resumes[0].fileURL}/>)
                 }
             </Row>
           </Col>
