@@ -64,6 +64,7 @@ class Search extends Component {
     // console.log(this.state.resourceList)
   }
 
+
   handler(criteria, resources) {
     console.log('initial resource:', resources)
     this.setState({'criteriaList': criteria})
