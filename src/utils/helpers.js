@@ -126,6 +126,38 @@ const helpers = {
    db.collection('people').add(data);
    console.log("Upload was success");
    callback();
+ },
+
+ dbCallttoAddnewSkill: function(newlist,callback){
+    var data;
+    var time = new Date();
+    var i;
+    //time = time.getMilliseconds();
+    //time = time/1000;
+    for(i in newlist.body.list){
+      if(newlist.body.list[i].hasOwnProperty('subGroup')){
+       data = {
+      name: newlist.body.list[i].name,
+      listName: newlist.body.list[i].listName,
+      subGroup:newlist.body.list[i].subGroup,
+      dateAdded: time
+      };
+    db.collection('lists').add(data);
+    }
+    else{
+      data = {
+        name: newlist.body.list[i].name,
+        listName: newlist.body.list[i].listName,
+        dateAdded:time
+        };
+      db.collection('lists').add(data);
+    }
+  }
+    
+    console.log("Upload was a sucess");
+    callback();
+   // return admin.firestore().doc('users/'+user.uid).set(userObject);
+  
  }
     
 
