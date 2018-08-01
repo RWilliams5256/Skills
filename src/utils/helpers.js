@@ -39,7 +39,7 @@ const helpers = {
             callback();
         });
     },
-
+    
     dbCallforPeople: function(listOfCriteria, callback) {
         console.log('listOfCriteria:', listOfCriteria)
 
@@ -101,6 +101,34 @@ const helpers = {
         //         throw new Error(err);
         //     });
     },
+    dbCalltoAddPerson: function(personalInfo, callback){
+    var person = personalInfo.body;
+    var data;
+    data ={
+      firstName: person.firstName,
+      lastName: person.lastName,
+      address:person.address,
+      colleges:  person.colleges,
+      referredBy: person.referredBy,
+      skills: person.skills,
+      role: person.role,
+      phone: person.phone,
+      socialMedia: person.socialMedia,
+      status: person.status,
+      experienceLevel: person.experienceLevel,
+      paymentType: person.paymentType,
+      resumes: person.resumes,
+      notes: person.notes,
+      email: person.email,
+      currentProject: person.currentProject
+  }
+   console.log("data is ", data);
+   db.collection('people').add(data);
+   console.log("Upload was success");
+   callback();
+ }
+    
+
 
 };
 
