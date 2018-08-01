@@ -5,8 +5,15 @@ class errorComponent extends Component
 
     render()
     {
+        var msg;
+if(this.props.filePath === ""){
+ msg = "No file found"
+}else{
+    msg="The file at '{this.props.filePath}'' did not load properly or is not supported"
+}
+
         return(
-            <div>The file at '{this.props.filePath}'' did not load properly or is not supported</div>
+            <div>{msg}</div>
         )
     }
 
