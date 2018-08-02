@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import docxComponent from '../subcomponents/docxComponent';
 import pdfComponent from '../subcomponents/pdfComponent';
-
-//Because we are using a local file, we have to import the path
-//TODO: pass path into this component fom db
-import file from "./pdfresume.pdf";
+import errorComponent from '../subcomponents/documentErrorComponent';
 
 class DocumentViewer extends Component {
 
     getDisplayComponent() {
-        var filePathArray = file.split(".");
-        const type = filePathArray[filePathArray.length - 1];
+        var fileExt = this.props.file.substring(
+            this.props.file.lastIndexOf(".") + 1, 
+            this.props.file.lastIndexOf("?")
+        );
 
-        switch (type) {
+        switch (fileExt) {
             case 'pdf': {
                 return pdfComponent
             }
@@ -20,7 +19,7 @@ class DocumentViewer extends Component {
                 return docxComponent;
             }
             default: {
-                return;
+                return errorComponent;
             }
         }
     }
@@ -30,7 +29,7 @@ class DocumentViewer extends Component {
 
         return (
             <FileComponent
-                filePath={file}
+                filePath={this.props.file}
             />
         );
 

@@ -16,9 +16,9 @@ const ResourceCard = props => (
             </div>
             <div className="card-action">
                 <Modal
-                    header='Modal Header'
+                    header={props.resume.name}
                     trigger={<Button>View Resume</Button>}>
-                    <DocumentViewer/>
+                    <DocumentViewer file={props.resume.fileURL}/>
                 </Modal>
             </div>
         </div>

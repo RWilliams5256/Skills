@@ -9,7 +9,7 @@ class Import extends Component {
       <div >
         <p/>             
         <Upload classname="upload" />
-        <DocumentViewer/>
+        
       </div>
       
     )

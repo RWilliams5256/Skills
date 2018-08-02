@@ -25,7 +25,7 @@ class PersonInfoForm extends Component {
                 <div className="card-content">
                     <form onSubmit={this.handleSubmit}>
                         <Row>
-                            <Field name="firstName" type="text" label="First Name" placeholder="John" size={6} className="validate" component={renderField} required />
+                            <Field name="firstName" type="text" label="First Name" size={6} className="validate" component={renderField} required />
                             <Field name="lastName" type="text" label="Last Name" size={6} className="validate" component={renderField} required />
 
                             <Field name="address" type="text" label="Address" size={12} component={renderField} />

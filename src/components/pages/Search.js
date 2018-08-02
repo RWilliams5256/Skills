@@ -64,6 +64,7 @@ class Search extends Component {
     // console.log(this.state.resourceList)
   }
 
+
   handler(criteria, resources) {
     console.log('initial resource:', resources)
     this.setState({'criteriaList': criteria})
@@ -130,8 +131,8 @@ class Search extends Component {
             <h5>Matching Resources:</h5>
             <Row>
               {
-                this.state.resources.map(
-                  (resource,i) => <ResourceCard key={i} name={resource.firstName} email={resource.studentEmail}  school={resource.college} position={resource.appliedFor} status={resource.applicationDate}/>)
+                this.state.resourceList.map(
+                  (resource,i) => <ResourceCard key={i} name={resource.firstName} email={resource.email[0]}  school={resource.colleges[0].name} position={resource.currentProject} status={resource.status} resume={resource.resumes[0]}/>)
                 }
             </Row>
           </Col>

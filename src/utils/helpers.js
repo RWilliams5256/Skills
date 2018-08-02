@@ -39,7 +39,7 @@ const helpers = {
             callback();
         });
     },
-
+    
     dbCallforPeople: function(listOfCriteria, callback) {
         console.log('listOfCriteria:', listOfCriteria)
 
@@ -101,6 +101,65 @@ const helpers = {
         //         throw new Error(err);
         //     });
     },
+    dbCalltoAddPerson: function(personalInfo, callback){
+    var person = personalInfo;
+    var data;
+    data ={
+      firstName: person.firstName,
+      lastName: person.lastName,
+      address:person.address,
+      colleges:  person.colleges,
+      referredBy: person.referredBy,
+      skills: person.skills,
+      role: person.role,
+      phone: person.phone,
+      socialMedia: person.socialMedia,
+      status: person.status,
+      experienceLevel: person.experienceLevel,
+      paymentType: person.paymentType,
+      resumes: person.resumes,
+      notes: person.notes,
+      email: person.email,
+      currentProject: person.currentProject
+  }
+   db.collection('people').add(data);
+   console.log("Added Person" );
+  
+ },
+
+ dbCallttoAddnewSkill: function(newlist,callback){
+    var data;
+    var time = new Date();
+    var i;
+    //time = time.getMilliseconds();
+    //time = time/1000;
+    for(i in newlist.list){
+      if(newlist.list[i].hasOwnProperty('subGroup')){
+       data = {
+      name: newlist.list[i].name,
+      listName: newlist.list[i].listName,
+      subGroup:newlist.list[i].subGroup,
+      dateAdded: time
+      };
+    db.collection('lists').add(data);
+    }
+    else{
+      data = {
+        name: newlist.list[i].name,
+        listName: newlist.list[i].listName,
+        dateAdded:time
+        };
+      db.collection('lists').add(data);
+    }
+  }
+    
+    console.log("Upload was a sucess");
+    
+   // return admin.firestore().doc('users/'+user.uid).set(userObject);
+  
+ }
+    
+
 
 };
 
