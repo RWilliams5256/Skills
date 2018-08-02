@@ -5,7 +5,7 @@ import Accordion from '../subcomponents/Accordion';
 import ResourceCard from '../subcomponents/ResourceCard';
 import './Search.css';
 
-import { db } from '../../firebase/firebase';
+// import { db } from '../../firebase/firebase';
 
 
 
@@ -68,7 +68,7 @@ class Search extends Component {
     console.log('initial resource:', resources)
     this.setState({'criteriaList': criteria})
     // this.setState({'resourceList': resources})
-    this.setState({'returnedMatches':true})
+    // this.setState({'returnedMatches':true})
     // this.setState({''})
 
     // console.log('resourceList:',typeof(this.state.resourceList))
@@ -90,18 +90,18 @@ class Search extends Component {
     // console.log('rendering search resource list:', this.state.resourceList[0])
 
 
-    if(!this.state.returnedMatches) {
-      let allPeople = [];
-      db.collection('people').onSnapshot(people => {
-        people.forEach(doc => {
-            const data = doc.data()
-            allPeople.push(data)
-        })
-        console.log('matches:',allPeople)
-        this.setState({'resourceList': allPeople})
-      })
+    // if(!this.state.returnedMatches) {
+    //   let allPeople = [];
+    //   db.collection('people').onSnapshot(people => {
+    //     people.forEach(doc => {
+    //         const data = doc.data()
+    //         allPeople.push(data)
+    //     })
+    //     console.log('matches:',allPeople)
+    //     this.setState({'resourceList': allPeople})
+    //   })
 
-    }
+    // }
 
     // const resor = this.state.resourceList;
     // console.log('resor:',)
@@ -130,12 +130,12 @@ class Search extends Component {
             <h5>Matching Resources:</h5>
             <Row>
               {
-                this.state.resourceList.map(
+                this.state.resources.map(
                   (resource,i) => <ResourceCard key={i} name={resource.firstName} email={resource.studentEmail}  school={resource.college} position={resource.appliedFor} status={resource.applicationDate}/>)
                 }
             </Row>
           </Col>
-          
+
         </Row>
       </div>
     );

@@ -14,3 +14,4 @@ var config = {
   firebase.initializeApp(config)
 
   export const db = firebase.firestore();
+  export const functions = firebase.functions();

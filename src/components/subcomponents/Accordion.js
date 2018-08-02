@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Row, Col, Collapsible, CollapsibleItem } from 'react-materialize';
 import $ from 'jquery';
 import Checkbox from './Checkbox';
-import helpers from '../../utils/helpers';
+// import helpers from '../../utils/helpers';
 
 import './Accordion.css';
+import { functions } from '../../firebase/firebase';
 
 
 class Accordion extends Component {
@@ -43,11 +44,22 @@ class Accordion extends Component {
 
     var listOfResources;
 
-    helpers.dbCallforPeople(listOfCriteria, function(matchingPeople){
-      listOfResources = matchingPeople
-    })
+    // helpers.dbCallforPeople(listOfCriteria, function(matchingPeople){
+    //   listOfResources = matchingPeople
+    // })
 
-    this.props.handler(listOfCriteria, listOfResources)
+    var getUserByMultipleSkill = functions.httpsCallable('getUserByMultipleSkill');
+    getUserByMultipleSkill({"User":{"skills":['java']}}
+
+  ).then(result => {
+        // Read result of the Cloud Function.
+        // var sanitizedMessage = result.data.text;
+        console.log(result)
+        // ...
+    }).catch(error => {
+      console.log(error)
+    });
+    // this.props.handler(listOfCriteria, listOfResources)
     console.log('accordion matching people:',listOfResources)
   }
 

@@ -43,8 +43,8 @@ const helpers = {
     dbCallforPeople: function(listOfCriteria, callback) {
         console.log('listOfCriteria:', listOfCriteria)
 
-        let matchingPeople = [];
-        const peopleRef = db.collection('people');
+        // let matchingPeople = [];
+        // const peopleRef = db.collection('people');
         // let queryStr = peopleRef;
 
         // for(let i =0;i<listOfCriteria.length;i++){
@@ -52,17 +52,17 @@ const helpers = {
         // }
 
 
-        const query = peopleRef.where('college', '==', 'Georgia State University')
-        //.where('firstName','==','Adam')
+        // const query = peopleRef.where('college', '==', 'Georgia State University')
+        // //.where('firstName','==','Adam')
 
-        query.onSnapshot(people => {
-            people.forEach(doc => {
-                const data = doc.data()
-                matchingPeople.push(data)
-            })
-            console.log('matches:',matchingPeople)
-            callback(matchingPeople)
-        })
+        // query.onSnapshot(people => {
+        //     people.forEach(doc => {
+        //         const data = doc.data()
+        //         matchingPeople.push(data)
+        //     })
+        //     console.log('matches:',matchingPeople)
+        //     callback(matchingPeople)
+        // })
 
 
         // var peopleRef = db.collection('people');
