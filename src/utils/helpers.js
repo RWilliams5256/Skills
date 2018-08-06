@@ -102,7 +102,7 @@ const helpers = {
         //     });
     },
     dbCalltoAddPerson: function(personalInfo, callback){
-    var person = personalInfo;
+    var person = personalInfo.body;
     var data;
     data ={
       firstName: person.firstName,
@@ -122,9 +122,10 @@ const helpers = {
       email: person.email,
       currentProject: person.currentProject
   }
+   console.log("data is ", data);
    db.collection('people').add(data);
-   console.log("Added Person" );
-  
+   console.log("Upload was success");
+   callback();
  },
 
  dbCallttoAddnewSkill: function(newlist,callback){
@@ -133,20 +134,20 @@ const helpers = {
     var i;
     //time = time.getMilliseconds();
     //time = time/1000;
-    for(i in newlist.list){
-      if(newlist.list[i].hasOwnProperty('subGroup')){
+    for(i in newlist.body.list){
+      if(newlist.body.list[i].hasOwnProperty('subGroup')){
        data = {
-      name: newlist.list[i].name,
-      listName: newlist.list[i].listName,
-      subGroup:newlist.list[i].subGroup,
+      name: newlist.body.list[i].name,
+      listName: newlist.body.list[i].listName,
+      subGroup:newlist.body.list[i].subGroup,
       dateAdded: time
       };
     db.collection('lists').add(data);
     }
     else{
       data = {
-        name: newlist.list[i].name,
-        listName: newlist.list[i].listName,
+        name: newlist.body.list[i].name,
+        listName: newlist.body.list[i].listName,
         dateAdded:time
         };
       db.collection('lists').add(data);
@@ -154,7 +155,7 @@ const helpers = {
   }
     
     console.log("Upload was a sucess");
-    
+    callback();
    // return admin.firestore().doc('users/'+user.uid).set(userObject);
   
  }
