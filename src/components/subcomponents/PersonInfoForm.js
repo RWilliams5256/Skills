@@ -42,18 +42,20 @@ class PersonInfoForm extends Component {
                             <Field key="0" name="phoneNumber[0]" type="number" label="Phone Number" size={12} component={renderField} />
                             {
                                 this.state.phoneNumber.map((phoneNumber, index) => (
+                                    
                                     <Field key={`${index + 1}`} name={`phoneNumber[${index + 1}]`} type="number" label="Phone Number" size={12} component={renderField} />
                                 ))
                             }
                         </Row>
                         <hr />
-                        <Row>
+                        <Row className="email">
                             <button className="btn" type="button" onClick={this.addEmail.bind(this)}>Add Email</button>
-                            <Field key="0" name="email[0]" type="text" label="Email" size={12} component={renderField} />
+                            <Field key="0" name="email[0]" type="text" classname="validate" label="Email" size={12} component={renderField} required />
                             {
                                 this.state.email.map((email, index) => (
-                                    <Field key={`${index + 1}`} name={`email[${index + 1}]`} type="text" label="Email" size={12} component={renderField} />
+                                    <Field key={`${index + 1}`} name={`email[${index + 1}]`} type="text" label="Email" size={12} classname="validate" component={renderField} required />
                                 ))
+
                             }
                         </Row>
                         <hr />
@@ -102,113 +104,113 @@ export default reduxForm({
     validate
 })(PersonInfoForm)
 
-/*
+                /*
 class PersonInfoForm extends React.Component{
 
-    constructor(props){
-        super(props);
+                        constructor(props){
+                    super(props);
         this.state={
-            "firstName": "",
-            "lastName": "",
-            "address": "",
-            "address2": "",
-            "city": "",
-            "state": "",
-            "zip": "",
-            "college": "",
-            "graduationDate": "",
-            "referedBy": "",
-            "phone": "",
-            //"socialmedia": "[],
-            //"status": "",
-            //"experienceLevel": "",
-            //"resumes": "",
-            //"email": []
-        }
-
-    }
-
-
-
+                        "firstName": "",
+                    "lastName": "",
+                    "address": "",
+                    "address2": "",
+                    "city": "",
+                    "state": "",
+                    "zip": "",
+                    "college": "",
+                    "graduationDate": "",
+                    "referedBy": "",
+                    "phone": "",
+                    //"socialmedia": "[],
+                    //"status": "",
+                    //"experienceLevel": "",
+                    //"resumes": "",
+                    //"email": []
+                }
+        
+            }
+        
+        
+        
     change = (e) =>{
-        this.setState({
-            [e.target.name] :e.target.value
-        });
-    }
-
+                        this.setState({
+                            [e.target.name]: e.target.value
+                        });
+                    }
+                
     render(){
 
-        return(
+        return (
 <form >
-    <input
-    name='firstName'
-    placeholder='First Name'
-    value={this.state.firstName}
-    onChange={e=>this.change(e)}
-    />
-    <input
-    name='address'
-    placeholder='Street Address'
-    value={this.state.address}
-    onChange={e=>this.change(e)}
-    />
-    <input
-    name='address2'
-    placeholder='Unit Number'
-    value={this.state.address2}
-    onChange={e=>this.change(e)}
-    />
-        <input
-    name='city'
-    placeholder='City'
-    value={this.state.city}
-    onChange={e=>this.change(e)}
-    />
-    <input
-    name='state'
-    placeholder='State'
-    value={this.state.state}
-    onChange={e=>this.change(e)}
-    />
-    <input
-    name='zip'
-    placeholder='Zip Code'
-    value={this.state.zip}
-    onChange={e=>this.change(e)}
-    />
-    <input
-    name='college'
-    placeholder='School Name'
-    value={this.state.college}
-    onChange={e=>this.change(e)}
-    />
-    <input
-    type= 'date'
-    name='graduationDate'
-    placeholder='Graduation Date'
-    value={this.state.graduationDate}
-    onChange={e=>this.change(e)}
-    />
-    <input
-    name='referedBy'
-    placeholder='Refered By'
-    value={this.state.referedBy}
-    onChange={e=>this.change(e)}
-    />
-        <input
-    name='phone'
-    placeholder='Phone Number'
-    value={this.state.phone}
-    onChange={e=>this.change(e)}
-    />
+                        <input
+                            name='firstName'
+                            placeholder='First Name'
+                            value={this.state.firstName}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            name='address'
+                            placeholder='Street Address'
+                            value={this.state.address}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            name='address2'
+                            placeholder='Unit Number'
+                            value={this.state.address2}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            name='city'
+                            placeholder='City'
+                            value={this.state.city}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            name='state'
+                            placeholder='State'
+                            value={this.state.state}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            name='zip'
+                            placeholder='Zip Code'
+                            value={this.state.zip}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            name='college'
+                            placeholder='School Name'
+                            value={this.state.college}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            type='date'
+                            name='graduationDate'
+                            placeholder='Graduation Date'
+                            value={this.state.graduationDate}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            name='referedBy'
+                            placeholder='Refered By'
+                            value={this.state.referedBy}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            name='phone'
+                            placeholder='Phone Number'
+                            value={this.state.phone}
+                            onChange={e => this.change(e)}
+                        />
 
-    <button type='submit' >Submit</button>
+                        <button type='submit' >Submit</button>
 
-    </form>
-        );
-    }
-
-
-
-};
+                    </form>
+                    );
+                }
+            
+            
+            
+            };
 export default PersonInfoForm; */
