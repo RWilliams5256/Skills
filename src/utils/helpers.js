@@ -45,12 +45,6 @@ const helpers = {
 
         let matchingPeople = [];
         const peopleRef = db.collection('people');
-        // let queryStr = peopleRef;
-
-        // for(let i =0;i<listOfCriteria.length;i++){
-        //     queryStr.concat()
-        // }
-
 
         const query = peopleRef.where('college', '==', 'Georgia State University')
         //.where('firstName','==','Adam')
@@ -63,44 +57,8 @@ const helpers = {
             console.log('matches:',matchingPeople)
             callback(matchingPeople)
         })
-
-
-        // var peopleRef = db.collection('people');
-        // var data;
-        // var query = peopleRef;
-        // //console.log('req',req.body);
-        // var college = ['Georgia State University'];
-        // var firstName = 'Adam';
-        // //console.log('skill',skill);
-        // if (college.length > 0) {
-        //     for (var i in college) {
-        //         query = query.where('college.' + college[i], '==', true)
-        //         console.log('i is',i)
-        //     }
-        // }
-        // if (college !== null) {
-        //     //for(i in college){
-        //     query = query.where('firstName', "==", firstName)
-        //     //  }
-        // }
-        // //  query = query.orderBy('skill.'+ skill[0])
-        // //  console.log('query is', query);
-        // query.get().then(snapshot => {
-        //         if (snapshot.empty) {
-        //             console.log('No documents found');
-        //         } else {
-        //             data = snapshot.docs.map(documentSnapshot => {
-        //                 return documentSnapshot.data();
-        //             })
-        //             console.log('Doc is', data);
-        //         }
-        //         return (JSON.stringify(data));
-        //     })
-        //     .catch(err => {
-        //         console.log('Oops! Something went wrong.');
-        //         throw new Error(err);
-        //     });
     },
+    
     dbCalltoAddPerson: function(personalInfo, callback){
     var person = personalInfo;
     var data;

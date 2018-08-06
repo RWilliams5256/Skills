@@ -98,7 +98,7 @@ class Search extends Component {
             const data = doc.data()
             allPeople.push(data)
         })
-        console.log('matches:',allPeople)
+        // console.log('matches:',allPeople)
         this.setState({'resourceList': allPeople})
       })
 
