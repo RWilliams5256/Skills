@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, formValueSelector } from 'redux-form'
+import { connect } from 'react-redux'
 import validate from './validate'
 import renderField from './renderField';
-import { Row } from 'react-materialize';
+import { Row, Modal, Button, Col } from 'react-materialize';
+
 
 
 
@@ -18,7 +20,15 @@ class PersonInfoForm extends Component {
         }
     }
 
+
     render() {
+        var addressButton = "Edit Address";
+        console.log(this.props.address)
+        if(this.props.address=== "   "){
+            addressButton = "Edit Address"
+        }else{
+            addressButton = this.props.address;
+        }
         return (
             <div className="card">
                 <div className="card-title">Person Info Form</div>
@@ -27,29 +37,25 @@ class PersonInfoForm extends Component {
                         <Row>
                             <Field name="firstName" type="text" label="First Name" size={6} className="validate" component={renderField} required />
                             <Field name="lastName" type="text" label="Last Name" size={6} className="validate" component={renderField} required />
-
-                            <Field name="address" type="text" label="Address" size={12} component={renderField} />
-
-                            <Field name="address2" type="text" label="Address 2" size={12} component={renderField} />
-
-                            <Field name="city" type="text" label="City" size={5} component={renderField} />
-                            <Field name="state" type="text" label="State" size={3} component={renderField} />
-                            <Field name="zip" type="text" label="Zip Code" size={4} component={renderField} />
                         </Row>
                         <hr />
                         <Row>
-                            <button className="btn" type="button" onClick={this.addPhoneNumber.bind(this)}>Add Phone Number</button>
+                        <Col style={{"width":"50%"}}>   
+                        <div>
+                            <div className="card-title" style={{"display":"inline"}}>Phone Numbers</div>
+                            <button style={{"display":"inline"}} className="btn" type="button" onClick={this.addPhoneNumber.bind(this)}>+</button>
+                        </div>
                             <Field key="0" name="phoneNumber[0]" type="number" label="Phone Number" size={12} component={renderField} />
                             {
                                 this.state.phoneNumber.map((phoneNumber, index) => (
-                                    
+
                                     <Field key={`${index + 1}`} name={`phoneNumber[${index + 1}]`} type="number" label="Phone Number" size={12} component={renderField} />
                                 ))
                             }
-                        </Row>
-                        <hr />
-                        <Row className="email">
-                            <button className="btn" type="button" onClick={this.addEmail.bind(this)}>Add Email</button>
+                            </Col>
+                            <Col style={{"width":"50%"}}>
+                        <div className="card-title" style={{"display":"inline"}}>Emails</div>
+                        <button style={{"display":"inline"}} className="btn" type="button" onClick={this.addEmail.bind(this)}>+</button>
                             <Field key="0" name="email[0]" type="text" classname="validate" label="Email" size={12} component={renderField} required />
                             {
                                 this.state.email.map((email, index) => (
@@ -57,20 +63,19 @@ class PersonInfoForm extends Component {
                                 ))
 
                             }
-                        </Row>
-                        <hr />
-                        <Row className="social">
-                            <button className="btn" type="button" onClick={this.addSocial.bind(this)}>Add Social</button>
-                            <Field key="0" name="social[0]" type="text" label="Social Media" size={12} component={renderField} />
-                            {
-                                this.state.social.map((social, index) => (
-                                    <Field key={`${index + 1}`} name={`social[${index + 1}]`} type="text" label="Social Media" size={12} component={renderField} />
-                                ))
-                            }
+                            </Col>
                         </Row>
                         <hr />
                         <Row>
-                            <Field name="university" type="text" label="College/University" size={12} component={renderField} />
+                            <Modal
+                                header="Edit Address"
+                                trigger={<Button>{addressButton}</Button>}>
+                                <Field name="address" type="text" label="Address" size={12} component={renderField} />
+                                <Field name="address2" type="text" label="Address 2" size={12} component={renderField} />
+                                <Field name="city" type="text" label="City" size={5} component={renderField} />
+                                <Field name="state" type="text" label="State" size={3} component={renderField} />
+                                <Field name="zip" type="text" label="Zip Code" size={4} component={renderField} />
+                            </Modal>
                         </Row>
                         <button type="submit" className="next">Next</button>
 
@@ -95,7 +100,21 @@ class PersonInfoForm extends Component {
 
 }
 
+const selector = formValueSelector('wizard') // <-- same as form name
+PersonInfoForm = connect(
+    state => {
+        // can select values individually
+        const addressValue = selector(state, 'address')
+        const address2Value = selector(state, 'address2')
+        const cityValue = selector(state, 'city')
+        const stateValue = selector(state, 'state')
+        const zip = selector(state, 'zip')
 
+        return {
+            address: `${addressValue || ""} ${address2Value || ""} ${cityValue || ""} ${stateValue || ""}`,
+        }
+    }
+)(PersonInfoForm)
 
 export default reduxForm({
     form: 'wizard',
