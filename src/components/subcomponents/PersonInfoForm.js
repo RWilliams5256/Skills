@@ -6,9 +6,6 @@ import renderField from './renderField';
 import { Row, Modal, Button, Col } from 'react-materialize';
 
 
-
-
-
 class PersonInfoForm extends Component {
     constructor(props) {
         super(props)
@@ -24,7 +21,7 @@ class PersonInfoForm extends Component {
     render() {
         var addressButton = "Edit Address";
         console.log(this.props.address)
-        if(this.props.address=== "   "){
+        if(this.props.address=== "    "){
             addressButton = "Edit Address"
         }else{
             addressButton = this.props.address;
@@ -39,17 +36,27 @@ class PersonInfoForm extends Component {
                             <Field name="lastName" type="text" label="Last Name" size={6} className="validate" component={renderField} required />
                         </Row>
                         <hr />
+                        
                         <Row>
-                        <Col style={{"width":"50%"}}>   
+                       
+                        <Col style={{"width":"50%"}}> 
+                          
                         <div>
                             <div className="card-title" style={{"display":"inline"}}>Phone Numbers</div>
                             <button style={{"display":"inline"}} className="btn" type="button" onClick={this.addPhoneNumber.bind(this)}>+</button>
+
+                            
                         </div>
-                            <Field key="0" name="phoneNumber[0]" type="number" label="Phone Number" size={12} component={renderField} />
+                            <div>
+                                <Field key="0" name="phoneNumber[0]" type="number" label="Phone Number" size={12} component={renderField} />
+                            
+                            </div>
                             {
                                 this.state.phoneNumber.map((phoneNumber, index) => (
-
-                                    <Field key={`${index + 1}`} name={`phoneNumber[${index + 1}]`} type="number" label="Phone Number" size={12} component={renderField} />
+                                    <div>
+                                    <Field key={`${index + 1}`} name={`phoneNumber[${index + 1}]`} type="number" label="Phone Number" size={10} component={renderField} />
+                                    <button className="btn" type="button" onClick={this.removePhoneNumber(index)}>-</button>
+                                    </div>
                                 ))
                             }
                             </Col>
@@ -59,12 +66,17 @@ class PersonInfoForm extends Component {
                             <Field key="0" name="email[0]" type="text" classname="validate" label="Email" size={12} component={renderField} required />
                             {
                                 this.state.email.map((email, index) => (
-                                    <Field key={`${index + 1}`} name={`email[${index + 1}]`} type="text" label="Email" size={12} classname="validate" component={renderField} required />
+                                    <div>
+                                    <Field key={`${index + 1}`} name={`email[${index + 1}]`} type="text" label="Email" size={10} classname="validate" component={renderField} required />
+                                    <button className="btn" type="button" onClick={this.removeEmail(index)}>-</button>
+                                    </div>
                                 ))
 
                             }
                             </Col>
+                            
                         </Row>
+                        
                         <hr />
                         <Row>
                             <Modal
@@ -93,9 +105,21 @@ class PersonInfoForm extends Component {
         this.setState({ phoneNumber: this.state.phoneNumber.concat('') });
     }
 
+    removePhoneNumber = (idx) => () => {
+        this.setState({
+          phoneNumber: this.state.phoneNumber.filter((s, sidx) => idx !== sidx)
+        });
+      }
+
     addEmail() {
         this.setState({ email: this.state.email.concat('') });
     }
+
+    removeEmail = (idx) => () => {
+        this.setState({
+          email: this.state.email.filter((s, sidx) => idx !== sidx)
+        });
+      }
 
 
 }
@@ -108,10 +132,10 @@ PersonInfoForm = connect(
         const address2Value = selector(state, 'address2')
         const cityValue = selector(state, 'city')
         const stateValue = selector(state, 'state')
-        const zip = selector(state, 'zip')
+        const zipValue = selector(state, 'zip')
 
         return {
-            address: `${addressValue || ""} ${address2Value || ""} ${cityValue || ""} ${stateValue || ""}`,
+            address: `${addressValue || ""} ${address2Value || ""} ${cityValue || ""} ${stateValue || ""} ${zipValue || ""}`,
         }
     }
 )(PersonInfoForm)
