@@ -1,6 +1,7 @@
 import Autosuggest from 'react-autosuggest';
 import React from 'react'
 import helpers from '../../utils/helpers';
+import './Example.css';
 // Imagine you have a list of lists that you'd like to autosuggest.
 var lists = [];
 
@@ -29,7 +30,7 @@ const renderSuggestion = suggestion => (
   </div>
 );
 
-class Example extends React.Component {
+class searchLists extends React.Component {
   constructor() {
     super();
 
@@ -91,4 +92,4 @@ class Example extends React.Component {
       />
     );
   }
-} export default Example;
+} export default searchLists;
