@@ -4,11 +4,7 @@ import helpers from '../../utils/helpers';
 import Accordion from '../subcomponents/Accordion';
 import ResourceCard from '../subcomponents/ResourceCard';
 import './Search.css';
-
 import { db } from '../../firebase/firebase';
-
-
-
 
 class Search extends Component {
 

@@ -25,9 +25,9 @@ const getSuggestionValue = suggestion => suggestion.name;
 
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
-  <div>
-    {suggestion.listName} > {suggestion.name}
-  </div>
+  <span>
+    {suggestion.listName} > {suggestion.subGroup} > <strong>{suggestion.name}</strong>
+  </span>
 );
 
 class searchLists extends React.Component {
@@ -73,6 +73,7 @@ class searchLists extends React.Component {
     lists = JSON.parse(sessionStorage.getItem('allItems'))
     const { value, suggestions } = this.state;
     console.log("render lists is array : ",Array.isArray(lists));
+    console.log("skills: ", lists)
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
       placeholder: 'Search for a Skill',

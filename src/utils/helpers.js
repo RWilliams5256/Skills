@@ -195,6 +195,27 @@ const helpers = {
         
         //callback();
     });
+},
+
+dbCallforSkills: function(callback){
+    let skills = []
+    this.dbCallforAllOptions();
+    skills = JSON.parse(sessionStorage.getItem('allItems'));
+
+    for(var i in skills){
+        if(skills[i].listName === "tech skills" || skills[i].listName === "other skills"){
+            var cat = {
+                listItem : skills[i].listItem,
+                subGroup : skills[i].subGroup,
+                name : skills[i].name
+            }
+        }
+        skills.push(cat)
+    }
+       
+
+        console.log("all skills: ",skills)
+        sessionStorage.setItem('allSkills', JSON.stringify(skills))
 }
     
 
