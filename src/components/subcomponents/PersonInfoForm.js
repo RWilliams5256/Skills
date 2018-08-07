@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, formValueSelector } from 'redux-form'
+import { connect } from 'react-redux'
 import validate from './validate'
 import renderField from './renderField';
-import { Row } from 'react-materialize';
-
-
+import { Row, Modal, Button, Col } from 'react-materialize';
 
 
 class PersonInfoForm extends Component {
@@ -18,7 +17,15 @@ class PersonInfoForm extends Component {
         }
     }
 
+
     render() {
+        var addressButton = "Edit Address";
+        console.log(this.props.address)
+        if(this.props.address=== "    "){
+            addressButton = "Edit Address"
+        }else{
+            addressButton = this.props.address;
+        }
         return (
             <div className="card">
                 <div className="card-title">Person Info Form</div>
@@ -27,48 +34,60 @@ class PersonInfoForm extends Component {
                         <Row>
                             <Field name="firstName" type="text" label="First Name" size={6} className="validate" component={renderField} required />
                             <Field name="lastName" type="text" label="Last Name" size={6} className="validate" component={renderField} required />
-
-                            <Field name="address" type="text" label="Address" size={12} component={renderField} />
-
-                            <Field name="address2" type="text" label="Address 2" size={12} component={renderField} />
-
-                            <Field name="city" type="text" label="City" size={5} component={renderField} />
-                            <Field name="state" type="text" label="State" size={3} component={renderField} />
-                            <Field name="zip" type="text" label="Zip Code" size={4} component={renderField} />
                         </Row>
                         <hr />
+                        
                         <Row>
-                            <button className="btn" type="button" onClick={this.addPhoneNumber.bind(this)}>Add Phone Number</button>
-                            <Field key="0" name="phoneNumber[0]" type="number" label="Phone Number" size={12} component={renderField} />
+                       
+                        <Col style={{"width":"50%"}}> 
+                          
+                        <div>
+                            <div className="card-title" style={{"display":"inline"}}>Phone Numbers</div>
+                            <button style={{"display":"inline"}} className="btn" type="button" onClick={this.addPhoneNumber.bind(this)}>+</button>
+
+                            
+                        </div>
+                            <div>
+                                <Field key="0" name="phoneNumber[0]" type="number" label="Phone Number" size={12} component={renderField} />
+                            
+                            </div>
                             {
                                 this.state.phoneNumber.map((phoneNumber, index) => (
-                                    <Field key={`${index + 1}`} name={`phoneNumber[${index + 1}]`} type="number" label="Phone Number" size={12} component={renderField} />
+                                    <div>
+                                    <Field key={`${index + 1}`} name={`phoneNumber[${index + 1}]`} type="number" label="Phone Number" size={10} component={renderField} />
+                                    <button className="btn" type="button" onClick={this.removePhoneNumber(index)}>-</button>
+                                    </div>
                                 ))
                             }
-                        </Row>
-                        <hr />
-                        <Row>
-                            <button className="btn" type="button" onClick={this.addEmail.bind(this)}>Add Email</button>
-                            <Field key="0" name="email[0]" type="text" label="Email" size={12} component={renderField} />
+                            </Col>
+                            <Col style={{"width":"50%"}}>
+                        <div className="card-title" style={{"display":"inline"}}>Emails</div>
+                        <button style={{"display":"inline"}} className="btn" type="button" onClick={this.addEmail.bind(this)}>+</button>
+                            <Field key="0" name="email[0]" type="text" classname="validate" label="Email" size={12} component={renderField} required />
                             {
                                 this.state.email.map((email, index) => (
-                                    <Field key={`${index + 1}`} name={`email[${index + 1}]`} type="text" label="Email" size={12} component={renderField} />
+                                    <div>
+                                    <Field key={`${index + 1}`} name={`email[${index + 1}]`} type="text" label="Email" size={10} classname="validate" component={renderField} required />
+                                    <button className="btn" type="button" onClick={this.removeEmail(index)}>-</button>
+                                    </div>
                                 ))
+
                             }
+                            </Col>
+                            
                         </Row>
-                        <hr />
-                        <Row className="social">
-                            <button className="btn" type="button" onClick={this.addSocial.bind(this)}>Add Social</button>
-                            <Field key="0" name="social[0]" type="text" label="Social Media" size={12} component={renderField} />
-                            {
-                                this.state.social.map((social, index) => (
-                                    <Field key={`${index + 1}`} name={`social[${index + 1}]`} type="text" label="Social Media" size={12} component={renderField} />
-                                ))
-                            }
-                        </Row>
+                        
                         <hr />
                         <Row>
-                            <Field name="university" type="text" label="College/University" size={12} component={renderField} />
+                            <Modal
+                                header="Edit Address"
+                                trigger={<Button>{addressButton}</Button>}>
+                                <Field name="address" type="text" label="Address" size={12} component={renderField} />
+                                <Field name="address2" type="text" label="Address 2" size={12} component={renderField} />
+                                <Field name="city" type="text" label="City" size={5} component={renderField} />
+                                <Field name="state" type="text" label="State" size={3} component={renderField} />
+                                <Field name="zip" type="text" label="Zip Code" size={4} component={renderField} />
+                            </Modal>
                         </Row>
                         <button type="submit" className="next">Next</button>
 
@@ -86,14 +105,40 @@ class PersonInfoForm extends Component {
         this.setState({ phoneNumber: this.state.phoneNumber.concat('') });
     }
 
+    removePhoneNumber = (idx) => () => {
+        this.setState({
+          phoneNumber: this.state.phoneNumber.filter((s, sidx) => idx !== sidx)
+        });
+      }
+
     addEmail() {
         this.setState({ email: this.state.email.concat('') });
     }
 
+    removeEmail = (idx) => () => {
+        this.setState({
+          email: this.state.email.filter((s, sidx) => idx !== sidx)
+        });
+      }
+
 
 }
 
+const selector = formValueSelector('wizard') // <-- same as form name
+PersonInfoForm = connect(
+    state => {
+        // can select values individually
+        const addressValue = selector(state, 'address')
+        const address2Value = selector(state, 'address2')
+        const cityValue = selector(state, 'city')
+        const stateValue = selector(state, 'state')
+        const zipValue = selector(state, 'zip')
 
+        return {
+            address: `${addressValue || ""} ${address2Value || ""} ${cityValue || ""} ${stateValue || ""} ${zipValue || ""}`,
+        }
+    }
+)(PersonInfoForm)
 
 export default reduxForm({
     form: 'wizard',
@@ -102,113 +147,113 @@ export default reduxForm({
     validate
 })(PersonInfoForm)
 
-/*
+                /*
 class PersonInfoForm extends React.Component{
 
-    constructor(props){
-        super(props);
+                        constructor(props){
+                    super(props);
         this.state={
-            "firstName": "",
-            "lastName": "",
-            "address": "",
-            "address2": "",
-            "city": "",
-            "state": "",
-            "zip": "",
-            "college": "",
-            "graduationDate": "",
-            "referedBy": "",
-            "phone": "",
-            //"socialmedia": "[],
-            //"status": "",
-            //"experienceLevel": "",
-            //"resumes": "",
-            //"email": []
-        }
-
-    }
-
-
-
+                        "firstName": "",
+                    "lastName": "",
+                    "address": "",
+                    "address2": "",
+                    "city": "",
+                    "state": "",
+                    "zip": "",
+                    "college": "",
+                    "graduationDate": "",
+                    "referedBy": "",
+                    "phone": "",
+                    //"socialmedia": "[],
+                    //"status": "",
+                    //"experienceLevel": "",
+                    //"resumes": "",
+                    //"email": []
+                }
+        
+            }
+        
+        
+        
     change = (e) =>{
-        this.setState({
-            [e.target.name] :e.target.value
-        });
-    }
-
+                        this.setState({
+                            [e.target.name]: e.target.value
+                        });
+                    }
+                
     render(){
 
-        return(
+        return (
 <form >
-    <input
-    name='firstName'
-    placeholder='First Name'
-    value={this.state.firstName}
-    onChange={e=>this.change(e)}
-    />
-    <input
-    name='address'
-    placeholder='Street Address'
-    value={this.state.address}
-    onChange={e=>this.change(e)}
-    />
-    <input
-    name='address2'
-    placeholder='Unit Number'
-    value={this.state.address2}
-    onChange={e=>this.change(e)}
-    />
-        <input
-    name='city'
-    placeholder='City'
-    value={this.state.city}
-    onChange={e=>this.change(e)}
-    />
-    <input
-    name='state'
-    placeholder='State'
-    value={this.state.state}
-    onChange={e=>this.change(e)}
-    />
-    <input
-    name='zip'
-    placeholder='Zip Code'
-    value={this.state.zip}
-    onChange={e=>this.change(e)}
-    />
-    <input
-    name='college'
-    placeholder='School Name'
-    value={this.state.college}
-    onChange={e=>this.change(e)}
-    />
-    <input
-    type= 'date'
-    name='graduationDate'
-    placeholder='Graduation Date'
-    value={this.state.graduationDate}
-    onChange={e=>this.change(e)}
-    />
-    <input
-    name='referedBy'
-    placeholder='Refered By'
-    value={this.state.referedBy}
-    onChange={e=>this.change(e)}
-    />
-        <input
-    name='phone'
-    placeholder='Phone Number'
-    value={this.state.phone}
-    onChange={e=>this.change(e)}
-    />
+                        <input
+                            name='firstName'
+                            placeholder='First Name'
+                            value={this.state.firstName}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            name='address'
+                            placeholder='Street Address'
+                            value={this.state.address}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            name='address2'
+                            placeholder='Unit Number'
+                            value={this.state.address2}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            name='city'
+                            placeholder='City'
+                            value={this.state.city}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            name='state'
+                            placeholder='State'
+                            value={this.state.state}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            name='zip'
+                            placeholder='Zip Code'
+                            value={this.state.zip}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            name='college'
+                            placeholder='School Name'
+                            value={this.state.college}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            type='date'
+                            name='graduationDate'
+                            placeholder='Graduation Date'
+                            value={this.state.graduationDate}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            name='referedBy'
+                            placeholder='Refered By'
+                            value={this.state.referedBy}
+                            onChange={e => this.change(e)}
+                        />
+                        <input
+                            name='phone'
+                            placeholder='Phone Number'
+                            value={this.state.phone}
+                            onChange={e => this.change(e)}
+                        />
 
-    <button type='submit' >Submit</button>
+                        <button type='submit' >Submit</button>
 
-    </form>
-        );
-    }
-
-
-
-};
+                    </form>
+                    );
+                }
+            
+            
+            
+            };
 export default PersonInfoForm; */
