@@ -36,7 +36,8 @@ const helpers = {
             });
 
             sessionStorage.setItem('allCategories', JSON.stringify(allCategories))
-            callback();
+            
+            //callback();
         });
     },
     
@@ -157,7 +158,44 @@ const helpers = {
     
    // return admin.firestore().doc('users/'+user.uid).set(userObject);
   
- }
+ },
+ dbCallforAllOptions: function(callback){
+    let allItems = []
+    const listRef =  db.collection('lists')
+
+    listRef.onSnapshot(querySnapshot => {
+        querySnapshot.forEach(doc => {
+            const data = doc.data();
+            if(data.listName !== undefined) {
+                const listName = data.listName.toLowerCase();
+                var subGroupTemp ="";
+            if(data.subGroup !== undefined){
+                subGroupTemp = data.subGroup.toLowerCase();
+                }
+                const subGroup = subGroupTemp;
+            if(data.name !== undefined){
+                const name = data.name.toLowerCase();
+                if(!allItems.includes(listName)){
+                        const cat = {
+                            listName: listName,
+                            subGroup: subGroup,
+                            name: name, 
+                            searchItem: listName + " " + subGroup + " " + name
+                        };
+                        allItems.push(cat)
+                }
+            }
+            }
+        });
+        console.log("all items before stringify: ",allItems)
+        sessionStorage.setItem('allItems', JSON.stringify(allItems))
+        //console.log("all items after stringify ", JSON.stringify(allItems));
+        console.log("all items is array: ", Array.isArray(allItems))
+        console.log("all items sessionstorage is array: ", Array.isArray(sessionStorage.allItems))
+        
+        //callback();
+    });
+}
     
 
 

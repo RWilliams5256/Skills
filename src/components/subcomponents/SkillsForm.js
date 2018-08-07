@@ -2,8 +2,9 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import validate from './validate'
 import renderField from './renderField'
-
 import { Values } from "redux-form-website-template";
+import Example from './Example';
+
 
 const SkillsForm = (props) => {
   const { handleSubmit, previousPage } = props
@@ -13,7 +14,7 @@ const SkillsForm = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           <label>Skills</label>
-          <Field name="skills" component={renderField} />
+          <Example/>
         </div>
         <div>
           <button type="button" className="previous" onClick={previousPage}>
