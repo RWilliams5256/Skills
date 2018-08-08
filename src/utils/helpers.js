@@ -35,9 +35,8 @@ const helpers = {
                 }
             });
 
-            sessionStorage.setItem('allCategories', JSON.stringify(allCategories))
-            
-            //callback();
+            sessionStorage.setItem('allCategories', JSON.stringify(allCategories));
+            callback();
         });
     },
     
@@ -198,25 +197,44 @@ const helpers = {
 },
 
 dbCallforSkills: function(callback){
-    let skills = []
-    this.dbCallforAllOptions();
-    skills = JSON.parse(sessionStorage.getItem('allItems'));
-
-    for(var i in skills){
-        if(skills[i].listName === "tech skills" || skills[i].listName === "other skills"){
-            var cat = {
-                listItem : skills[i].listItem,
-                subGroup : skills[i].subGroup,
-                name : skills[i].name
-            }
-        }
-        skills.push(cat)
+        let skills = []
+        const listRef =  db.collection('lists')
+    
+        listRef.onSnapshot(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                const data = doc.data();
+                if(data.listName !== undefined) {
+                    const listName = data.listName.toLowerCase();
+                    var subGroupTemp ="";
+                if(data.subGroup !== undefined){
+                    subGroupTemp = data.subGroup.toLowerCase();
+                    }
+                    const subGroup = subGroupTemp;
+                if(data.name !== undefined){
+                    const name = data.name.toLowerCase();
+                    if(!skills.includes(listName)){
+                            const cat = {
+                                listName: listName,
+                                subGroup: subGroup,
+                                name: name, 
+                                searchItem: listName + " " + subGroup + " " + name
+                            };
+                        if(cat.listName === "tech skills" || cat.listName === "other skills")    
+                            skills.push(cat)
+                    }
+                }
+                }
+            });
+            console.log("all items before stringify: ",skills)
+            sessionStorage.setItem('allSkills', JSON.stringify(skills))
+            //console.log("all items after stringify ", JSON.stringify(allItems));
+            console.log("all items is array: ", Array.isArray(skills))
+            console.log("all items sessionstorage is array: ", Array.isArray(sessionStorage.allItems))
+            
+            //callback();
+        });
     }
-       
 
-        console.log("all skills: ",skills)
-        sessionStorage.setItem('allSkills', JSON.stringify(skills))
-}
     
 
 

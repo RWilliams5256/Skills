@@ -9,10 +9,6 @@ var lists = [];
 const getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
-
-  console.log("getsuggestions lists is array: ", Array.isArray(lists));
-  console.log("lists: ", lists);
-  console.log("lists at 0: ", lists[0]);
   return inputLength === 0 ? [] : lists.filter(word =>
     word.searchItem.toLowerCase().search(inputValue) !== -1
   );
@@ -69,11 +65,9 @@ class searchLists extends React.Component {
   };
 
   render() {
-    helpers.dbCallforAllOptions();
-    lists = JSON.parse(sessionStorage.getItem('allItems'))
+    helpers.dbCallforSkills();
+    lists = JSON.parse(sessionStorage.getItem('allSkills'))
     const { value, suggestions } = this.state;
-    console.log("render lists is array : ",Array.isArray(lists));
-    console.log("skills: ", lists)
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
       placeholder: 'Search for a Skill',
