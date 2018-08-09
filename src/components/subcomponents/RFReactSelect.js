@@ -2,6 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import 'react-select/dist/react-select.esm'
 import { PropTypes } from 'prop-types';
+import makeAnimated from 'react-select/lib/animated';
 
 RFReactSelect.defaultProps = {
   multi: false,
@@ -38,6 +39,7 @@ export default function RFReactSelect({ input , options, multi, className }) {
       onBlur={() => onBlur(value)}
       onFocus={onFocus}
       className={className}
+      //components={makeAnimated()}
     />
   );
 }
