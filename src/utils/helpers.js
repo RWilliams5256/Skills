@@ -179,7 +179,6 @@ const helpers = {
                             listName: listName,
                             subGroup: subGroup,
                             name: name, 
-                            searchItem: listName + " " + subGroup + " " + name
                         };
                         allItems.push(cat)
                 }
@@ -203,11 +202,14 @@ dbCallforSkills: function(callback){
         listRef.onSnapshot(querySnapshot => {
             querySnapshot.forEach(doc => {
                 const data = doc.data();
+                var listAndSub;
                 if(data.listName !== undefined) {
                     const listName = data.listName.toLowerCase();
                     var subGroupTemp ="";
+                    listAndSub = listName
                 if(data.subGroup !== undefined){
                     subGroupTemp = data.subGroup.toLowerCase();
+                    listAndSub += " > " + subGroupTemp
                     }
                     const subGroup = subGroupTemp;
                 if(data.name !== undefined){
@@ -217,7 +219,7 @@ dbCallforSkills: function(callback){
                                 listName: listName,
                                 subGroup: subGroup,
                                 name: name, 
-                                searchItem: listName + " " + subGroup + " " + name
+                                label: listAndSub + " > " + name
                             };
                         if(cat.listName === "tech skills" || cat.listName === "other skills")    
                             skills.push(cat)
@@ -225,11 +227,7 @@ dbCallforSkills: function(callback){
                 }
                 }
             });
-            console.log("all items before stringify: ",skills)
             sessionStorage.setItem('allSkills', JSON.stringify(skills))
-            //console.log("all items after stringify ", JSON.stringify(allItems));
-            console.log("all items is array: ", Array.isArray(skills))
-            console.log("all items sessionstorage is array: ", Array.isArray(sessionStorage.allItems))
             
             //callback();
         });

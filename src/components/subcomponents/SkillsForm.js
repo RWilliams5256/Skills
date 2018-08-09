@@ -3,18 +3,26 @@ import { Field, reduxForm } from 'redux-form'
 import validate from './validate'
 import renderField from './renderField'
 import { Values } from "redux-form-website-template";
-import Example from './Example';
+import RFReactSelect from './RFReactSelect';
+import helpers from '../../utils/helpers';
 
 
 const SkillsForm = (props) => {
   const { handleSubmit, previousPage } = props
+  helpers.dbCallforSkills();
+  var skills = JSON.parse(sessionStorage.getItem("allSkills"));
+ 
   return (
     <div>
       <Values form="wizard" />
       <form onSubmit={handleSubmit}>
         <div>
           <label>Skills</label>
-          <Example/>
+<Field
+  multi={true}
+  name="skills"
+  options={skills}
+  component={RFReactSelect} />
         </div>
         <div>
           <button type="button" className="previous" onClick={previousPage}>
