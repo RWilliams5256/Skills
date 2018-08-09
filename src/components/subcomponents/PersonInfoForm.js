@@ -82,11 +82,11 @@ class PersonInfoForm extends Component {
                             <Modal
                                 header="Edit Address"
                                 trigger={<Button>{addressButton}</Button>}>
-                                <Field name="address" type="text" label="Address" size={12} component={renderField} />
+                                <Field name="address" type="text" label="Address" size={12} component={renderField} required/>
                                 <Field name="address2" type="text" label="Address 2" size={12} component={renderField} />
-                                <Field name="city" type="text" label="City" size={5} component={renderField} />
-                                <Field name="state" type="text" label="State" size={3} component={renderField} />
-                                <Field name="zip" type="text" label="Zip Code" size={4} component={renderField} />
+                                <Field name="city" type="text" label="City" size={5} component={renderField} required/>
+                                <Field name="state" type="text" label="State" size={3} component={renderField} required/>
+                                <Field name="zip" type="text" label="Zip Code" size={4} component={renderField} required/>
                             </Modal>
                         </Row>
                         <button type="submit" className="next">Next</button>

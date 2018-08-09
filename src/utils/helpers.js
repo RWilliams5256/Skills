@@ -218,7 +218,7 @@ dbCallforSkills: function(callback){
                             const cat = {
                                 listName: listName,
                                 subGroup: subGroup,
-                                name: name, 
+                                value: name, 
                                 label: listAndSub + " > " + name
                             };
                         if(cat.listName === "tech skills" || cat.listName === "other skills")    

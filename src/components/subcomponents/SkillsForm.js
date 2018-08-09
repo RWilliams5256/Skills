@@ -22,7 +22,9 @@ const SkillsForm = (props) => {
   multi={true}
   name="skills"
   options={skills}
-  component={RFReactSelect} />
+  component={RFReactSelect}/>
+
+  
         </div>
         <div>
           <button type="button" className="previous" onClick={previousPage}>
