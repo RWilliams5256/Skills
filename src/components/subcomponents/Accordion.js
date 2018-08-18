@@ -5,7 +5,7 @@ import Checkbox from './Checkbox';
 import helpers from '../../utils/helpers';
 
 import './Accordion.css';
-import { functions } from '../../firebase/firebase';
+// import { functions } from '../../firebase/firebase';
 
 
 class Accordion extends Component {
@@ -28,23 +28,63 @@ class Accordion extends Component {
   }
 
   handleEvent() {
-    var listOfCriteria = []
+
+    const searchCriteria = {
+      'currentProject': '',
+      'experienceLevel': '',
+      'known': '',
+      'techSkill': {},
+      'otherSkills': {},
+      'role': '',
+      'referralSource': '',
+      'resumeRank': '',
+      'status': '',
+    };
 
     $('input[type="checkbox"]:checked').each(function() {
+        let category = $(this).attr('data-category');
 
-        var selectedItem = {
-          'value': $(this).attr('id'),
-          'category': $(this).attr('data-category')
+        if(category === 'current project'){
+
+          var $box = $(this);
+          if ($box.is(":checked")) {
+            // the name of the box is retrieved using the .attr() method
+            // as it is assumed and expected to be immutable
+            var group = "input:checkbox[name='" + $box.attr("name") + "']";
+            // the checked state of the group/box on the other hand will change
+            // and the current value is retrieved using .prop() method
+            $(group).prop("checked", false);
+            $box.prop("checked", true);
+          } else {
+            $box.prop("checked", false);
+          }
+          searchCriteria.currentProject = $(this).attr('id');
+        } else if(category === 'other skills') {
+          searchCriteria.otherSkills[$(this).attr('id')] = true;
+        } else if(category === 'known?') {
+          searchCriteria.known = $(this).attr('id');
+        } else if(category === 'experience level') {
+          searchCriteria.experienceLevel = $(this).attr('id');
+        } else if(category === 'status') {
+          searchCriteria.status = $(this).attr('id');
+        } else if(category === 'resume rank') {
+          searchCriteria.resumeRank = $(this).attr('id');
+        } else if(category === 'role') {
+          searchCriteria.role = $(this).attr('id');
+        } else if(category === 'tech skills') {
+          searchCriteria.techSkill[$(this).attr('id')] = true;
+        } else if(category === 'referral source') {
+          searchCriteria.referralSource = $(this).attr('id');
         }
 
-        listOfCriteria.push(selectedItem);
     });
 
     // console.log('selectedCriteria', listOfCriteria)
+    console.log(searchCriteria)
 
     var listOfResources;
 
-    functions.https.onRequest()
+    // functions.https.onRequest()
     // helpers.dbCallforPeople(listOfCriteria, function(matchingPeople){
     //   listOfResources = matchingPeople
     // })
@@ -64,7 +104,7 @@ class Accordion extends Component {
               <CollapsibleItem header={category.listName.toUpperCase()} key={i}>
                 <Row>
                 {category.listItem.map((item,j) => (
-                  <Checkbox key={j} name={item} id={item} span={item} onChange={this.handleEvent} category={category.listName}/>
+                  <Checkbox key={j} name={category} id={item} span={item} onChange={this.handleEvent} category={category.listName}/>
                 ))}
                 </Row>
               </CollapsibleItem>

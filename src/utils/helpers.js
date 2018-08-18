@@ -39,14 +39,14 @@ const helpers = {
             callback();
         });
     },
-    
+
     dbCallforPeople: function(listOfCriteria, callback) {
         console.log('listOfCriteria:', listOfCriteria)
 
         let matchingPeople = [];
         const peopleRef = db.collection('people');
 
-        const query = peopleRef.where('college', '==', 'Georgia State University')
+        const query = peopleRef.where('firstName', '==', 'Harry')
         //.where('firstName','==','Adam')
 
         query.onSnapshot(people => {
@@ -58,7 +58,7 @@ const helpers = {
             callback(matchingPeople)
         })
     },
-    
+
     dbCalltoAddPerson: function(personalInfo, callback){
     var person = personalInfo;
     var data;
@@ -82,7 +82,7 @@ const helpers = {
   }
    db.collection('people').add(data);
    console.log("Added Person" );
-  
+
  },
 
  dbCallttoAddnewSkill: function(newlist,callback){
@@ -110,15 +110,12 @@ const helpers = {
       db.collection('lists').add(data);
     }
   }
-    
+
     console.log("Upload was a sucess");
-    
+
    // return admin.firestore().doc('users/'+user.uid).set(userObject);
-  
- }
-    
 
-
+ },
 };
 
 export default helpers;
