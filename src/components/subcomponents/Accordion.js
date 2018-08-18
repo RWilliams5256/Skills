@@ -5,6 +5,7 @@ import Checkbox from './Checkbox';
 import helpers from '../../utils/helpers';
 
 import './Accordion.css';
+import { functions } from '../../firebase/firebase';
 
 
 class Accordion extends Component {
@@ -43,11 +44,12 @@ class Accordion extends Component {
 
     var listOfResources;
 
-    helpers.dbCallforPeople(listOfCriteria, function(matchingPeople){
-      listOfResources = matchingPeople
-    })
+    functions.https.onRequest()
+    // helpers.dbCallforPeople(listOfCriteria, function(matchingPeople){
+    //   listOfResources = matchingPeople
+    // })
 
-    this.props.handler(listOfCriteria, listOfResources)
+    // this.props.handler(listOfCriteria, listOfResources)
     console.log('accordion matching people:',listOfResources)
   }
 
