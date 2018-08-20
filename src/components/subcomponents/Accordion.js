@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Collapsible, CollapsibleItem } from 'react-materialize';
 import $ from 'jquery';
 import Checkbox from './Checkbox';
-import helpers from '../../utils/helpers';
+// import helpers from '../../utils/helpers';
 
 import './Accordion.css';
 // import { functions } from '../../firebase/firebase';
@@ -41,24 +41,44 @@ class Accordion extends Component {
       'status': '',
     };
 
+    let $box = $(this);
+  
+    console.log($box)
+    // if ($box.is(":checked")) {
+    //   let category = $box.attr("data-category");
+
+    //   console.log('category selected:', category)
+    //   if (category === "current project") {
+    //     // the name of the box is retrieved using the .attr() method
+    //     // as it is assumed and expected to be immutable
+    //     var group = "input:checkbox[name='" + $box.attr("name") + "']";
+    //     // the checked state of the group/box on the other hand will change
+    //     // and the current value is retrieved using .prop() method
+    //     $(group).prop("checked", false);
+    //     $box.prop("checked", true);
+    //     searchCriteria.currentProject = $(this).attr("id");
+    //   } else {
+    //     $box.prop("checked", false);
+    //   }
+
+    // }
+
     $('input[type="checkbox"]:checked').each(function() {
-        let category = $(this).attr('data-category');
+        let category = $(this).attr('name');
 
         if(category === 'current project'){
-
-          var $box = $(this);
-          if ($box.is(":checked")) {
+          if ($(this).is(":checked")) {
             // the name of the box is retrieved using the .attr() method
             // as it is assumed and expected to be immutable
-            var group = "input:checkbox[name='" + $box.attr("name") + "']";
+            var group = "input:checkbox[name='" + $(this).attr("name") + "']";
             // the checked state of the group/box on the other hand will change
             // and the current value is retrieved using .prop() method
             $(group).prop("checked", false);
-            $box.prop("checked", true);
+            $(this).prop("checked", true);
+            searchCriteria.currentProject = $(this).attr('id');
           } else {
-            $box.prop("checked", false);
+            $(this).prop("checked", false);
           }
-          searchCriteria.currentProject = $(this).attr('id');
         } else if(category === 'other skills') {
           searchCriteria.otherSkills[$(this).attr('id')] = true;
         } else if(category === 'known?') {
@@ -104,7 +124,7 @@ class Accordion extends Component {
               <CollapsibleItem header={category.listName.toUpperCase()} key={i}>
                 <Row>
                 {category.listItem.map((item,j) => (
-                  <Checkbox key={j} name={category} id={item} span={item} onChange={this.handleEvent} category={category.listName}/>
+                  <Checkbox key={j} name={category.listName} id={item} span={item} onChange={this.handleEvent} />
                 ))}
                 </Row>
               </CollapsibleItem>
