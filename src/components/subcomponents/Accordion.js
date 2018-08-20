@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Collapsible, CollapsibleItem } from 'react-materialize';
 import $ from 'jquery';
 import Checkbox from './Checkbox';
-// import helpers from '../../utils/helpers';
+import helpers from '../../utils/helpers';
 
 import './Accordion.css';
 // import { functions } from '../../firebase/firebase';
@@ -28,8 +28,8 @@ class Accordion extends Component {
   }
 
   handleEvent() {
-
-    const searchCriteria = {
+    let listOfCriteria = []
+    let searchCriteria = {
       'currentProject': '',
       'experienceLevel': '',
       'known': '',
@@ -40,45 +40,29 @@ class Accordion extends Component {
       'resumeRank': '',
       'status': '',
     };
-
-    let $box = $(this);
   
-    console.log($box)
-    // if ($box.is(":checked")) {
-    //   let category = $box.attr("data-category");
-
-    //   console.log('category selected:', category)
-    //   if (category === "current project") {
-    //     // the name of the box is retrieved using the .attr() method
-    //     // as it is assumed and expected to be immutable
-    //     var group = "input:checkbox[name='" + $box.attr("name") + "']";
-    //     // the checked state of the group/box on the other hand will change
-    //     // and the current value is retrieved using .prop() method
-    //     $(group).prop("checked", false);
-    //     $box.prop("checked", true);
-    //     searchCriteria.currentProject = $(this).attr("id");
-    //   } else {
-    //     $box.prop("checked", false);
-    //   }
-
-    // }
-
     $('input[type="checkbox"]:checked').each(function() {
         let category = $(this).attr('name');
-
+        var selectedItem = {
+          'value': $(this).attr('id'),
+          'category': $(this).attr('name')
+        }
+        listOfCriteria.push(selectedItem);
+        
         if(category === 'current project'){
-          if ($(this).is(":checked")) {
-            // the name of the box is retrieved using the .attr() method
-            // as it is assumed and expected to be immutable
-            var group = "input:checkbox[name='" + $(this).attr("name") + "']";
-            // the checked state of the group/box on the other hand will change
-            // and the current value is retrieved using .prop() method
-            $(group).prop("checked", false);
-            $(this).prop("checked", true);
-            searchCriteria.currentProject = $(this).attr('id');
-          } else {
-            $(this).prop("checked", false);
-          }
+          // if ($(this).is(":checked")) {
+          //   // the name of the box is retrieved using the .attr() method
+          //   // as it is assumed and expected to be immutable
+          //   var group = "input:checkbox[name='" + $(this).attr("name") + "']";
+          //   // the checked state of the group/box on the other hand will change
+          //   // and the current value is retrieved using .prop() method
+          //   $(group).prop("checked", false);
+          //   $(this).prop("checked", true);
+          //   searchCriteria.currentProject = $(this).attr('id');
+          // } else {
+          //   $(this).prop("checked", false);
+          // }
+          searchCriteria.currentProject = $(this).attr('id');
         } else if(category === 'other skills') {
           searchCriteria.otherSkills[$(this).attr('id')] = true;
         } else if(category === 'known?') {
@@ -99,18 +83,14 @@ class Accordion extends Component {
 
     });
 
-    // console.log('selectedCriteria', listOfCriteria)
+    console.log('selectedCriteria', listOfCriteria)
     console.log(searchCriteria)
 
     var listOfResources;
-
-    // functions.https.onRequest()
-    // helpers.dbCallforPeople(listOfCriteria, function(matchingPeople){
-    //   listOfResources = matchingPeople
-    // })
-
-    // this.props.handler(listOfCriteria, listOfResources)
-    console.log('accordion matching people:',listOfResources)
+    helpers.dbCallforPeople(searchCriteria, function(matchingPeople){
+      listOfResources = matchingPeople
+    })
+    this.props.handler(listOfCriteria, listOfResources)
   }
 
 
