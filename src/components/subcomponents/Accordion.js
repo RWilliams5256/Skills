@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Collapsible, CollapsibleItem } from 'react-materialize';
 import $ from 'jquery';
 import Checkbox from './Checkbox';
+import RadioButton from './RadioButton';
 import helpers from '../../utils/helpers';
 
 import './Accordion.css';
@@ -12,6 +13,8 @@ class Accordion extends Component {
   constructor(props) {
     super(props);
     this.handleEvent = this.handleEvent.bind(this)
+    this.renderOptions = this.renderOptions.bind(this)
+
 
   }
 
@@ -41,6 +44,32 @@ class Accordion extends Component {
       'status': '',
     };
   
+    $('input[type="radio"]:checked').each(function () {
+      let category = $(this).attr('name');
+      var selectedItem = {
+        'value': $(this).attr('id'),
+        'category': $(this).attr('name')
+      }
+      listOfCriteria.push(selectedItem);
+
+      if (category === 'current project') {
+        searchCriteria.currentProject = $(this).attr('id');
+      } else if (category === 'known?') {
+        searchCriteria.known = $(this).attr('id');
+      } else if (category === 'experience level') {
+        searchCriteria.experienceLevel = $(this).attr('id');
+      } else if (category === 'status') {
+        searchCriteria.status = $(this).attr('id');
+      } else if (category === 'resume rank') {
+        searchCriteria.resumeRank = $(this).attr('id');
+      } else if (category === 'role') {
+        searchCriteria.role = $(this).attr('id');
+      } else if (category === 'referral source') {
+        searchCriteria.referralSource = $(this).attr('id');
+      }
+
+    });
+
     $('input[type="checkbox"]:checked').each(function() {
         let category = $(this).attr('name');
         var selectedItem = {
@@ -49,37 +78,11 @@ class Accordion extends Component {
         }
         listOfCriteria.push(selectedItem);
         
-        if(category === 'current project'){
-          // if ($(this).is(":checked")) {
-          //   // the name of the box is retrieved using the .attr() method
-          //   // as it is assumed and expected to be immutable
-          //   var group = "input:checkbox[name='" + $(this).attr("name") + "']";
-          //   // the checked state of the group/box on the other hand will change
-          //   // and the current value is retrieved using .prop() method
-          //   $(group).prop("checked", false);
-          //   $(this).prop("checked", true);
-          //   searchCriteria.currentProject = $(this).attr('id');
-          // } else {
-          //   $(this).prop("checked", false);
-          // }
-          searchCriteria.currentProject = $(this).attr('id');
-        } else if(category === 'other skills') {
+      if(category === 'other skills') {
           searchCriteria.otherSkills[$(this).attr('id')] = true;
-        } else if(category === 'known?') {
-          searchCriteria.known = $(this).attr('id');
-        } else if(category === 'experience level') {
-          searchCriteria.experienceLevel = $(this).attr('id');
-        } else if(category === 'status') {
-          searchCriteria.status = $(this).attr('id');
-        } else if(category === 'resume rank') {
-          searchCriteria.resumeRank = $(this).attr('id');
-        } else if(category === 'role') {
-          searchCriteria.role = $(this).attr('id');
-        } else if(category === 'tech skills') {
-          searchCriteria.techSkill[$(this).attr('id')] = true;
-        } else if(category === 'referral source') {
-          searchCriteria.referralSource = $(this).attr('id');
-        }
+      } else if(category === 'tech skills') {
+        searchCriteria.techSkill[$(this).attr('id')] = true;
+      }
 
     });
 
@@ -93,6 +96,17 @@ class Accordion extends Component {
     this.props.handler(listOfCriteria, listOfResources)
   }
 
+  renderOptions(index,name,item,event) { 
+    if(name === 'other skills' || name === 'tech skills') {         
+      return (
+        <Checkbox key={index} name={name} id={item} span={item} onChange={event} />
+      )
+    } else {
+      return (
+        <RadioButton key={index} name={name} id={item} span={item} onChange={event} />
+      )
+    }
+  }
 
   render() {
 
@@ -104,7 +118,7 @@ class Accordion extends Component {
               <CollapsibleItem header={category.listName.toUpperCase()} key={i}>
                 <Row>
                 {category.listItem.map((item,j) => (
-                  <Checkbox key={j} name={category.listName} id={item} span={item} onChange={this.handleEvent} />
+                  this.renderOptions(j,category.listName,item,this.handleEvent)
                 ))}
                 </Row>
               </CollapsibleItem>
