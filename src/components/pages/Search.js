@@ -7,9 +7,6 @@ import './Search.css';
 
 import { db } from '../../firebase/firebase';
 
-
-
-
 class Search extends Component {
 
   constructor(props) {
@@ -49,7 +46,6 @@ class Search extends Component {
   componentWillMount() {
     // console.log('Search will mount')
     helpers.dbCallforLists(() => {
-      // console.log("callback function")
       this.setState({'callToDbComplete': true})
     });
   }
@@ -66,19 +62,14 @@ class Search extends Component {
 
 
   handler(criteria, resources) {
-    // console.log('initial resource:', resources)
     this.setState({'criteriaList': criteria})
     // this.setState({'resourceList': resources})
     this.setState({'returnedMatches':true})
-    // this.setState({''})
 
-    // console.log('resourceList:',typeof(this.state.resourceList))
   }
 
 
   render() {
-    // console.log("Search rendered")
-
     const dataReturned = this.state.callToDbComplete;
     let accord;
 
@@ -87,9 +78,6 @@ class Search extends Component {
     } else {
       accord = <Preloader />
     }
-
-    // console.log('rendering search resource list:', this.state.resourceList[0])
-
 
     if(!this.state.returnedMatches) {
       let allPeople = [];

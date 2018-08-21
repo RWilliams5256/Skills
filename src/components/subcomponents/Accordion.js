@@ -86,9 +86,6 @@ class Accordion extends Component {
 
     });
 
-    console.log('selectedCriteria', listOfCriteria)
-    console.log(searchCriteria)
-
     var listOfResources;
     helpers.dbCallforPeople(searchCriteria, function(matchingPeople){
       listOfResources = matchingPeople
