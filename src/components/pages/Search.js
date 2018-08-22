@@ -62,13 +62,11 @@ class Search extends Component {
 
   handler(criteria, resources) {
     console.log("handler", resources)
-    this.setState(
-      {
-        'criteriaList': criteria, 
-        'resourceList': resources, 
-        'returnedMatches': true
-      }
-    )
+    this.setState({
+      'criteriaList': criteria, 
+      'resourceList': resources, 
+      'returnedMatches': true
+    })
   }
 
   renderReturnedResources() { 
