@@ -3,7 +3,7 @@ import { Row, Col, Collapsible, CollapsibleItem } from 'react-materialize';
 import $ from 'jquery';
 import Checkbox from './Checkbox';
 import RadioButton from './RadioButton';
-import helpers from '../../utils/helpers';
+// import helpers from '../../utils/helpers';
 
 import './Accordion.css';
 // import { functions } from '../../firebase/firebase';
@@ -32,17 +32,8 @@ class Accordion extends Component {
 
   handleEvent() {
     let listOfCriteria = []
-    let searchCriteria = {
-      'currentProject': '',
-      'experienceLevel': '',
-      'known': '',
-      'techSkill': {},
-      'otherSkills': {},
-      'role': '',
-      'referralSource': '',
-      'resumeRank': '',
-      'status': '',
-    };
+    let skills = []
+    let searchCriteria = {};
   
     $('input[type="radio"]:checked').each(function () {
       let category = $(this).attr('name');
@@ -53,44 +44,65 @@ class Accordion extends Component {
       listOfCriteria.push(selectedItem);
 
       if (category === 'current project') {
-        searchCriteria.currentProject = $(this).attr('id');
-      } else if (category === 'known?') {
-        searchCriteria.known = $(this).attr('id');
+        searchCriteria['currentProject'] = $(this).attr('id');
+      // } else if (category === 'known?') {
+      //   searchCriteria.known = $(this).attr('id');
       } else if (category === 'experience level') {
-        searchCriteria.experienceLevel = $(this).attr('id');
+        searchCriteria['experienceLevel'] = $(this).attr('id');
       } else if (category === 'status') {
-        searchCriteria.status = $(this).attr('id');
-      } else if (category === 'resume rank') {
-        searchCriteria.resumeRank = $(this).attr('id');
+        searchCriteria['status'] = $(this).attr('id');
+      // } else if (category === 'resume rank') {
+      //   searchCriteria.resumeRank = $(this).attr('id');
       } else if (category === 'role') {
-        searchCriteria.role = $(this).attr('id');
+        searchCriteria['role'] = $(this).attr('id');
       } else if (category === 'referral source') {
-        searchCriteria.referralSource = $(this).attr('id');
+        searchCriteria['referralSource'] = $(this).attr('id');
       }
 
     });
 
     $('input[type="checkbox"]:checked').each(function() {
-        let category = $(this).attr('name');
         var selectedItem = {
           'value': $(this).attr('id'),
           'category': $(this).attr('name')
         }
         listOfCriteria.push(selectedItem);
-        
-      if(category === 'other skills') {
-          searchCriteria.otherSkills[$(this).attr('id')] = true;
-      } else if(category === 'tech skills') {
-        searchCriteria.techSkill[$(this).attr('id')] = true;
-      }
+        skills.push($(this).attr('id'));
+        searchCriteria['skills'] = skills;
 
     });
 
-    var listOfResources;
-    helpers.dbCallforPeople(searchCriteria, function(matchingPeople){
-      listOfResources = matchingPeople
-    })
-    this.props.handler(listOfCriteria, listOfResources)
+    console.log(searchCriteria)
+    // var listOfResources;
+
+    // helpers.dbCallforPeople(searchCriteria, function(matchingPeople){
+    //   listOfResources = matchingPeople
+    // })
+
+    var getUserByMultipleSkill = "https://us-central1-shomsi-test.cloudfunctions.net/getUserByMultipleSkill";
+    var proxyurl = "https://cors-anywhere.herokuapp.com/";
+    var data = JSON.stringify(searchCriteria)
+    // console.log("data",data);
+
+    fetch(proxyurl + getUserByMultipleSkill, {
+        method: 'POST',
+        body: data,
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Access-Control-Allow-Origin': '*'
+        }
+      }).then(response => {
+        return response.json();
+      })
+      .then(myJson => {
+        this.props.handler(listOfCriteria, myJson)
+      })
+      .catch( err => {
+        console.log("Error:", err)
+      }
+      );
+
+    // this.props.handler(listOfCriteria, listOfResources)
   }
 
   renderOptions(index,name,item,event) { 

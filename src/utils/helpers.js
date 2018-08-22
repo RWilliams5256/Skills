@@ -41,22 +41,25 @@ const helpers = {
     },
 
     dbCallforPeople: function(listOfCriteria, callback) {
-        console.log('listOfCriteria:', listOfCriteria)
 
-        let matchingPeople = [];
-        const peopleRef = db.collection('people');
+        var getUserByMultipleSkill = "https://us-central1-shomsi-test.cloudfunctions.net/getUserByMultipleSkill";
+        var proxyurl = "https://cors-anywhere.herokuapp.com/";
+        var data = JSON.stringify(listOfCriteria)
 
-        const query = peopleRef.where('firstName', '==', 'Harry')
-        //.where('firstName','==','Adam')
-
-        query.onSnapshot(people => {
-            people.forEach(doc => {
-                const data = doc.data()
-                matchingPeople.push(data)
+        fetch(proxyurl + getUserByMultipleSkill, {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Content-Type': 'application/json',
+                    // 'Access-Control-Allow-Origin': '*'
+                }
+            }).then(response => {
+                return response.json();
             })
-            console.log('matches:',matchingPeople)
-            callback(matchingPeople)
-        })
+            .then(myJson => {
+                // console.log(JSON.stringify(myJson));
+                callback(myJson)
+            });
     },
 
     dbCalltoAddPerson: function(personalInfo, callback){
