@@ -60,13 +60,37 @@ class Search extends Component {
     console.log(this.state)
   }
 
-  handler(criteria, resources) {
-    console.log("handler", resources)
-    this.setState({
-      'criteriaList': criteria, 
-      'resourceList': resources, 
-      'returnedMatches': true
-    })
+  handler(listOfCriteria, searchCriteria) {
+    console.log("handler", listOfCriteria, searchCriteria)
+
+
+    var getUserByMultipleSkill = "https://us-central1-shomsi-test.cloudfunctions.net/getUserByMultipleSkill";
+    var proxyurl = "https://cors-anywhere.herokuapp.com/";
+    var data = JSON.stringify(searchCriteria)
+    // console.log("data",data);
+
+    fetch(proxyurl + getUserByMultipleSkill, {
+        method: 'POST',
+        body: data,
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Access-Control-Allow-Origin': '*'
+        }
+      }).then(response => {
+        return response.json();
+      })
+      .then(myJson => {
+        console.log(JSON.stringify(myJson))
+      })
+      .catch(err => {
+        console.log("Error:", err)
+      });
+
+    // this.setState({
+    //   'criteriaList': criteria, 
+    //   'resourceList': resources, 
+    //   'returnedMatches': true
+    // })
   }
 
   renderReturnedResources() { 

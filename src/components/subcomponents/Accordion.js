@@ -3,10 +3,7 @@ import { Row, Col, Collapsible, CollapsibleItem } from 'react-materialize';
 import $ from 'jquery';
 import Checkbox from './Checkbox';
 import RadioButton from './RadioButton';
-// import helpers from '../../utils/helpers';
-
 import './Accordion.css';
-// import { functions } from '../../firebase/firebase';
 
 
 class Accordion extends Component {
@@ -14,8 +11,6 @@ class Accordion extends Component {
     super(props);
     this.handleEvent = this.handleEvent.bind(this)
     this.renderOptions = this.renderOptions.bind(this)
-
-
   }
 
   componentWillMount() {
@@ -61,6 +56,7 @@ class Accordion extends Component {
 
     });
 
+    // Capture selected checkboxes
     $('input[type="checkbox"]:checked').each(function() {
         var selectedItem = {
           'value': $(this).attr('id'),
@@ -72,37 +68,8 @@ class Accordion extends Component {
 
     });
 
-    console.log(searchCriteria)
-    // var listOfResources;
-
-    // helpers.dbCallforPeople(searchCriteria, function(matchingPeople){
-    //   listOfResources = matchingPeople
-    // })
-
-    var getUserByMultipleSkill = "https://us-central1-shomsi-test.cloudfunctions.net/getUserByMultipleSkill";
-    var proxyurl = "https://cors-anywhere.herokuapp.com/";
-    var data = JSON.stringify(searchCriteria)
-    // console.log("data",data);
-
-    fetch(proxyurl + getUserByMultipleSkill, {
-        method: 'POST',
-        body: data,
-        headers: {
-          'Content-Type': 'application/json',
-          // 'Access-Control-Allow-Origin': '*'
-        }
-      }).then(response => {
-        return response.json();
-      })
-      .then(myJson => {
-        this.props.handler(listOfCriteria, myJson)
-      })
-      .catch( err => {
-        console.log("Error:", err)
-      }
-      );
-
-    // this.props.handler(listOfCriteria, listOfResources)
+    // Send selected criteria to parent component
+    this.props.handler(listOfCriteria, searchCriteria)
   }
 
   renderOptions(index,name,item,event) { 
