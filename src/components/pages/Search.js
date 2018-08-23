@@ -14,30 +14,37 @@ class Search extends Component {
     this.state = {
       callToDbComplete: false,
       returnedMatches: false,
-      resources: [
+      resourceList: [
         {
-          uKey: 0,
           firstName: 'Ryan Rodwell',
-          position: 'BA',
-          studentEmail: 'ryanrodwell@gmail.com',
+          currentProject: 'BA',
+          email: ['ryanrodwell@gmail.com'],
           phone: '12346789',
-          college: 'Georgia Tech',
+          colleges: [{'name':'Georgia Tech'}],
           status: 'employee',
+          resumes: [{
+            'name': 'pdfresume.pdf',
+            'fileURL': 'https://firebasestorage.googleapis.com/v0/b/shomsi-test.appspot.com/o/pdfresume.pdf?alt=media&token=445c5465-73ed-416a-9c7d-83709463e3d5',
+            'dateCreated': ''
+          }]
 
         },
         {
-          uKey: 1,
           firstName: 'John Doe',
-          position: 'Developer',
-          studentEmail: 'jdoe@gmail.com',
+          currentProject: 'Developer',
+          email: ['jdoe@gmail.com'],
           phone: '12346789',
-          college: 'Georgia Southern',
+          colleges: [{'name':'Georgia Southern'}],
           status: 'employee',
+          resumes: [{
+            'name': 'pdfresume.pdf',
+            'fileURL': 'https://firebasestorage.googleapis.com/v0/b/shomsi-test.appspot.com/o/pdfresume.pdf?alt=media&token=445c5465-73ed-416a-9c7d-83709463e3d5',
+            'dateCreated': ''
+          }]
 
         },
       ],
       criteriaList: [],
-      resourceList: [],
     };
 
     this.handler = this.handler.bind(this);
@@ -81,27 +88,26 @@ class Search extends Component {
       })
       .then(myJson => {
         console.log(JSON.stringify(myJson))
+        
+        this.setState({
+          'criteriaList': listOfCriteria, 
+          'resourceList': myJson, 
+          'returnedMatches': true
+        })
+
       })
       .catch(err => {
         console.log("Error:", err)
       });
 
-    // this.setState({
-    //   'criteriaList': criteria, 
-    //   'resourceList': resources, 
-    //   'returnedMatches': true
-    // })
+    
   }
 
-  renderReturnedResources() { 
+  renderReturnedResources(match,i) { 
 
     return (
-      
-        this.state.resourceList.map((match, i) => (
-          <ResourceCard key={i} name={match.firstName} email={match.email[0]}  school={match.colleges[0].name} position={match.currentProject} status={match.status} resume={match.resumes[0]}/>
-        ))
-      
-      )
+      <ResourceCard key={i} name={match.firstName} email={match.email[0]}  school={match.colleges[0].name} position={match.currentProject} status={match.status} resume={match.resumes[0]}/>
+    )
   }
 
 
@@ -144,7 +150,11 @@ class Search extends Component {
           <Col s={12}>
             <h5>Matching Resources:</h5>
             <Row>
-                
+                {
+                  this.state.resourceList.map((resource, i) =>
+                     this.renderReturnedResources(resource, i)
+                    )
+                }
             </Row>
           </Col>
           
