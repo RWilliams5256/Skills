@@ -43,6 +43,20 @@ class Search extends Component {
           }]
 
         },
+        {
+          firstName: 'Jacob Stone',
+          currentProject: 'Developer',
+          email: ['jstone@gmail.com'],
+          phone: '12346789',
+          colleges: [{'name':'Berry'}],
+          status: 'employee',
+          resumes: [{
+            'name': 'pdfresume.pdf',
+            'fileURL': 'https://firebasestorage.googleapis.com/v0/b/shomsi-test.appspot.com/o/pdfresume.pdf?alt=media&token=445c5465-73ed-416a-9c7d-83709463e3d5',
+            'dateCreated': ''
+          }]
+
+        },
       ],
       criteriaList: [],
     };
@@ -88,10 +102,10 @@ class Search extends Component {
       })
       .then(myJson => {
         console.log(JSON.stringify(myJson))
-        
+
         this.setState({
-          'criteriaList': listOfCriteria, 
-          'resourceList': myJson, 
+          'criteriaList': listOfCriteria,
+          'resourceList': myJson,
           'returnedMatches': true
         })
 
@@ -100,10 +114,10 @@ class Search extends Component {
         console.log("Error:", err)
       });
 
-    
+
   }
 
-  renderReturnedResources(match,i) { 
+  renderReturnedResources(match,i) {
 
     return (
       <ResourceCard key={i} name={match.firstName} email={match.email[0]}  school={match.colleges[0].name} position={match.currentProject} status={match.status} resume={match.resumes[0]}/>
@@ -157,7 +171,7 @@ class Search extends Component {
                 }
             </Row>
           </Col>
-          
+
         </Row>
       </div>
     );
