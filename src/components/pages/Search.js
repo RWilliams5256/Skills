@@ -95,7 +95,6 @@ class Search extends Component {
         body: data,
         headers: {
           'Content-Type': 'application/json',
-          // 'Access-Control-Allow-Origin': '*'
         }
       }).then(response => {
         return response.json();
