@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, Preloader } from 'react-materialize';
+import { Row, Col, Button, Preloader, Tag } from 'react-materialize';
 import helpers from '../../utils/helpers';
 import Accordion from '../subcomponents/Accordion';
 import ResourceCard from '../subcomponents/ResourceCard';
 import './Search.css';
+import $ from 'jquery';
 
 // import { db } from '../../firebase/firebase';
 
@@ -63,6 +64,7 @@ class Search extends Component {
 
     this.handler = this.handler.bind(this);
     this.renderReturnedResources = this.renderReturnedResources.bind(this);
+    this.closeTag = this.closeTag.bind(this);
   }
 
   componentWillMount() {
@@ -90,30 +92,38 @@ class Search extends Component {
     var data = JSON.stringify(searchCriteria)
     // console.log("data",data);
 
-    fetch(proxyurl + getUserByMultipleSkill, {
-        method: 'POST',
-        body: data,
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      }).then(response => {
-        return response.json();
-      })
-      .then(myJson => {
-        console.log(JSON.stringify(myJson))
+    // fetch(proxyurl + getUserByMultipleSkill, {
+    //     method: 'POST',
+    //     body: data,
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     }
+    //   }).then(response => {
+    //     return response.json();
+    //   })
+    //   .then(myJson => {
+    //     console.log(JSON.stringify(myJson))
 
-        this.setState({
+    //     this.setState({
+    //       'criteriaList': listOfCriteria,
+    //       'resourceList': myJson,
+    //       'returnedMatches': true
+    //     })
+
+    //   })
+    //   .catch(err => {
+    //     console.log("Error:", err)
+    //   });
+
+    this.setState({
           'criteriaList': listOfCriteria,
-          'resourceList': myJson,
+          //'resourceList': ,
           'returnedMatches': true
         })
+  }
 
-      })
-      .catch(err => {
-        console.log("Error:", err)
-      });
-
-
+  closeTag() {
+    console.log($(".criteria-tag").attr("id"))
   }
 
   renderReturnedResources(match,i) {
@@ -145,21 +155,25 @@ class Search extends Component {
       <div className='search'>
         <Row>
           <Col s={12}>
+            <h5>Filter On:</h5>
+            {accord}
+          </Col>
+          <Col s={12}>
             <h5>Current Criteria:</h5>
             <Row>
               <Col s={12}>
                 {
-                  this.state.criteriaList.map((criteria,i) => <Button key={i}>{criteria.value}</Button>)
+                  this.state.criteriaList.map((criteria,i) => 
+                    <div key={i} className="chip criteria-tag" id={criteria.category}>
+                      {criteria.value}
+                      <i className="close material-icons" onClick={this.closeTag}>close</i>
+                    </div>
+                )
                 }
               </Col>
             </Row>
+            <br/><hr/>
           </Col>
-
-          <Col s={12}>
-            <h5>Filter On:</h5>
-            {accord}
-          </Col>
-
           <Col s={12}>
             <h5>Matching Resources:</h5>
             <Row>
