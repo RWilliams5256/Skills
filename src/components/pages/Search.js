@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, Preloader, Tag } from 'react-materialize';
+import { Row, Col, Preloader } from 'react-materialize';
 import helpers from '../../utils/helpers';
 import Accordion from '../subcomponents/Accordion';
 import ResourceCard from '../subcomponents/ResourceCard';
 import './Search.css';
 import $ from 'jquery';
-
-// import { db } from '../../firebase/firebase';
 
 class Search extends Component {
 
@@ -15,50 +13,7 @@ class Search extends Component {
     this.state = {
       callToDbComplete: false,
       returnedMatches: false,
-      resourceList: [
-        {
-          firstName: 'Ryan Rodwell',
-          currentProject: 'BA',
-          email: ['ryanrodwell@gmail.com'],
-          phone: '12346789',
-          colleges: [{'name':'Georgia Tech'}],
-          status: 'employee',
-          resumes: [{
-            'name': 'pdfresume.pdf',
-            'fileURL': 'https://firebasestorage.googleapis.com/v0/b/shomsi-test.appspot.com/o/pdfresume.pdf?alt=media&token=445c5465-73ed-416a-9c7d-83709463e3d5',
-            'dateCreated': ''
-          }]
-
-        },
-        {
-          firstName: 'John Doe',
-          currentProject: 'Developer',
-          email: ['jdoe@gmail.com'],
-          phone: '12346789',
-          colleges: [{'name':'Georgia Southern'}],
-          status: 'employee',
-          resumes: [{
-            'name': 'pdfresume.pdf',
-            'fileURL': 'https://firebasestorage.googleapis.com/v0/b/shomsi-test.appspot.com/o/pdfresume.pdf?alt=media&token=445c5465-73ed-416a-9c7d-83709463e3d5',
-            'dateCreated': ''
-          }]
-
-        },
-        {
-          firstName: 'Jacob Stone',
-          currentProject: 'Developer',
-          email: ['jstone@gmail.com'],
-          phone: '12346789',
-          colleges: [{'name':'Berry'}],
-          status: 'employee',
-          resumes: [{
-            'name': 'pdfresume.pdf',
-            'fileURL': 'https://firebasestorage.googleapis.com/v0/b/shomsi-test.appspot.com/o/pdfresume.pdf?alt=media&token=445c5465-73ed-416a-9c7d-83709463e3d5',
-            'dateCreated': ''
-          }]
-
-        },
-      ],
+      resourceList: [],
       criteriaList: [],
     };
 
@@ -72,6 +27,13 @@ class Search extends Component {
     helpers.dbCallforLists(() => {
       this.setState({'callToDbComplete': true})
     });
+
+    helpers.dbCallforPeople({}, (data) => {
+      console.log('returned', data)
+      this.setState({
+        'resourceList': data,
+      })
+    })
   }
 
   componentDidMount(){
@@ -84,42 +46,15 @@ class Search extends Component {
   }
 
   handler(listOfCriteria, searchCriteria) {
+    
     console.log("handler", listOfCriteria, searchCriteria)
+    this.setState({'criteriaList': listOfCriteria})
 
+    helpers.dbCallforPeople(searchCriteria, (data) => {
+      console.log('returned', data)
+      this.setState({'resourceList': data})
+    })
 
-    var getUserByMultipleSkill = "https://us-central1-shomsi-test.cloudfunctions.net/getUserByMultipleSkill";
-    var proxyurl = "https://cors-anywhere.herokuapp.com/";
-    var data = JSON.stringify(searchCriteria)
-    // console.log("data",data);
-
-    // fetch(proxyurl + getUserByMultipleSkill, {
-    //     method: 'POST',
-    //     body: data,
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     }
-    //   }).then(response => {
-    //     return response.json();
-    //   })
-    //   .then(myJson => {
-    //     console.log(JSON.stringify(myJson))
-
-    //     this.setState({
-    //       'criteriaList': listOfCriteria,
-    //       'resourceList': myJson,
-    //       'returnedMatches': true
-    //     })
-
-    //   })
-    //   .catch(err => {
-    //     console.log("Error:", err)
-    //   });
-
-    this.setState({
-          'criteriaList': listOfCriteria,
-          //'resourceList': ,
-          'returnedMatches': true
-        })
   }
 
   closeTag() {

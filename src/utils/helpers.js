@@ -47,19 +47,21 @@ const helpers = {
         var data = JSON.stringify(listOfCriteria)
 
         fetch(proxyurl + getUserByMultipleSkill, {
-                method: 'POST',
-                body: data,
-                headers: {
-                    'Content-Type': 'application/json',
-                    // 'Access-Control-Allow-Origin': '*'
-                }
-            }).then(response => {
-                return response.json();
-            })
-            .then(myJson => {
-                // console.log(JSON.stringify(myJson));
-                callback(myJson)
-            });
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': 'application/json',
+        }
+        }).then(response => {
+            return response.json();
+        })
+        .then(myJson => {
+            console.log(JSON.stringify(myJson))
+            callback(myJson)
+        })
+        .catch(err => {
+            console.log("Error:", err)
+        });
     },
 
     dbCalltoAddPerson: function(personalInfo, callback){
