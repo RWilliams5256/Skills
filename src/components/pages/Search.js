@@ -29,7 +29,7 @@ class Search extends Component {
     });
 
     helpers.dbCallforPeople({}, (data) => {
-      console.log('returned', data)
+      // console.log('returned', data)
       this.setState({
         'resourceList': data,
       })
@@ -41,24 +41,30 @@ class Search extends Component {
   }
 
   componentDidUpdate(){
-    console.log("search DB again for employees")
-    console.log(this.state)
+    // console.log("search DB again for employees")
+    // console.log(this.state)
   }
 
   handler(listOfCriteria, searchCriteria) {
     
-    console.log("handler", listOfCriteria, searchCriteria)
+    // console.log("handler", listOfCriteria, searchCriteria)
     this.setState({'criteriaList': listOfCriteria})
 
     helpers.dbCallforPeople(searchCriteria, (data) => {
-      console.log('returned', data)
-      this.setState({'resourceList': data})
+      // console.log('returned', data)
+      if( data !== undefined) {
+        this.setState({
+          'resourceList': data
+        })
+      } else {
+        alert('No matches found with this criteria.');
+      }
     })
 
   }
 
   closeTag() {
-    console.log($(".criteria-tag").attr("id"))
+    
   }
 
   renderReturnedResources(match,i) {
@@ -71,7 +77,7 @@ class Search extends Component {
 
   render() {
     const dataReturned = this.state.callToDbComplete;
-    const matchesReturned = this.state.returnedMatches;
+    // const matchesReturned = this.state.returnedMatches;
     let accord;
 
     if (dataReturned) {
@@ -80,11 +86,11 @@ class Search extends Component {
       accord = <Preloader />
     }
 
-    if (!matchesReturned) {
-        console.log('No matches yet');
-    } else {
-      console.log('Matches found:',this.state.resourceList)
-    }
+    // if (!matchesReturned) {
+    //     console.log('No matches yet');
+    // } else {
+    //   console.log('Matches found:',this.state.resourceList)
+    // }
 
     return (
       <div className='search'>
@@ -100,8 +106,8 @@ class Search extends Component {
                 {
                   this.state.criteriaList.map((criteria,i) => 
                     <div key={i} className="chip criteria-tag" id={criteria.category}>
-                      {criteria.value}
-                      <i className="close material-icons" onClick={this.closeTag}>close</i>
+                      <span>{criteria.value}</span>
+                      <i className="close material-icons">close</i>
                     </div>
                 )
                 }

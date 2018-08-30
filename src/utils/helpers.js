@@ -169,7 +169,7 @@ const helpers = {
             callback(data);
         })
         .catch(err => {
-            console.log('Oops! Something went wrong.');
+            console.log('Oops! Something went wrong.');            
             throw new Error(err);
         });
 
