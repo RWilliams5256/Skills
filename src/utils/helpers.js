@@ -61,6 +61,7 @@ const helpers = {
         })
         .catch(err => {
             console.log("Error:", err)
+            alert("No user with this criteria!")
         });
     },
 
