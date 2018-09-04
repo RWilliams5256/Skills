@@ -1,15 +1,15 @@
 import React from 'react';
 import { Col } from 'react-materialize';
 
-const Checkbox = props => (
+const RadioButton = props => (
     <Col s={3} style={{'textAlign': 'left'}}>
         <p key={props.i} >
             <label>
-                <input type='checkbox' className='filled-in' id={props.id} name={props.name} onChange={props.onChange}/>
+                <input type='radio' id={props.id} name={props.name} onChange={props.onChange}/>
                 <span>{props.span}</span>
             </label>
         </p>
     </Col>
 
 );
-export default Checkbox;
+export default RadioButton;

@@ -1,0 +1,63 @@
+{
+    "firstName": "",
+    "lastName": "",
+    "address":{
+        "address1":"",
+        "address2":"",
+        "city":"",
+        "state":"",
+        "zip":""
+    },
+    "colleges":[
+            {
+            "name":"",
+            "graduationDate":"",
+            "major":"",
+            "minor":"",
+            "focus":""
+            }
+        ],
+    "referredBy": "",
+    "skills": {
+        "skill1": true,
+        "skill2": true
+    },
+    "role": "Sr Consultant",
+    "phone": [
+        {
+        "type":"home",
+        "number":"6788439090"
+        },
+        {
+        "type":"mobile",
+        "number":"5433891212"
+        }
+    ]
+    ,
+    "socialMedia": {
+        "linkedin": "",
+        "facebook": ""
+    },
+    "status": "",
+    "experienceLevel":"",
+    "paymentType": "",
+    "resumes": [
+        {
+            "name": "",
+            "fileURL": "",
+            "dateCreated": ""
+        }
+        ],
+     "notes":[
+            
+            {
+                "author": "",
+                "note": "",
+                "dateCreated": ""
+            }
+        ],
+    "email": [
+        
+    ],
+    "currentProject":""
+}

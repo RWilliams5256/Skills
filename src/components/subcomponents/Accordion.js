@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Collapsible, CollapsibleItem } from 'react-materialize';
 import $ from 'jquery';
 import Checkbox from './Checkbox';
-// import helpers from '../../utils/helpers';
-
+import RadioButton from './RadioButton';
 import './Accordion.css';
 import { functions } from '../../firebase/firebase';
 
@@ -12,7 +11,7 @@ class Accordion extends Component {
   constructor(props) {
     super(props);
     this.handleEvent = this.handleEvent.bind(this)
-
+    this.renderOptions = this.renderOptions.bind(this)
   }
 
   componentWillMount() {
@@ -28,41 +27,63 @@ class Accordion extends Component {
   }
 
   handleEvent() {
-    var listOfCriteria = []
+    let listOfCriteria = []
+    let skills = []
+    let searchCriteria = {};
 
+    $('input[type="radio"]:checked').each(function () {
+      let category = $(this).attr('name');
+      var selectedItem = {
+        'value': $(this).attr('id'),
+        'category': $(this).attr('name')
+      }
+      listOfCriteria.push(selectedItem);
+
+      if (category === 'current project') {
+        searchCriteria['currentProject'] = $(this).attr('id');
+      // } else if (category === 'known?') {
+      //   searchCriteria.known = $(this).attr('id');
+      } else if (category === 'experience level') {
+        searchCriteria['experienceLevel'] = $(this).attr('id');
+      } else if (category === 'status') {
+        searchCriteria['status'] = $(this).attr('id');
+      // } else if (category === 'resume rank') {
+      //   searchCriteria.resumeRank = $(this).attr('id');
+      } else if (category === 'role') {
+        searchCriteria['role'] = $(this).attr('id');
+      } else if (category === 'referral source') {
+        searchCriteria['referralSource'] = $(this).attr('id');
+      }
+
+    });
+
+    // Capture selected checkboxes
     $('input[type="checkbox"]:checked').each(function() {
-
         var selectedItem = {
           'value': $(this).attr('id'),
-          'category': $(this).attr('data-category')
+          'category': $(this).attr('name')
         }
-
         listOfCriteria.push(selectedItem);
+        skills.push($(this).attr('id'));
+        searchCriteria['skills'] = skills;
+
     });
 
-    // console.log('selectedCriteria', listOfCriteria)
-
-    var listOfResources;
-
-    // helpers.dbCallforPeople(listOfCriteria, function(matchingPeople){
-    //   listOfResources = matchingPeople
-    // })
-
-    var getUserByMultipleSkill = functions.httpsCallable('getUserByMultipleSkill');
-    getUserByMultipleSkill({"User":{"skills":['java']}}
-
-  ).then(result => {
-        // Read result of the Cloud Function.
-        // var sanitizedMessage = result.data.text;
-        console.log(result)
-        // ...
-    }).catch(error => {
-      console.log(error)
-    });
-    // this.props.handler(listOfCriteria, listOfResources)
-    console.log('accordion matching people:',listOfResources)
+    // Send selected criteria to parent component
+    this.props.handler(listOfCriteria, searchCriteria)
   }
 
+  renderOptions(index,name,item,event) {
+    if(name === 'other skills' || name === 'tech skills') {
+      return (
+        <Checkbox key={index} name={name} id={item} span={item} onChange={event} />
+      )
+    } else {
+      return (
+        <RadioButton key={index} name={name} id={item} span={item} onChange={event} />
+      )
+    }
+  }
 
   render() {
 
@@ -74,7 +95,7 @@ class Accordion extends Component {
               <CollapsibleItem header={category.listName.toUpperCase()} key={i}>
                 <Row>
                 {category.listItem.map((item,j) => (
-                  <Checkbox key={j} name={item} id={item} span={item} onChange={this.handleEvent} category={category.listName}/>
+                  this.renderOptions(j,category.listName,item,this.handleEvent)
                 ))}
                 </Row>
               </CollapsibleItem>

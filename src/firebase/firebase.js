@@ -12,6 +12,12 @@ var config = {
   };
 
   firebase.initializeApp(config)
+  const db = firebase.firestore();
+  const functions = firebase.functions();
 
+<<<<<<< HEAD
   export const db = firebase.firestore();
   export const functions = firebase.functions();
+=======
+  export { db, functions };
+>>>>>>> 35563312ea6bfbfd23089c52085f39a9f8f81cb0
