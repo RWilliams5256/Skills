@@ -46,7 +46,7 @@ class Search extends Component {
   }
 
   handler(listOfCriteria, searchCriteria) {
-    
+
     // console.log("handler", listOfCriteria, searchCriteria)
     this.setState({'criteriaList': listOfCriteria})
 
@@ -64,7 +64,7 @@ class Search extends Component {
   }
 
   closeTag() {
-    
+
   }
 
   renderReturnedResources(match,i) {
@@ -104,11 +104,11 @@ class Search extends Component {
             <Row>
               <Col s={12}>
                 {
-                  this.state.criteriaList.map((criteria,i) => 
-                    <div key={i} className="chip criteria-tag" id={criteria.category}>
-                      <span>{criteria.value}</span>
+                  this.state.criteriaList.map((criteria,i) =>
+                    <a key={i} className="chip criteria-tag" id={criteria.category} onClick={this.closeTag}>
+                      {criteria.value}
                       <i className="close material-icons">close</i>
-                    </div>
+                    </a>
                 )
                 }
               </Col>
