@@ -1,4 +1,4 @@
-/* 
+/*
 *  Hosted Fonts
 */
 @font-face {
@@ -32,6 +32,11 @@ body {
   font-family: sans-serif;
 }
 
+main {
+  padding-top: 20px;
+  padding-left: 300px;
+}
+
 .App {
   text-align: left;
 }
@@ -43,15 +48,14 @@ body {
 
 .App-logo2 {
   text-align: left;
-  height: 80px;
+  height: 70px;
   float: left;
+  padding: 5px 20px;
 }
 
 .App-header {
   background-color: #EFE3D8;
-  height: 100px;
-  padding: 20px;
-  color: white;
+  padding: 10px;
 }
 
 .App-title {

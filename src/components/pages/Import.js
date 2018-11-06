@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import './Import.css';
+import '../../css/Import.css';
 import Upload from'../subcomponents/Upload';
 
 class Import extends Component {
   render() {
     return (
       <div >
-        <p/>             
+        <p/>
         <Upload classname="upload" />
-        
+
       </div>
-      
+
     )
   };
 }
