@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../css/App.css';
 import Navigation from'./subcomponents/Navigation';
 
 
@@ -9,9 +9,8 @@ class App extends Component {
     return (
 
       <div className="App">
-        <header className="App-header">
-          <Navigation />
-        </header>
+
+        <Navigation />
 
         <main>
           {this.props.children}

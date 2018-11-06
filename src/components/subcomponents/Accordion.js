@@ -3,7 +3,7 @@ import { Row, Col, Collapsible, CollapsibleItem } from 'react-materialize';
 import $ from 'jquery';
 import Checkbox from './Checkbox';
 import RadioButton from './RadioButton';
-import './Accordion.css';
+import '../../css/Accordion.css';
 
 
 class Accordion extends Component {
@@ -29,7 +29,7 @@ class Accordion extends Component {
     let listOfCriteria = []
     let skills = []
     let searchCriteria = {};
-  
+
     $('input[type="radio"]:checked').each(function () {
       let category = $(this).attr('name');
       var selectedItem = {
@@ -72,8 +72,8 @@ class Accordion extends Component {
     this.props.handler(listOfCriteria, searchCriteria)
   }
 
-  renderOptions(index,name,item,event) { 
-    if(name === 'other skills' || name === 'tech skills') {         
+  renderOptions(index,name,item,event) {
+    if(name === 'other skills' || name === 'tech skills') {
       return (
         <Checkbox key={index} name={name} id={item} span={item} onChange={event} />
       )
@@ -84,6 +84,15 @@ class Accordion extends Component {
     }
   }
 
+  renderHeader(name){
+    return (
+      <span>
+        <i class="fas fa-plus"></i>
+        {name.toUpperCase()}
+      </span>
+    )
+  }
+
   render() {
 
     return (
@@ -91,7 +100,7 @@ class Accordion extends Component {
         <Col s={12}>
           <Collapsible>
             {this.state.allItems.map((category,i) => (
-              <CollapsibleItem header={category.listName.toUpperCase()} key={i}>
+              <CollapsibleItem header={this.renderHeader(category.listName)} key={i}>
                 <Row>
                 {category.listItem.map((item,j) => (
                   this.renderOptions(j,category.listName,item,this.handleEvent)

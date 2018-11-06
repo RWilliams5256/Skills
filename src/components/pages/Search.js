@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Row, Col, Preloader } from 'react-materialize';
+import { Row, Col, Preloader, Card } from 'react-materialize';
 import helpers from '../../utils/helpers';
 import Accordion from '../subcomponents/Accordion';
 import ResourceCard from '../subcomponents/ResourceCard';
-import './Search.css';
-import $ from 'jquery';
+import '../../css/Search.css';
+// import $ from 'jquery';
 
 class Search extends Component {
 
@@ -47,7 +47,7 @@ class Search extends Component {
 
   handler(listOfCriteria, searchCriteria) {
 
-    // console.log("handler", listOfCriteria, searchCriteria)
+    console.log("handler", searchCriteria)
     this.setState({'criteriaList': listOfCriteria})
 
     helpers.dbCallforPeople(searchCriteria, (data) => {
@@ -95,27 +95,30 @@ class Search extends Component {
     return (
       <div className='search'>
         <Row>
+
           <Col s={12}>
-            <h5>Filter On:</h5>
             {accord}
           </Col>
+
           <Col s={12}>
-            <h5>Current Criteria:</h5>
-            <Row>
-              <Col s={12}>
-                {
-                  this.state.criteriaList.map((criteria,i) =>
-                    <a key={i} className="chip criteria-tag" id={criteria.category} onClick={this.closeTag}>
-                      {criteria.value}
-                      <i className="close material-icons">close</i>
-                    </a>
-                )
-                }
-              </Col>
-            </Row>
-            <br/><hr/>
+            <Card>
+              <h5>Current Criteria:</h5>
+              <Row>
+                <Col s={12}>
+                  {
+                    this.state.criteriaList.map((criteria,i) =>
+                      <a key={i} className="chip criteria-tag" id={criteria.category} onClick={this.closeTag}>
+                        {criteria.value}
+                        <i className="close material-icons">close</i>
+                      </a>
+                  )
+                  }
+                </Col>
+              </Row>
+            </Card>
           </Col>
-          <Col s={12}>
+
+          <Col s={12} >
             <h5>Matching Resources:</h5>
             <Row>
                 {
