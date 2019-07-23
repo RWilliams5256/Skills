@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import Accordion from '../Subcomponents/Accordion';
-import ResourceCard from '../Subcomponents/ResourceCard';
+import Accordion from '../../Subcomponents/Accordion';
+import ResourceCard from '../../Subcomponents/ResourceCard';
 import './Search.css';
 
 
 class Search extends Component {
 
   constructor() {
-    super()
+    super();
     this.state = {
       resources: [
         {
