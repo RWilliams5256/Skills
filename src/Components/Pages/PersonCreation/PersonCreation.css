@@ -1,0 +1,38 @@
+.person-creation {
+    margin: 30px;
+}
+
+.person-creation-row {
+    display: flex;
+    justify-content: center;
+}
+
+.person-creation-form {
+    margin: 0 !important;
+}
+
+.column {
+    margin: 0 !important;
+    display: flex;
+
+}
+
+
+/*.row {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*}*/
+
+/*form {*/
+
+/*}*/
+
+/*form .row {*/
+/*    margin: 0;*/
+/*}*/
+
+/*form .row div {*/
+/*    margin: 0;*/
+/*}*/
+
+
