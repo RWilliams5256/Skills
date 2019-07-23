@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Accordion from '../subcomponents/Accordion';
-import ResourceCard from '../subcomponents/ResourceCard';
+import Accordion from '../Subcomponents/Accordion';
+import ResourceCard from '../Subcomponents/ResourceCard';
 import './Search.css';
 
 
@@ -47,10 +47,12 @@ class Search extends Component {
       ]
     }
   }
+
   render() {
     return (
       <div className='search'>
         <div className='row'>
+
           <div className='col s12'>
             <h5>Current Criteria:</h5>
             <div className='row'>
@@ -75,6 +77,7 @@ class Search extends Component {
               }
             </div>
           </div>
+
         </div>
       </div>
     );
