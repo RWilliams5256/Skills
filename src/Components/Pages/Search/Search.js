@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Accordion from '../../Subcomponents/Accordion';
-import ResourceCard from '../../Subcomponents/ResourceCard';
+import Accordion from '../../Subcomponents/Accordion/Accordion';
+import ResourceCard from '../../Subcomponents/ResourceCard/ResourceCard';
 import './Search.css';
 
 
