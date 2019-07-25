@@ -11,54 +11,108 @@ class PersonCreation extends Component {
     render() {
         return (
             <div className='person-creation'>
-                <div className='row person-creation-row'>
-                    <form className='col s10 person-creation-form'>
-                        <div className="row">
-                            <div className="input-field col s3 column">
-                                <label>First Name</label>
-                                <input placeholder="Placeholder" id="first_name" type="text" className="validate" />
+                <div className='row person-creation-section'>
+                    <form className='col s12 person-creation-form'>
+                        <div className="row form-row">
+                            <div className="input-field col form-column">
+                                <input placeholder="First Name" id="first_name" type="text" className="validate" />
                             </div>
-                            <div className="input-field col s3 column">
-                                <label>Last Name</label>
-                                <input id="last_name" type="text" className="validate" />
+                            <div className="input-field col form-column">
+                                <input placeholder="Last Name" id="last_name" type="text" className="validate" />
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="input-field col s10 column">
-                                <input id="address" type="text" className="validate" />
-                                <label htmlFor="address">Address</label>
+                        <div className="row form-row">
+                            <div className="input-field col form-column">
+                                <input placeholder="Address" id="address" type="text" className="validate" />
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="input-field col s10 column">
-                                <input id="address1" type="text" className="validate" />
-                                <label htmlFor="address1">Address1</label>
+                        <div className="row form-row">
+                            <div className="input-field col form-column">
+                                <input placeholder="Address 1" id="address1" type="text" className="validate" />
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="input-field col s4 column">
-                                <input id="city" type="text" className="validate" />
-                                <label htmlFor="cit">city</label>
+                        <div className="row form-row">
+                            <div className="input-field col form-column">
+                                <input placeholder="City" id="city" type="text" className="validate" />
                             </div>
-                            <div className="input-field col s2 column">
-                                <input id="state" type="text" className="validate" />
-                                <label htmlFor="state">state</label>
+                            <div className="input-field col form-column">
+                                <input placeholder="State" id="state" type="text" className="validate" />
                             </div>
-                            <div className="input-field col s4 column">
-                                <input id="zip" type="text" className="validate" />
-                                <label htmlFor="zip">zip</label>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="input-field col s10 column">
-                                <input id="email" type="email" className="validate" />
-                                <label htmlFor="email">Email</label>
+                            <div className="input-field col form-column">
+                                <input placeholder="Zip" id="zip" type="text" className="validate" />
                             </div>
                         </div>
                     </form>
                 </div>
 
-                <hr/>
+                <div className='row person-creation-section'>
+                    <form className='col s12 person-creation-form'>
+                        <div className="row form-row">
+                            <div className="input-field col form-column">
+                                <input placeholder="Phone Number" type="text" className="validate" />
+                            </div>
+                            <div className="col form-column">
+                                <a className="btn-floating btn waves-effect waves-light red"><i
+                                    className="material-icons">add</i></a>
+                                <span style={{color:"#9e9e9e"}}>Add Another</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div className='row person-creation-section'>
+                    <form className='col s12 person-creation-form'>
+                        <div className="row form-row">
+                            <div className="input-field col form-column">
+                                <input placeholder="Email" type="text" className="validate" />
+                            </div>
+                            <div className="input-field col form-column">
+                                <a className="btn-floating btn waves-effect waves-light red"><i
+                                    className="material-icons">add</i></a>
+                                <span style={{color:"#9e9e9e"}}>Add Another</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div className='row person-creation-section'>
+                    <form className='col s12 person-creation-form'>
+                        <div className="row form-row">
+                            <div className="input-field col form-column">
+                                <div className="social-media">
+                                    <a className='dropdown-trigger btn social-media-dropdown' href='' data-target='social_media_dropdown'>Social Media</a>
+                                    <ul id='social_media_dropdown' className='dropdown-content'>
+                                        <li>LinkedIn</li>
+                                        <li>Facebook</li>
+                                        <li>Twitter</li>
+                                        <li>Instagram</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div className="input-field col form-column">
+                                <input placeholder="Account Link" id="first_name" type="text" className="validate" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div className='row person-creation-section'>
+                    <form className='col s12 person-creation-form'>
+                        <div className="row form-row">
+                            <div className="college">
+                                <a className='dropdown-trigger btn college-dropdown' href='' data-target='college_dropdown'>College / University</a>
+                                <ul id='college_dropdown' className='dropdown-content'>
+                                    <li>University of Georiga</li>
+                                    <li>Georgia Institute of Technology</li>
+                                    <li>Georgia State University</li>
+                                    <li>Emory University</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         );
     }
