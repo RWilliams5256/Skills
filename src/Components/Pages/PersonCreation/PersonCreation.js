@@ -45,12 +45,16 @@ class PersonCreation extends Component {
                     </form>
                 </div>
 
-                <div className='row person-creation-section'>
+                <div className='row sm-person-creation-section'>
                     <form className='col s12 person-creation-form'>
                         <div className="row form-row">
                             <div className="input-field col form-column">
                                 <input placeholder="Phone Number" type="text" className="validate" />
                             </div>
+                            <label className="primary-label form-column" htmlFor="primary-phone-check">
+                                <input id="primary-phone-check" type="checkbox" className="filled-in" />
+                                <span>Primary</span>
+                            </label>
                             <div className="col form-column">
                                 <a className="btn-floating btn waves-effect waves-light red"><i
                                     className="material-icons">add</i></a>
@@ -60,12 +64,16 @@ class PersonCreation extends Component {
                     </form>
                 </div>
 
-                <div className='row person-creation-section'>
+                <div className='row sm-person-creation-section'>
                     <form className='col s12 person-creation-form'>
                         <div className="row form-row">
                             <div className="input-field col form-column">
                                 <input placeholder="Email" type="text" className="validate" />
                             </div>
+                            <label className="primary-label" htmlFor="primary-email-check">
+                                <input id="primary-email-check" type="checkbox" className="filled-in" />
+                                <span>Primary</span>
+                            </label>
                             <div className="input-field col form-column">
                                 <a className="btn-floating btn waves-effect waves-light red"><i
                                     className="material-icons">add</i></a>
@@ -79,8 +87,10 @@ class PersonCreation extends Component {
                     <form className='col s12 person-creation-form'>
                         <div className="row form-row">
                             <div className="input-field col form-column">
-                                <div className="social-media">
-                                    <a className='dropdown-trigger btn social-media-dropdown' href='' data-target='social_media_dropdown'>Social Media</a>
+                                <div className="dropdown-button">
+                                    <a className='dropdown-trigger btn dropdown-text-logo' href='' data-target='social_media_dropdown'>
+                                        Social Media <i className="material-icons" style={{fontSize: "30px"}}>arrow_drop_down</i>
+                                    </a>
                                     <ul id='social_media_dropdown' className='dropdown-content'>
                                         <li>LinkedIn</li>
                                         <li>Facebook</li>
@@ -100,8 +110,10 @@ class PersonCreation extends Component {
                 <div className='row person-creation-section'>
                     <form className='col s12 person-creation-form'>
                         <div className="row form-row">
-                            <div className="college">
-                                <a className='dropdown-trigger btn college-dropdown' href='' data-target='college_dropdown'>College / University</a>
+                            <div className="dropdown-button">
+                                <a className='dropdown-trigger btn dropdown-text-logo' href='' data-target='college_dropdown'>
+                                    College / University <i className="material-icons" style={{fontSize: "30px"}}>arrow_drop_down</i>
+                                </a>
                                 <ul id='college_dropdown' className='dropdown-content'>
                                     <li>University of Georiga</li>
                                     <li>Georgia Institute of Technology</li>

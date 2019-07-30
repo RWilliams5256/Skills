@@ -1,5 +1,9 @@
 .person-creation {
-    margin: 50px 0;
+    width: 80%;
+    margin: 50px auto;
+    padding: 40px 0;
+    box-shadow: 0 0 18px -2px rgba(0,0,0,0.4);
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,17 +11,24 @@
 }
 
 .person-creation-section {
-    width: 80%;
-    margin: 20px 0 !important;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 18px -2px rgba(0,0,0,0.75);
+    width: 90%;
+    padding: 25px;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.sm-person-creation-section {
+    width: 75%;
+    padding: 25px;
+    margin-bottom: 0;
     display: flex;
     justify-content: center;
 }
 
 .person-creation-form {
     margin: 0 !important;
+    padding: 0 !important;
     display: flex;
     flex-direction: column;
 }
@@ -40,6 +51,15 @@
     align-items: center;
 }
 
+.primary-label {
+    width: 30%;
+    color: rgb(158, 158, 158);
+    background-color: rgba(255, 255, 255, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .checkbox-label {
     background-color: rgba(255, 255, 255, 0);
 }
@@ -48,18 +68,13 @@ input::placeholder {
     color: rgba(0,0,0,0.75);
 }
 
-.social-media {
+.dropdown-button {
     width: 100%;
 }
 
-.social-media-dropdown {
+.dropdown-text-logo {
     width: 100%;
-}
-
-.college {
-    width: 100%
-}
-
-.college-dropdown {
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
