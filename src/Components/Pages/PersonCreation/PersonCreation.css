@@ -1,7 +1,7 @@
 .person-creation {
     width: 80%;
     margin: 50px auto;
-    padding: 40px 0;
+    padding: 50px 0;
     box-shadow: 0 0 18px -2px rgba(0,0,0,0.4);
     border-radius: 15px;
     display: flex;
@@ -19,7 +19,7 @@
 }
 
 .sm-person-creation-section {
-    width: 75%;
+    width: 65%;
     padding: 25px;
     margin-bottom: 0;
     display: flex;
@@ -31,6 +31,8 @@
     padding: 0 !important;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .form-row {
@@ -42,11 +44,16 @@
     margin: 10px 0 !important;
 }
 
+.skill-row {
+    flex-flow: row wrap;
+}
+
 .form-column {
     width: 100%;
     height: 100%;
     margin: 0 !important;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -70,6 +77,10 @@ input::placeholder {
 
 .dropdown-button {
     width: 100%;
+}
+
+.skills-dropdown-button {
+    width: 50%;
 }
 
 .dropdown-text-logo {
