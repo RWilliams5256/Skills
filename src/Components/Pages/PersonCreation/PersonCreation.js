@@ -52,23 +52,24 @@ class PersonCreation extends Component {
     addSkill = (event) => {
         let selectedSkills = [...this.state.selectedSkills];
         selectedSkills.push(event.target.innerHTML);
-        this.setState({selectedSkills: selectedSkills})
+        let availableSkills = [...this.state.availableSkills];
+        availableSkills.splice(availableSkills.indexOf(event.target.innerHTML), 1);
+        this.setState({selectedSkills: selectedSkills});
+        this.setState({availableSkills: availableSkills});
     };
 
     deleteSkillSelection = (event) => {
+        let availableSkills = [...this.state.availableSkills];
+        availableSkills.push(event.target.innerHTML);
         let selectedSkills = [...this.state.selectedSkills];
         selectedSkills.splice(selectedSkills.indexOf(event.target.innerHTML), 1);
-        this.setState({selectedSkills: selectedSkills})
+        this.setState({selectedSkills: selectedSkills});
+        this.setState({availableSkills: availableSkills});
     };
 
     submit = (event) => {
       console.log('Form has been submitted');
     };
-
-    // const disabledLiStyle = {
-    //     pointer-events: none;
-    //     opacity:0.6;
-    // }
 
     render() {
         return (
@@ -177,6 +178,7 @@ class PersonCreation extends Component {
                                 </a>
                                 <ul id='college_dropdown' className='dropdown-content'>
                                     {this.state.availableColleges.map((college) => {
+                                        // return <ListItem data={college} />
                                         return  <li style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}}>{college}</li>;
                                     })}
                                 </ul>
@@ -188,8 +190,9 @@ class PersonCreation extends Component {
                 <div className='row sm-person-creation-section'>
                     <form className='col s12 person-creation-form'>
                         <div className="row form-row" style={{flexFlow: "row wrap"}}>
-                            {this.state.selectedSkills.map((value) => {
-                                return <a className="btn" onClick={this.deleteSkillSelection} style={{margin:"10px"}}>{value}</a>;
+                            {this.state.selectedSkills.map((selectedSkill) => {
+                                // return <ListItem data={selectedSkill} isListItem={false}/>
+                                return <a className="btn" onClick={this.deleteSkillSelection} style={{margin:"10px"}}>{selectedSkill}</a>;
                             })}
                         </div>
 
@@ -200,8 +203,9 @@ class PersonCreation extends Component {
                                         Skills<i className="material-icons" style={{fontSize: "30px"}}>arrow_drop_down</i>
                                     </a>
                                     <ul id='skill-dropdown' className='dropdown-content' onChange={this.skillSelect}>
-                                        {this.state.availableSkills.map((value) => {
-                                            return <li className={`skill-list-item`} onClick={this.addSkill}>{value}</li>;
+                                        {this.state.availableSkills.map((skill) => {
+                                            // return <ListItem data={skill} isListItem={true}/>
+                                            return <li className={`skill-list-item`} onClick={this.addSkill}>{skill}</li>;
                                         })}
                                     </ul>
                                 </div>
