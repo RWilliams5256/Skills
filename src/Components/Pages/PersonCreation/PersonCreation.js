@@ -8,7 +8,7 @@ class PersonCreation extends Component {
         this.state = {
             phoneSection:{},
             emailSection:{},
-            selectedSkills:['React', 'Node.js'],
+            selectedSkills:[],
             availableSkills:['React', 'Angular', 'HTML', 'CSS', 'AWS', 'GCP']
         };
     }
@@ -23,19 +23,16 @@ class PersonCreation extends Component {
         console.log('add another email added');
     };
 
-    skillSelect = (event) => {
-        console.log(event.target.innerHTML);
+    addSkill = (event) => {
         let selectedSkills = [...this.state.selectedSkills];
         selectedSkills.push(event.target.innerHTML);
         this.setState({selectedSkills: selectedSkills})
     };
 
     deleteSkillSelection = (event) => {
-        console.log(event.target.innerHTML);
-        console.log('skills deleted');
-        // let skillSection = [...this.state.skillSection];
-        //
-        // skillSection.pop()
+        let selectedSkills = [...this.state.selectedSkills];
+        selectedSkills.splice(selectedSkills.indexOf(event.target.innerHTML), 1);
+        this.setState({selectedSkills: selectedSkills})
     };
 
     render() {
@@ -172,7 +169,7 @@ class PersonCreation extends Component {
                                     </a>
                                     <ul id='skill-dropdown' className='dropdown-content' onChange={this.skillSelect}>
                                         {this.state.availableSkills.map((value) => {
-                                            return <li style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}} onClick={this.skillSelect}>{value}</li>;
+                                            return <li style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}} onClick={this.addSkill}>{value}</li>;
                                         })}
                                     </ul>
                                 </div>
