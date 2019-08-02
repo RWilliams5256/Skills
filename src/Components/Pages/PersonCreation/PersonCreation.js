@@ -48,8 +48,8 @@ class PersonCreation extends Component {
                 <div className="input-field col form-column">
                     <input placeholder="Phone Number" type="text" className="validate" />
                 </div>
-                <label className="primary-label form-column" htmlFor="primary-phone-check">
-                    <input id="primary-phone-check" type="checkbox" className="filled-in" />
+                <label className="primary-label form-column" htmlFor="secondary-phone-check">
+                    <input id="secondary-phone-check" type="checkbox" className="filled-in" />
                     <span>Primary</span>
                 </label>
                 <div className="input-field col form-row">
@@ -73,8 +73,8 @@ class PersonCreation extends Component {
                 <div className="input-field col form-column">
                     <input placeholder="Email" type="text" className="validate" />
                 </div>
-                <label className="primary-label" htmlFor="primary-email-check">
-                    <input id="primary-email-check" type="checkbox" className="filled-in" />
+                <label className="primary-label" htmlFor="secondary-email-check">
+                    <input id="secondary-email-check" type="checkbox" className="filled-in" />
                     <span>Primary</span>
                 </label>
                 <div className="input-field col form-row">
