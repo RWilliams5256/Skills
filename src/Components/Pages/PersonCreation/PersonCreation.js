@@ -35,20 +35,62 @@ class PersonCreation extends Component {
                     note: null,
                     dateCreated: null
                 }
-            }
+            },
+            addAnotherPhone: null,
+            addAnotherEmail: null
         };
     }
 
     // adds another phone number input to our page
     addAnotherPhone = () => {
         console.log('add another phone added');
+        this.setState({addAnotherPhone: <div className="row form-row">
+                <div className="input-field col form-column">
+                    <input placeholder="Phone Number" type="text" className="validate" />
+                </div>
+                <label className="primary-label form-column" htmlFor="primary-phone-check">
+                    <input id="primary-phone-check" type="checkbox" className="filled-in" />
+                    <span>Primary</span>
+                </label>
+                <div className="input-field col form-row">
+                    <a className="btn-floating btn waves-effect waves-light red" onClick={this.removeExtraPhone}>
+                        <i className="material-icons" style={{height: '20px', width: '20px'}}>backspace</i></a>
+                    <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto"}}>Remove</span>
+                </div>
+            </div>});
+
+    };
+
+    removeExtraPhone = () => {
+        console.log('extra phone removed');
+        this.setState({addAnotherPhone: null});
     };
 
     // adds another email input to our page
     addAnotherEmail = () => {
         console.log('add another email added');
+        this.setState({addAnotherEmail: <div className="row form-row">
+                <div className="input-field col form-column">
+                    <input placeholder="Email" type="text" className="validate" />
+                </div>
+                <label className="primary-label" htmlFor="primary-email-check">
+                    <input id="primary-email-check" type="checkbox" className="filled-in" />
+                    <span>Primary</span>
+                </label>
+                <div className="input-field col form-row">
+                    <a className="btn-floating btn waves-effect waves-light red" onClick={this.removeExtraEmail}>
+                        <i className="material-icons" style={{height: '20px', width: '20px'}}>backspace</i></a>
+                    <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto"}}>Remove</span>
+                </div>
+            </div>});
     };
 
+    removeExtraEmail = () => {
+        console.log('extra email removed');
+        this.setState({addAnotherEmail: null});
+    };
+
+    // adds skill from dropdown list and removes it from the dropdown list
     addSkill = (event) => {
         let selectedSkills = [...this.state.selectedSkills];
         selectedSkills.push(event.target.innerHTML);
@@ -58,6 +100,7 @@ class PersonCreation extends Component {
         this.setState({availableSkills: availableSkills});
     };
 
+    // removes selected skill and adds it back to the dropdown list
     deleteSkillSelection = (event) => {
         let availableSkills = [...this.state.availableSkills];
         availableSkills.push(event.target.innerHTML);
@@ -67,6 +110,7 @@ class PersonCreation extends Component {
         this.setState({availableSkills: availableSkills});
     };
 
+    // submits form with Persons info
     submit = (event) => {
       console.log('Form has been submitted');
     };
@@ -119,11 +163,12 @@ class PersonCreation extends Component {
                                 <span>Primary</span>
                             </label>
                             <div className="input-field col form-row">
-                                <a className="btn-floating btn waves-effect waves-light red">
+                                <a className="btn-floating btn waves-effect waves-light red" onClick={this.addAnotherPhone}>
                                     <i className="material-icons">add</i></a>
                                 <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto"}}>Add Another</span>
                             </div>
                         </div>
+                        {this.state.addAnotherPhone}
                     </form>
                 </div>
 
@@ -138,11 +183,12 @@ class PersonCreation extends Component {
                                 <span>Primary</span>
                             </label>
                             <div className="input-field col form-row">
-                                <a className="btn-floating btn waves-effect waves-light red">
+                                <a className="btn-floating btn waves-effect waves-light red" onClick={this.addAnotherEmail}>
                                     <i className="material-icons">add</i></a>
                                 <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto"}}>Add Another</span>
                             </div>
                         </div>
+                        {this.state.addAnotherEmail}
                     </form>
                 </div>
 
@@ -211,12 +257,13 @@ class PersonCreation extends Component {
                                 </div>
                             </div>
                         </div>
-
-                        {this.state.skillSection}
                     </form>
                 </div>
 
                 <div className='row sm-person-creation-section'>
+                    <label id="#bb">Choose file to upload
+                        <input type="file" id="file" size="60" accept=".csv"/>
+                    </label>
                     <a className="waves-effect waves-light btn" style={{width: '150px', height: '50px', fontSize: '18px'}} onClick={this.submit}>Create</a>
                 </div>
             </div>

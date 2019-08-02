@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b05937b2-9313-4c25-a30c-86db48434a1e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Pages/PersonCreation/PersonCreation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Pages/PersonCreation/PersonCreation.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -19,8 +18,32 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Components/Pages/PersonCreation/PersonCreation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="71" column="6" selection-start-line="71" selection-start-column="6" selection-end-line="71" selection-end-column="6" />
+            <state relative-caret-position="311">
+              <caret line="64" column="43" lean-forward="true" selection-start-line="64" selection-start-column="43" selection-end-line="64" selection-end-column="43" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Pages/Import/Import.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="9" column="11" lean-forward="true" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Subcomponents/Upload/Upload.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="19" column="23" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="19" selection-end-column="23" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -105,6 +128,7 @@
       <find>Add Another</find>
       <find>onClick</find>
       <find>social media</find>
+      <find>addAnotherEmail</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -176,6 +200,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Components" type="462c0819:PsiDirectoryNode" />
               <item name="Pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="skills" type="b2602c69:ProjectViewProjectNode" />
+              <item name="skills" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Components" type="462c0819:PsiDirectoryNode" />
+              <item name="Pages" type="462c0819:PsiDirectoryNode" />
+              <item name="Import" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="skills" type="b2602c69:ProjectViewProjectNode" />
@@ -268,12 +300,12 @@
       <workItem from="1564063350245" duration="16693000" />
       <workItem from="1564495317987" duration="20566000" />
       <workItem from="1564582301523" duration="17000" />
-      <workItem from="1564755606746" duration="9176000" />
+      <workItem from="1564755606746" duration="10851000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56687000" />
+    <option name="totallyTimeSpent" value="58362000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -360,16 +392,6 @@
     <entry file="file://$PROJECT_DIR$/src/Components/Pages/Import/Import.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Pages/Import/Import.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="11" lean-forward="true" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/web-forms.rnc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="491">
@@ -388,16 +410,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="63">
           <caret line="3" column="35" lean-forward="true" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Subcomponents/Upload/Upload.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -517,10 +529,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Pages/Import/Import.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="11" lean-forward="true" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Subcomponents/Upload/Upload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="19" column="23" lean-forward="true" selection-start-line="17" selection-start-column="16" selection-end-line="19" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Pages/PersonCreation/PersonCreation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="71" column="6" selection-start-line="71" selection-start-column="6" selection-end-line="71" selection-end-column="6" />
+        <state relative-caret-position="311">
+          <caret line="64" column="43" lean-forward="true" selection-start-line="64" selection-start-column="43" selection-end-line="64" selection-end-column="43" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
