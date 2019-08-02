@@ -6,10 +6,36 @@ class PersonCreation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            phoneSection:{},
-            emailSection:{},
+            firstName: null,
+            lastNAme: null,
+            address: null,
+            address2: null,
+            city: null,
+            state: null,
+            zip: null,
+            college: null,
+            graduationDate: null,
+            referredBy: null,
+            phoneSection:{
+                home: null,
+                mobile: null
+            },
+            emailSection:{
+                0: null,
+                1: null,
+                2: null
+            },
             selectedSkills:[],
-            availableSkills:['React', 'Angular', 'HTML', 'CSS', 'AWS', 'GCP']
+            availableSkills:['React', 'Angular', 'HTML', 'CSS', 'AWS', 'GCP'],
+            availableColleges:['University of Georgia', 'Georgia Institute of Technology', 'Georgia State University', 'Emory University', 'Georgia Southern University'],
+            availableSocialMedias:['LinkedIn', 'Github', 'Facebook'],
+            notes: {
+                notes: {
+                    author: null,
+                    note: null,
+                    dateCreated: null
+                }
+            }
         };
     }
 
@@ -34,6 +60,15 @@ class PersonCreation extends Component {
         selectedSkills.splice(selectedSkills.indexOf(event.target.innerHTML), 1);
         this.setState({selectedSkills: selectedSkills})
     };
+
+    submit = (event) => {
+      console.log('Form has been submitted');
+    };
+
+    // const disabledLiStyle = {
+    //     pointer-events: none;
+    //     opacity:0.6;
+    // }
 
     render() {
         return (
@@ -119,11 +154,9 @@ class PersonCreation extends Component {
                                         Social Media <i className="material-icons" style={{fontSize: "30px"}}>arrow_drop_down</i>
                                     </a>
                                     <ul id='social_media_dropdown' className='dropdown-content'>
-                                        <li style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}}>LinkedIn</li>
-                                        <li style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}}>Github</li>
-                                        <li style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}}>Facebook</li>
-                                        <li style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}}>Twitter</li>
-                                        <li style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}}>Instagram</li>
+                                        {this.state.availableSocialMedias.map((socialMedia) => {
+                                        return  <li style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}}>{socialMedia}</li>;
+                                        })}
                                     </ul>
                                 </div>
                             </div>
@@ -143,10 +176,9 @@ class PersonCreation extends Component {
                                     College / University <i className="material-icons" style={{fontSize:"30px"}}>arrow_drop_down</i>
                                 </a>
                                 <ul id='college_dropdown' className='dropdown-content'>
-                                    <li style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}}>University of Georiga</li>
-                                    <li style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}}>Georgia Institute of Technology</li>
-                                    <li style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}}>Georgia State University</li>
-                                    <li style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}}>Emory University</li>
+                                    {this.state.availableColleges.map((college) => {
+                                        return  <li style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}}>{college}</li>;
+                                    })}
                                 </ul>
                             </div>
                         </div>
@@ -169,22 +201,19 @@ class PersonCreation extends Component {
                                     </a>
                                     <ul id='skill-dropdown' className='dropdown-content' onChange={this.skillSelect}>
                                         {this.state.availableSkills.map((value) => {
-                                            return <li style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}} onClick={this.addSkill}>{value}</li>;
+                                            return <li className={`skill-list-item`} onClick={this.addSkill}>{value}</li>;
                                         })}
                                     </ul>
                                 </div>
                             </div>
-                            {/*<div className="input-field col form-row">*/}
-                            {/*    <a className="btn-floating btn waves-effect waves-light red" style={{width:"40px", height:"40px"}} onClick={this.deleteSkillSection}>*/}
-                            {/*        <i className="material-icons" style={{fontSize:"15px"}}>backspace</i>*/}
-                            {/*    </a>*/}
-                            {/*    <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto"}}>Delete</span>*/}
-                            {/*</div>*/}
                         </div>
 
-                        {/*{this.state.skillSection}*/}
                         {this.state.skillSection}
                     </form>
+                </div>
+
+                <div className='row sm-person-creation-section'>
+                    <a className="waves-effect waves-light btn" style={{width: '150px', height: '50px', fontSize: '18px'}} onClick={this.submit}>Create</a>
                 </div>
             </div>
         );
