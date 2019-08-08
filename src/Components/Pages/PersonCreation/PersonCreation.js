@@ -462,6 +462,9 @@ class PersonCreation extends Component {
                                             return <li className={`skill-list-item`} onClick={this.addSkill}>{skill}</li>;
                                         })}
                                     </ul>
+                                    <h1>
+                                        boopity
+                                    </h1>
                                 </div>
                             </div>
                         </div>
