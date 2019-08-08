@@ -14,16 +14,16 @@ class PersonCreation extends Component {
         college: null,
         graduationDate: null,
         referredBy: null,
-        primaryPhone: null,
-        primaryPhoneCheck: null,
         addAnotherPhone: null,
+        primaryPhone: null,
+        primaryPhoneCheck: false,
         secondaryPhone: null,
-        secondaryPhoneCheck: null,
-        primaryEmail: null,
-        primaryEmailCheck: null,
+        secondaryPhoneCheck: false,
         addAnotherEmail: null,
+        primaryEmail: null,
+        primaryEmailCheck: false,
         secondaryEmail: null,
-        secondaryEmailCheck: null,
+        secondaryEmailCheck: false,
         availableSocialMedias:[],
         socialMediaSelection: null,
         socialMediaAccountLink: null,
@@ -100,11 +100,16 @@ class PersonCreation extends Component {
 
             case 'primary_phone_check':
                 console.log('primary phone checkbox status changed');
-                if (event.target.checked) {
-                    this.setState({primaryPhoneCheck: true}, () => {
+                if (this.state.secondaryPhoneCheck) {
+                    this.setState({primaryPhoneCheck: true, secondaryPhoneCheck: false}, () => {
+                        console.log(this.state.primaryPhoneCheck);
+                        console.log(this.state.secondaryPhoneCheck);
+                    })
+                } else {
+                    this.setState({primaryPhoneCheck: !this.state.primaryPhoneCheck}, () => {
                         console.log(this.state.primaryPhoneCheck);
                     });
-                }
+                };
                 break;
 
             case 'secondary_phone_number':
@@ -116,11 +121,16 @@ class PersonCreation extends Component {
 
             case 'secondary_phone_check':
                 console.log('secondary phone checkbox status changed');
-                if (event.target.checked) {
-                    this.setState({secondaryPhoneCheck: true}, () => {
+                if (this.state.primaryPhoneCheck) {
+                    this.setState({primaryPhoneCheck: false, secondaryPhoneCheck: true}, () => {
+                        console.log(this.state.primaryPhoneCheck);
+                        console.log(this.state.secondaryPhoneCheck);
+                    })
+                } else {
+                    this.setState({secondaryPhoneCheck: !this.state.secondaryPhoneCheck}, () => {
                         console.log(this.state.secondaryPhoneCheck);
                     });
-                }
+                };
                 break;
 
             case 'primary_email':
@@ -132,11 +142,16 @@ class PersonCreation extends Component {
 
             case 'primary_email_check':
                 console.log('primary email checkbox status changed');
-                if (event.target.checked) {
-                    this.setState({primaryEmailCheck: true}, () => {
+                if (this.state.secondaryEmailCheck) {
+                    this.setState({primaryEmailCheck: true, secondaryEmailCheck: false}, () => {
+                        console.log(this.state.primaryEmailCheck);
+                        console.log(this.state.secondaryEmailCheck);
+                    })
+                } else {
+                    this.setState({primaryEmailCheck: !this.state.primaryEmailCheck}, () => {
                         console.log(this.state.primaryEmailCheck);
                     });
-                }
+                };
                 break;
 
             case 'secondary_email':
@@ -148,11 +163,16 @@ class PersonCreation extends Component {
 
             case 'secondary_email_check':
                 console.log('secondary email checkbox status changed');
-                if (event.target.checked) {
-                    this.setState({secondaryEmailCheck: true}, () => {
+                if (this.state.primaryEmailCheck) {
+                    this.setState({primaryEmailCheck: false, secondaryEmailCheck: true}, () => {
+                        console.log(this.state.primaryEmailCheck);
+                        console.log(this.state.secondaryEmailCheck);
+                    })
+                } else {
+                    this.setState({secondaryEmailCheck: !this.state.secondaryEmailCheck}, () => {
                         console.log(this.state.secondaryEmailCheck);
                     });
-                }
+                };
                 break;
 
             case 'social_media_account_link':
@@ -169,23 +189,7 @@ class PersonCreation extends Component {
 
     // adds another phone number field to our page
     addAnotherPhone = () => {
-        this.setState({addAnotherPhone:
-                <div className="row form-row">
-                    <i class="material-icons prefix" style={{marginTop: "auto", marginBottom: "auto"}}>phone</i>
-                    <div className="input-field col form-column">
-                        <input id="secondary_phone_number" placeholder="Phone Number" type="text" className="validate" onChange={this.enterInputFields}/>
-                    </div>
-                    <label className="primary-label form-column" htmlFor="secondary_phone_check">
-                        <input id="secondary_phone_check" type="checkbox" className="filled-in" onChange={this.enterInputFields}/>
-                        <span>Primary</span>
-                    </label>
-                    <div className="input-field col form-row">
-                        <a className="btn-floating btn waves-effect waves-light red" onClick={this.removeExtraPhone}>
-                            <i className="material-icons" style={{height: '100%', width: '100%'}}>delete</i>
-                        </a>
-                        <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto", paddingLeft: "5px"}}>Remove</span>
-                    </div>
-                </div>});
+        this.setState({addAnotherPhone:true});
     };
 
     // removes extra phone field and reverts secondaryPhone state back into null
@@ -197,24 +201,7 @@ class PersonCreation extends Component {
 
     // adds another email field to our page
     addAnotherEmail = () => {
-        this.setState({addAnotherEmail:
-                <div className="row form-row">
-                    <i class="material-icons prefix" style={{marginTop: "auto", marginBottom: "auto"}}>email</i>
-                    <div className="input-field col form-column">
-                        <input id="secondary_email" placeholder="Email" type="text" className="validate" onChange={this.enterInputFields}/>
-                    </div>
-                    <label className="primary-label form-column" htmlFor="secondary_email_check">
-                        <input id="secondary_email_check" type="checkbox" className="filled-in" onChange={this.enterInputFields}/>
-                        <span>Primary</span>
-                    </label>
-                    <div className="input-field col form-row">
-                        <a className="btn-floating btn waves-effect waves-light red" onClick={this.removeExtraEmail}>
-                            <i className="material-icons" style={{height: '100%', width: '100%'}}>delete</i>
-                        </a>
-                        <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto", paddingLeft: "5px"}}>Remove</span>
-                    </div>
-                </div>}
-                );
+        this.setState({addAnotherEmail:true});
     };
 
     // removes extra email field and reverts secondaryEmail state back into null
@@ -275,6 +262,49 @@ class PersonCreation extends Component {
     }
 
     render() {
+        let additionalPhone;
+        let additionalEmail;
+
+        if (this.state.addAnotherPhone) {
+            additionalPhone = 
+            <div className="row form-row">
+                <i class="material-icons prefix" style={{marginTop: "auto", marginBottom: "auto"}}>phone</i>
+                <div className="input-field col form-column">
+                    <input id="secondary_phone_number" placeholder="Phone Number" type="text" className="validate" onChange={this.enterInputFields}/>
+                </div>
+                <label className="primary-label form-column" htmlFor="secondary_phone_check">
+                    <input id="secondary_phone_check" type="checkbox" className="filled-in" onChange={this.enterInputFields} checked={this.state.secondaryPhoneCheck}/>
+                    <span>Primary</span>
+                </label>
+                <div className="input-field col form-row">
+                    <a className="btn-floating btn waves-effect waves-light red" onClick={this.removeExtraPhone}>
+                        <i className="material-icons" style={{height: '100%', width: '100%'}}>delete</i>
+                    </a>
+                    <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto", paddingLeft: "5px"}}>Remove</span>
+                </div>
+            </div>
+        };
+
+        if (this.state.addAnotherEmail) {
+            additionalEmail = 
+            <div className="row form-row">
+                <i class="material-icons prefix" style={{marginTop: "auto", marginBottom: "auto"}}>email</i>
+                <div className="input-field col form-column">
+                    <input id="secondary_email" placeholder="Email" type="text" className="validate" onChange={this.enterInputFields}/>
+                </div>
+                <label className="primary-label form-column" htmlFor="secondary_email_check">
+                    <input id="secondary_email_check" type="checkbox" className="filled-in" onChange={this.enterInputFields} checked={this.state.secondaryEmailCheck}/>
+                    <span>Primary</span>
+                </label>
+                <div className="input-field col form-row">
+                    <a className="btn-floating btn waves-effect waves-light red" onClick={this.removeExtraEmail}>
+                        <i className="material-icons" style={{height: '100%', width: '100%'}}>delete</i>
+                    </a>
+                    <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto", paddingLeft: "5px"}}>Remove</span>
+                </div>
+            </div>
+        };
+
         return (
             <div className='person-creation-page'>
 
@@ -326,7 +356,7 @@ class PersonCreation extends Component {
                                 <input placeholder="Phone Number" id="primary_phone_number" type="text" className="validate" onChange={this.enterInputFields}/>
                             </div>
                             <label className="primary-label form-column" htmlFor="primary_phone_check">
-                                <input id="primary_phone_check" type="checkbox" className="filled-in" onChange={this.enterInputFields}/>
+                                <input id="primary_phone_check" type="checkbox" className="filled-in" onChange={this.enterInputFields} checked={this.state.primaryPhoneCheck}/>
                                 <span>Primary</span>
                             </label>
                             <div className="input-field col form-row">
@@ -335,7 +365,8 @@ class PersonCreation extends Component {
                                 <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto", paddingLeft: "5px"}}>Add Another</span>
                             </div>
                         </div>
-                        {this.state.addAnotherPhone}
+                        {/* {this.state.addAnotherPhone} */}
+                        {additionalPhone}
                     </form>
                 </div>
 
@@ -348,7 +379,7 @@ class PersonCreation extends Component {
                                 <input id="primary_email" placeholder="Email" type="text" className="validate" onChange={this.enterInputFields}/>
                             </div>
                             <label className="primary-label form-column" htmlFor="primary_email_check">
-                                <input id="primary_email_check" type="checkbox" className="filled-in" onChange={this.enterInputFields}/>
+                                <input id="primary_email_check" type="checkbox" className="filled-in" onChange={this.enterInputFields} checked={this.state.primaryEmailCheck}/>
                                 <span>Primary</span>
                             </label>
                             <div className="input-field col form-row">
@@ -357,7 +388,8 @@ class PersonCreation extends Component {
                                 <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto", paddingLeft: "5px"}}>Add Another</span>
                             </div>
                         </div>
-                        {this.state.addAnotherEmail}
+                        {/* {this.state.addAnotherEmail} */}
+                        {additionalEmail}
                     </form>
                 </div>
 

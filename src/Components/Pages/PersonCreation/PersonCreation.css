@@ -101,10 +101,6 @@ input::placeholder {
     align-items:center;
 }
 
-.skill-list-item {
-
-}
-
 li .disabled {
     pointer-events: none;
     opacity:0.6;
