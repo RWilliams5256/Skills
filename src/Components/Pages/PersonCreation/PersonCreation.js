@@ -177,7 +177,7 @@ class PersonCreation extends Component {
             this.setState({availableSkills: availableSkills});
         };
     }
-    
+
     // selects college to state
     selectCollege = (event) => {
         this.setState({collegeSelection: event.target.firstChild.data});
@@ -386,7 +386,7 @@ class PersonCreation extends Component {
                 </div>
 
                 {/* Skill section */}
-                <div className='row sm-person-creation-section'>
+                <div className='row sm-person-creation-section' style={{borderRadius: "5px", boxShadow: "0px 3px 10px -2px rgba(0,0,0,0.75)", margin: "30px 0"}}>
                     <form className='col s12 person-creation-form'>
                 
                         <div className="row form-row" style={{flexFlow: "row wrap"}}>
