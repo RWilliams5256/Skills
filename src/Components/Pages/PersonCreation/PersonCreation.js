@@ -45,141 +45,97 @@ class PersonCreation extends Component {
         switch (event.target.id) {
             case 'first_name':
                 console.log('first name changed');
-                this.setState({firstName: event.target.value}, () => {
-                    console.log(this.state.firstName);
-                });
+                this.setState({firstName: event.target.value});
                 break;
 
             case 'last_name':
                 console.log('last name changed');
-                this.setState({lastName: event.target.value}, () => {
-                    console.log(this.state.lastName);
-                });
+                this.setState({lastName: event.target.value});
                 break;
 
             case 'address':
                 console.log('address changed');
-                this.setState({address: event.target.value}, () => {
-                    console.log(this.state.address);
-                });
+                this.setState({address: event.target.value});
                 break;
 
             case 'address1':
                 console.log('address1 changed');
-                this.setState({address1: event.target.value}, () => {
-                    console.log(this.state.address1);
-                });
+                this.setState({address1: event.target.value});
                 break;
 
             case 'city':
                 console.log('city changed');
-                this.setState({city: event.target.value}, () => {
-                    console.log(this.state.city);
-                });
+                this.setState({city: event.target.value});
                 break;
 
             case 'state':
                 console.log('state changed');
-                this.setState({state: event.target.value}, () => {
-                    console.log(this.state.state);
-                });
+                this.setState({state: event.target.value});
                 break;
             case 'zip':
                 console.log('zip changed');
-                this.setState({zip: event.target.value}, () => {
-                    console.log(this.state.zip);
-                });
+                this.setState({zip: event.target.value});
                 break;
 
             case 'primary_phone_number':
                 console.log('primary phone number changed');
-                this.setState({primaryPhone: event.target.value}, () => {
-                    console.log(this.state.primaryPhone);
-                });
+                this.setState({primaryPhone: event.target.value});
                 break;
 
             case 'primary_phone_check':
                 console.log('primary phone checkbox status changed');
                 if (this.state.secondaryPhoneCheck) {
-                    this.setState({primaryPhoneCheck: true, secondaryPhoneCheck: false}, () => {
-                        console.log(this.state.primaryPhoneCheck);
-                        console.log(this.state.secondaryPhoneCheck);
-                    })
+                    this.setState({primaryPhoneCheck: true, secondaryPhoneCheck: false});
                 } else {
-                    this.setState({primaryPhoneCheck: !this.state.primaryPhoneCheck}, () => {
-                        console.log(this.state.primaryPhoneCheck);
-                    });
+                    this.setState({primaryPhoneCheck: !this.state.primaryPhoneCheck});
                 };
                 break;
 
             case 'secondary_phone_number':
                 console.log('secondary phone number changed');
-                this.setState({secondaryPhone: event.target.value}, () => {
-                    console.log(this.state.secondaryPhone);
-                });
+                this.setState({secondaryPhone: event.target.value});
                 break;
 
             case 'secondary_phone_check':
                 console.log('secondary phone checkbox status changed');
                 if (this.state.primaryPhoneCheck) {
-                    this.setState({primaryPhoneCheck: false, secondaryPhoneCheck: true}, () => {
-                        console.log(this.state.primaryPhoneCheck);
-                        console.log(this.state.secondaryPhoneCheck);
-                    })
+                    this.setState({primaryPhoneCheck: false, secondaryPhoneCheck: true});
                 } else {
-                    this.setState({secondaryPhoneCheck: !this.state.secondaryPhoneCheck}, () => {
-                        console.log(this.state.secondaryPhoneCheck);
-                    });
+                    this.setState({secondaryPhoneCheck: !this.state.secondaryPhoneCheck});
                 };
                 break;
 
             case 'primary_email':
                 console.log('primary email changed');
-                this.setState({primaryEmail: event.target.value}, () => {
-                    console.log(this.state.primaryEmail);
-                });
+                this.setState({primaryEmail: event.target.value});
                 break;
 
             case 'primary_email_check':
                 console.log('primary email checkbox status changed');
                 if (this.state.secondaryEmailCheck) {
-                    this.setState({primaryEmailCheck: true, secondaryEmailCheck: false}, () => {
-                        console.log(this.state.primaryEmailCheck);
-                        console.log(this.state.secondaryEmailCheck);
-                    })
+                    this.setState({primaryEmailCheck: true, secondaryEmailCheck: false});
                 } else {
-                    this.setState({primaryEmailCheck: !this.state.primaryEmailCheck}, () => {
-                        console.log(this.state.primaryEmailCheck);
-                    });
+                    this.setState({primaryEmailCheck: !this.state.primaryEmailCheck});
                 };
                 break;
 
             case 'secondary_email':
                 console.log('secondary email changed');
-                this.setState({secondaryEmail: event.target.value}, () => {
-                    console.log(this.state.secondaryEmail);
-                });
+                this.setState({secondaryEmail: event.target.value});
                 break;
 
             case 'secondary_email_check':
                 console.log('secondary email checkbox status changed');
                 if (this.state.primaryEmailCheck) {
-                    this.setState({primaryEmailCheck: false, secondaryEmailCheck: true}, () => {
-                        console.log(this.state.primaryEmailCheck);
-                        console.log(this.state.secondaryEmailCheck);
-                    })
+                    this.setState({primaryEmailCheck: false, secondaryEmailCheck: true});
                 } else {
-                    this.setState({secondaryEmailCheck: !this.state.secondaryEmailCheck}, () => {
-                        console.log(this.state.secondaryEmailCheck);
-                    });
+                    this.setState({secondaryEmailCheck: !this.state.secondaryEmailCheck});
                 };
                 break;
 
             case 'social_media_account_link':
                 console.log('social media account link changed');
-                this.setState({socialMediaAccountLink: event.target.value}, () => {
-                    console.log(this.state.socialMediaAccountLink);
-                });
+                this.setState({socialMediaAccountLink: event.target.value});
                 break;
 
             default:
@@ -187,50 +143,41 @@ class PersonCreation extends Component {
         }
     }
 
-    // adds another phone number field to our page
-    addAnotherPhone = () => {
-        this.setState({addAnotherPhone:true});
+    // adds or removes an extra phone number field
+    addOrRemovePhone = (event) => { 
+        if (event.target.firstChild.data === "add") {
+            this.setState({addAnotherPhone:true});
+        } else {
+            this.setState({addAnotherPhone: null, secondaryPhone: null, secondaryPhoneCheck: null});
+        };
     };
 
-    // removes extra phone field and reverts secondaryPhone state back into null
-    removeExtraPhone = () => {
-        this.setState({addAnotherPhone: null, secondaryPhone: null, secondaryPhoneCheck: null}, () => {
-            console.log(this.state);
-        });
-    };
+    addOrRemoveEmail = (event) => {
+        if (event.target.firstChild.data === "add") {
+            this.setState({addAnotherEmail:true});
+        } else {
+            this.setState({addAnotherEmail: null, secondaryEmail: null, secondaryEmailCheck: null});
+        };
+    }
 
-    // adds another email field to our page
-    addAnotherEmail = () => {
-        this.setState({addAnotherEmail:true});
-    };
-
-    // removes extra email field and reverts secondaryEmail state back into null
-    removeExtraEmail = () => {
-        this.setState({addAnotherEmail: null, secondaryEmail: null, secondaryEmailCheck: null}, () => {
-        });
-    };
-
-    // adds skill from dropdown list and removes it from the dropdown list
-    addSkill = (event) => {
+    addOrRemoveSkill = (event) => {
         let selectedSkills = [...this.state.selectedSkills];
         let availableSkills = [...this.state.availableSkills];
-        selectedSkills.push(event.target.innerHTML);
-        availableSkills.splice(availableSkills.indexOf(event.target.innerHTML), 1);
-        this.setState({selectedSkills: selectedSkills});
-        this.setState({availableSkills: availableSkills});
-    };
 
-    // removes selected skill and adds it back to the dropdown list in alphabetical order 
-    deleteSkillSelection = (event) => {
-        let availableSkills = [...this.state.availableSkills];
-        let selectedSkills = [...this.state.selectedSkills];
-        availableSkills.push(event.target.innerHTML);
-        selectedSkills.splice(selectedSkills.indexOf(event.target.innerHTML), 1);
-        availableSkills.sort();
-        this.setState({selectedSkills: selectedSkills});
-        this.setState({availableSkills: availableSkills});
-    };
-
+        if (event.target.tagName === "LI") {
+            selectedSkills.push(event.target.innerHTML);
+            availableSkills.splice(availableSkills.indexOf(event.target.innerHTML), 1);
+            this.setState({selectedSkills: selectedSkills});
+            this.setState({availableSkills: availableSkills});
+        } else {
+            availableSkills.push(event.target.innerHTML);
+            selectedSkills.splice(selectedSkills.indexOf(event.target.innerHTML), 1);
+            availableSkills.sort();
+            this.setState({selectedSkills: selectedSkills});
+            this.setState({availableSkills: availableSkills});
+        };
+    }
+    
     // selects college to state
     selectCollege = (event) => {
         this.setState({collegeSelection: event.target.firstChild.data});
@@ -277,7 +224,7 @@ class PersonCreation extends Component {
                     <span>Primary</span>
                 </label>
                 <div className="input-field col form-row">
-                    <a className="btn-floating btn waves-effect waves-light red" onClick={this.removeExtraPhone}>
+                    <a className="btn-floating btn waves-effect waves-light red" onClick={this.addOrRemovePhone}>
                         <i className="material-icons" style={{height: '100%', width: '100%'}}>delete</i>
                     </a>
                     <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto", paddingLeft: "5px"}}>Remove</span>
@@ -297,7 +244,7 @@ class PersonCreation extends Component {
                     <span>Primary</span>
                 </label>
                 <div className="input-field col form-row">
-                    <a className="btn-floating btn waves-effect waves-light red" onClick={this.removeExtraEmail}>
+                    <a className="btn-floating btn waves-effect waves-light red" onClick={this.addOrRemoveEmail}>
                         <i className="material-icons" style={{height: '100%', width: '100%'}}>delete</i>
                     </a>
                     <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto", paddingLeft: "5px"}}>Remove</span>
@@ -360,7 +307,7 @@ class PersonCreation extends Component {
                                 <span>Primary</span>
                             </label>
                             <div className="input-field col form-row">
-                                <a className="btn-floating btn waves-effect waves-light red" onClick={this.addAnotherPhone}>
+                                <a className="btn-floating btn waves-effect waves-light red" onClick={this.addOrRemovePhone}>
                                     <i className="material-icons">add</i></a>
                                 <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto", paddingLeft: "5px"}}>Add Another</span>
                             </div>
@@ -383,7 +330,7 @@ class PersonCreation extends Component {
                                 <span>Primary</span>
                             </label>
                             <div className="input-field col form-row">
-                                <a className="btn-floating btn waves-effect waves-light red" onClick={this.addAnotherEmail}>
+                                <a className="btn-floating btn waves-effect waves-light red" onClick={this.addOrRemoveEmail}>
                                     <i className="material-icons">add</i></a>
                                 <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto", paddingLeft: "5px"}}>Add Another</span>
                             </div>
@@ -442,11 +389,11 @@ class PersonCreation extends Component {
                 <div className='row sm-person-creation-section'>
                     <form className='col s12 person-creation-form'>
                 
-                        {/* <div className="row form-row" style={{flexFlow: "row wrap"}}>
+                        <div className="row form-row" style={{flexFlow: "row wrap"}}>
                             {this.state.selectedSkills.map((selectedSkill) => {
-                                return <a className="btn" onClick={this.deleteSkillSelection} style={{margin:"10px"}}>{selectedSkill}</a>;
+                                return <a className="btn" onClick={this.addOrRemoveSkill} style={{margin:"10px"}}>{selectedSkill}</a>;
                             })}
-                        </div> */}
+                        </div>
 
                         <div className="row form-row">
                             <div className="input-field col form-column">
@@ -459,12 +406,9 @@ class PersonCreation extends Component {
                                     </a>
                                     <ul id='skill-dropdown' className='dropdown-content' onChange={this.skillSelect}>
                                         {this.state.availableSkills.map((skill) => {
-                                            return <li className={`skill-list-item`} onClick={this.addSkill}>{skill}</li>;
+                                            return <li className={`skill-list-item`} onClick={this.addOrRemoveSkill}>{skill}</li>;
                                         })}
                                     </ul>
-                                    <h1>
-                                        boopity
-                                    </h1>
                                 </div>
                             </div>
                         </div>
