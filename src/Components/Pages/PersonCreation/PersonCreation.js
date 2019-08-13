@@ -223,10 +223,10 @@ class PersonCreation extends Component {
             <div className="row form-row">
                 <i class="material-icons prefix" style={{marginTop: "auto", marginBottom: "auto"}}>phone</i>
                 <div className="input-field col form-column">
-                    <input id="secondary_phone_number" className="validate" type="text" placeholder="Phone Number" onChange={this.enterInputFields} value={this.state.secondaryPhone}/>
+                    <input id="secondary_phone_number" className="validate" type="text" placeholder="Phone Number" value={this.state.secondaryPhone} onChange={this.enterInputFields}/>
                 </div>
                 <label className="primary-label form-column" htmlFor="secondary_phone_check">
-                    <input id="secondary_phone_check" className="filled-in" type="checkbox" onChange={this.enterInputFields} checked={this.state.secondaryPhoneCheck}/>
+                    <input id="secondary_phone_check" className="filled-in" type="checkbox" checked={this.state.secondaryPhoneCheck} onChange={this.enterInputFields}/>
                     <span>Primary</span>
                 </label>
                 <div className="input-field col form-row">
@@ -246,7 +246,7 @@ class PersonCreation extends Component {
                     <input id="secondary_email" className="validate" placeholder="Email" type="text" onChange={this.enterInputFields}/>
                 </div>
                 <label className="primary-label form-column" htmlFor="secondary_email_check">
-                    <input id="secondary_email_check" className="filled-in" type="checkbox" onChange={this.enterInputFields} checked={this.state.secondaryEmailCheck}/>
+                    <input id="secondary_email_check" className="filled-in" type="checkbox" checked={this.state.secondaryEmailCheck} onChange={this.enterInputFields}/>
                     <span>Primary</span>
                 </label>
                 <div className="input-field col form-row">
@@ -265,7 +265,7 @@ class PersonCreation extends Component {
                 <div className='row person-creation-section'>
                     <form className='col s12 person-creation-form'>
                         <div className="row form-row">
-                            <i class="material-icons prefix" style={{marginTop: "auto", marginBottom: "auto"}}>account_circle</i>
+                            <i className="material-icons prefix" style={{marginTop: "auto", marginBottom: "auto"}}>account_circle</i>
                             <div className="input-field col form-column">
                                 <input id="first_name" className="validate" type="text" placeholder="First Name" onChange={this.enterInputFields}/>
                             </div>
@@ -274,7 +274,7 @@ class PersonCreation extends Component {
                             </div>
                         </div>
                         <div className="row form-row">
-                            <i class="material-icons" style={{marginTop: "auto", marginBottom: "auto", marginRight: "5px"}}>home</i>
+                            <i className="material-icons" style={{marginTop: "auto", marginBottom: "auto", marginRight: "5px"}}>home</i>
                             <div className="input-field col form-column">
                                 <input id="address" className="validate" type="text"  placeholder="Address" onChange={this.enterInputFields}/>
                             </div>
@@ -309,7 +309,7 @@ class PersonCreation extends Component {
                                 <input id="primary_phone_number" className="validate" type="text" placeholder="Phone Number" onChange={this.enterInputFields} />
                             </div>
                             <label className="primary-label form-column" htmlFor="primary_phone_check">
-                                <input id="primary_phone_check" className="filled-in" type="checkbox" onChange={this.enterInputFields} checked={this.state.primaryPhoneCheck}/>
+                                <input id="primary_phone_check" className="filled-in" type="checkbox" checked={this.state.primaryPhoneCheck} onChange={this.enterInputFields}/>
                                 <span>Primary</span>
                             </label>
                             <div className="input-field col form-row">
@@ -331,7 +331,7 @@ class PersonCreation extends Component {
                                 <input id="primary_email" className="validate" type="text" placeholder="Email" onChange={this.enterInputFields}/>
                             </div>
                             <label className="primary-label form-column" htmlFor="primary_email_check">
-                                <input id="primary_email_check" className="filled-in" type="checkbox" onChange={this.enterInputFields} checked={this.state.primaryEmailCheck}/>
+                                <input id="primary_email_check" className="filled-in" type="checkbox" checked={this.state.primaryEmailCheck} onChange={this.enterInputFields}/>
                                 <span>Primary</span>
                             </label>
                             <div className="input-field col form-row">
@@ -395,7 +395,7 @@ class PersonCreation extends Component {
                 
                         <div className="row form-row" style={{flexFlow: "row wrap"}}>
                             {this.state.selectedSkills.map((selectedSkill) => {
-                                return <a className="btn" style={{margin:"10px"}} onClick={this.addOrRemoveSkill}>{selectedSkill}</a>;
+                                return <a className="btn skill-badge" style={{margin:"10px"}} onClick={this.addOrRemoveSkill}>{selectedSkill}</a>;
                             })}
                         </div>
 
@@ -409,7 +409,7 @@ class PersonCreation extends Component {
                                     </a>
                                     <ul id='skill-dropdown' className='dropdown-content' onChange={this.skillSelect}>
                                         {this.state.availableSkills.map((skill) => {
-                                            return <li className={`skill-list-item`} onClick={this.addOrRemoveSkill}>{skill}</li>;
+                                            return <li className="skill-list-item" onClick={this.addOrRemoveSkill}>{skill}</li>;
                                         })}
                                     </ul>
                                 </div>

@@ -94,6 +94,11 @@ input::placeholder {
     align-items: center;
 }
 
+.skill-badge:hover {
+    transition: .15s;
+    background-color: #F44336 !important;
+}
+
 .skill-list-item {
     display: flex;
     font-size:20px;
