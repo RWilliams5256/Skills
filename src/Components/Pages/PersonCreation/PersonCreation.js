@@ -5,7 +5,7 @@ class PersonCreation extends Component {
 
     state = {
         firstName: null,
-        lastNAme: null,
+        lastName: null,
         address: null,
         address1: null,
         city: null,
@@ -14,12 +14,12 @@ class PersonCreation extends Component {
         college: null,
         graduationDate: null,
         referredBy: null,
-        addAnotherPhone: null,
+        extraPhone: null,
         primaryPhone: null,
         primaryPhoneCheck: false,
         secondaryPhone: null,
         secondaryPhoneCheck: false,
-        addAnotherEmail: null,
+        extraEmail: null,
         primaryEmail: null,
         primaryEmailCheck: false,
         secondaryEmail: null,
@@ -72,6 +72,7 @@ class PersonCreation extends Component {
                 console.log('state changed');
                 this.setState({state: event.target.value});
                 break;
+
             case 'zip':
                 console.log('zip changed');
                 this.setState({zip: event.target.value});
@@ -79,7 +80,10 @@ class PersonCreation extends Component {
 
             case 'primary_phone_number':
                 console.log('primary phone number changed');
-                this.setState({primaryPhone: event.target.value});
+                // let phoneNum = event.target.value.replace(/\D[^\.]/g, "");
+                this.setState({primaryPhone: event.target.value}, () => {
+                    console.log(this.state.primaryPhone);
+                });
                 break;
 
             case 'primary_phone_check':
@@ -146,20 +150,22 @@ class PersonCreation extends Component {
     // adds or removes an extra phone number field
     addOrRemovePhone = (event) => { 
         if (event.target.firstChild.data === "add") {
-            this.setState({addAnotherPhone:true});
+            this.setState({extraPhone:true});
         } else {
-            this.setState({addAnotherPhone: null, secondaryPhone: null, secondaryPhoneCheck: null});
+            this.setState({extraPhone: null, secondaryPhone: null, secondaryPhoneCheck: null});
         };
     };
 
+    // adds or removes an extra email field
     addOrRemoveEmail = (event) => {
         if (event.target.firstChild.data === "add") {
-            this.setState({addAnotherEmail:true});
+            this.setState({extraEmail:true});
         } else {
-            this.setState({addAnotherEmail: null, secondaryEmail: null, secondaryEmailCheck: null});
+            this.setState({extraEmail: null, secondaryEmail: null, secondaryEmailCheck: null});
         };
     }
 
+    // adds or removes an skill badge
     addOrRemoveSkill = (event) => {
         let selectedSkills = [...this.state.selectedSkills];
         let availableSkills = [...this.state.availableSkills];
@@ -212,15 +218,15 @@ class PersonCreation extends Component {
         let additionalPhone;
         let additionalEmail;
 
-        if (this.state.addAnotherPhone) {
+        if (this.state.extraPhone) {
             additionalPhone = 
             <div className="row form-row">
                 <i class="material-icons prefix" style={{marginTop: "auto", marginBottom: "auto"}}>phone</i>
                 <div className="input-field col form-column">
-                    <input id="secondary_phone_number" placeholder="Phone Number" type="text" className="validate" onChange={this.enterInputFields}/>
+                    <input id="secondary_phone_number" className="validate" type="text" placeholder="Phone Number" onChange={this.enterInputFields} value={this.state.secondaryPhone}/>
                 </div>
                 <label className="primary-label form-column" htmlFor="secondary_phone_check">
-                    <input id="secondary_phone_check" type="checkbox" className="filled-in" onChange={this.enterInputFields} checked={this.state.secondaryPhoneCheck}/>
+                    <input id="secondary_phone_check" className="filled-in" type="checkbox" onChange={this.enterInputFields} checked={this.state.secondaryPhoneCheck}/>
                     <span>Primary</span>
                 </label>
                 <div className="input-field col form-row">
@@ -232,15 +238,15 @@ class PersonCreation extends Component {
             </div>
         };
 
-        if (this.state.addAnotherEmail) {
+        if (this.state.extraEmail) {
             additionalEmail = 
             <div className="row form-row">
                 <i class="material-icons prefix" style={{marginTop: "auto", marginBottom: "auto"}}>email</i>
                 <div className="input-field col form-column">
-                    <input id="secondary_email" placeholder="Email" type="text" className="validate" onChange={this.enterInputFields}/>
+                    <input id="secondary_email" className="validate" placeholder="Email" type="text" onChange={this.enterInputFields}/>
                 </div>
                 <label className="primary-label form-column" htmlFor="secondary_email_check">
-                    <input id="secondary_email_check" type="checkbox" className="filled-in" onChange={this.enterInputFields} checked={this.state.secondaryEmailCheck}/>
+                    <input id="secondary_email_check" className="filled-in" type="checkbox" onChange={this.enterInputFields} checked={this.state.secondaryEmailCheck}/>
                     <span>Primary</span>
                 </label>
                 <div className="input-field col form-row">
@@ -261,34 +267,34 @@ class PersonCreation extends Component {
                         <div className="row form-row">
                             <i class="material-icons prefix" style={{marginTop: "auto", marginBottom: "auto"}}>account_circle</i>
                             <div className="input-field col form-column">
-                                <input placeholder="First Name" id="first_name" type="text" className="validate" onChange={this.enterInputFields}/>
+                                <input id="first_name" className="validate" type="text" placeholder="First Name" onChange={this.enterInputFields}/>
                             </div>
                             <div className="input-field col form-column">
-                                <input placeholder="Last Name" id="last_name" type="text" className="validate" onChange={this.enterInputFields}/>
-                            </div>
-                        </div>
-                        <div className="row form-row">
-                            <i class="material-icons" style={{marginTop: "auto", marginBottom: "auto", marginRight: "5px"}}>home</i>
-                            <div className="input-field col form-column">
-                                <input placeholder="Address" id="address" type="text" className="validate" onChange={this.enterInputFields}/>
+                                <input id="last_name" className="validate" type="text" placeholder="Last Name" onChange={this.enterInputFields}/>
                             </div>
                         </div>
                         <div className="row form-row">
                             <i class="material-icons" style={{marginTop: "auto", marginBottom: "auto", marginRight: "5px"}}>home</i>
                             <div className="input-field col form-column">
-                                <input placeholder="Address 1" id="address1" type="text" className="validate" onChange={this.enterInputFields}/>
+                                <input id="address" className="validate" type="text"  placeholder="Address" onChange={this.enterInputFields}/>
+                            </div>
+                        </div>
+                        <div className="row form-row">
+                            <i class="material-icons" style={{marginTop: "auto", marginBottom: "auto", marginRight: "5px"}}>home</i>
+                            <div className="input-field col form-column">
+                                <input id="address1" className="validate" type="text" placeholder="Address 1" onChange={this.enterInputFields}/>
                             </div>
                         </div>
                         <div className="row form-row">
                             <i class="material-icons" style={{marginTop: "auto", marginBottom: "auto", marginRight: "5px"}}>location_city</i>
                             <div className="input-field col form-column">
-                                <input placeholder="City" id="city" type="text" className="validate" onChange={this.enterInputFields}/>
+                                <input id="city" className="validate" type="text" placeholder="City" onChange={this.enterInputFields}/>
                             </div>
                             <div className="input-field col form-column">
-                                <input placeholder="State" id="state" type="text" className="validate" onChange={this.enterInputFields}/>
+                                <input id="state" className="validate" type="text" placeholder="State" onChange={this.enterInputFields}/>
                             </div>
                             <div className="input-field col form-column">
-                                <input placeholder="Zip" id="zip" type="text" className="validate" onChange={this.enterInputFields}/>
+                                <input id="zip" className="validate" type="text" placeholder="Zip" onChange={this.enterInputFields}/>
                             </div>
                         </div>
                     </form>
@@ -300,10 +306,10 @@ class PersonCreation extends Component {
                         <div className="row form-row">
                             <i class="material-icons prefix" style={{marginTop: "auto", marginBottom: "auto"}}>phone</i>
                             <div className="input-field col form-column">
-                                <input placeholder="Phone Number" id="primary_phone_number" type="text" className="validate" onChange={this.enterInputFields}/>
+                                <input id="primary_phone_number" className="validate" type="text" placeholder="Phone Number" onChange={this.enterInputFields} />
                             </div>
                             <label className="primary-label form-column" htmlFor="primary_phone_check">
-                                <input id="primary_phone_check" type="checkbox" className="filled-in" onChange={this.enterInputFields} checked={this.state.primaryPhoneCheck}/>
+                                <input id="primary_phone_check" className="filled-in" type="checkbox" onChange={this.enterInputFields} checked={this.state.primaryPhoneCheck}/>
                                 <span>Primary</span>
                             </label>
                             <div className="input-field col form-row">
@@ -312,7 +318,6 @@ class PersonCreation extends Component {
                                 <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto", paddingLeft: "5px"}}>Add Another</span>
                             </div>
                         </div>
-                        {/* {this.state.addAnotherPhone} */}
                         {additionalPhone}
                     </form>
                 </div>
@@ -323,10 +328,10 @@ class PersonCreation extends Component {
                         <div className="row form-row">
                             <i class="material-icons prefix" style={{marginTop: "auto", marginBottom: "auto"}}>email</i>
                             <div className="input-field col form-column">
-                                <input id="primary_email" placeholder="Email" type="text" className="validate" onChange={this.enterInputFields}/>
+                                <input id="primary_email" className="validate" type="text" placeholder="Email" onChange={this.enterInputFields}/>
                             </div>
                             <label className="primary-label form-column" htmlFor="primary_email_check">
-                                <input id="primary_email_check" type="checkbox" className="filled-in" onChange={this.enterInputFields} checked={this.state.primaryEmailCheck}/>
+                                <input id="primary_email_check" className="filled-in" type="checkbox" onChange={this.enterInputFields} checked={this.state.primaryEmailCheck}/>
                                 <span>Primary</span>
                             </label>
                             <div className="input-field col form-row">
@@ -335,7 +340,6 @@ class PersonCreation extends Component {
                                 <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto", paddingLeft: "5px"}}>Add Another</span>
                             </div>
                         </div>
-                        {/* {this.state.addAnotherEmail} */}
                         {additionalEmail}
                     </form>
                 </div>
@@ -353,14 +357,14 @@ class PersonCreation extends Component {
                                     </a>
                                     <ul id='social_media_dropdown' className='dropdown-content'>
                                         {this.state.availableSocialMedias.map((socialMedia) => {
-                                        return  <li onClick={this.setSocialMediaSelection} style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}}>{socialMedia}</li>;
+                                        return  <li style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}} onClick={this.setSocialMediaSelection}>{socialMedia}</li>;
                                         })}
                                     </ul>
                                 </div>
                             </div>
 
                             <div className="input-field col form-column">
-                                <input id="social_media_account_link" placeholder="Account Link" type="text" className="validate" onChange={this.enterInputFields}/>
+                                <input id="social_media_account_link" className="validate" type="text" placeholder="Account Link" onChange={this.enterInputFields}/>
                             </div>
                         </div>
                     </form>
@@ -391,7 +395,7 @@ class PersonCreation extends Component {
                 
                         <div className="row form-row" style={{flexFlow: "row wrap"}}>
                             {this.state.selectedSkills.map((selectedSkill) => {
-                                return <a className="btn" onClick={this.addOrRemoveSkill} style={{margin:"10px"}}>{selectedSkill}</a>;
+                                return <a className="btn" style={{margin:"10px"}} onClick={this.addOrRemoveSkill}>{selectedSkill}</a>;
                             })}
                         </div>
 
@@ -399,7 +403,6 @@ class PersonCreation extends Component {
                             <div className="input-field col form-column">
                                 <div className="skills-dropdown-button">
                                     <a className='dropdown-trigger btn dropdown-text-logo' data-target='skill-dropdown'>
-                                        {/* <i class="material-icons" style={{marginTop: "auto", marginBottom: "auto", marginRight: "5px"}}>brush</i> */}
                                         <i class="material-icons" style={{marginTop: "auto", marginBottom: "auto", marginRight: "5px"}}>color_lens</i>
                                         Skills
                                         <i className="material-icons" style={{fontSize: "30px"}}>arrow_drop_down</i>
@@ -423,9 +426,7 @@ class PersonCreation extends Component {
                             <i class="material-icons" style={{marginTop: "auto", marginBottom: "auto", marginRight: "5px"}}>file_upload</i>
                             Upload Resume
                         </label>
-                        <input type="file"
-                            id="avatar" name="avatar"
-                            accept="image/png, image/jpeg">
+                        <input id="avatar" name="avatar" type="file" accept="image/png, image/jpeg">
                         </input>
                     </form>
                 </div>
