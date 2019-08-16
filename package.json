@@ -5,8 +5,10 @@
   "dependencies": {
     "create-react-class": "^15.6.3",
     "materialize-css": "^1.0.0-rc.2",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-dropzone": "^10.1.7",
     "react-file-input": "^0.2.5",
     "react-redux": "^7.1.0",
     "react-router-dom": "^4.2.2",
