@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Dropzone from '../../Subcomponents/Dropzone/Dropzone';
+import CustomDropZone from '../../Subcomponents/Dropzone/Dropzone';
 import './PersonCreation.css';
 
 class PersonCreation extends Component {
@@ -33,7 +33,7 @@ class PersonCreation extends Component {
         selectedSkills:[],
         availableColleges:[],
         collegeSelection: null,
-        uploadedResumes: [],
+        uploadedResume: null,
         notes: {
             notes: {
                 author: null,
@@ -75,7 +75,6 @@ class PersonCreation extends Component {
                 break;
 
             case 'primary_phone_number':
-                // let phoneNum = event.target.value.replace(/\D[^\.]/g, "");
                 this.setState({ primaryPhone: event.target.value });
                 break;
 
@@ -205,27 +204,27 @@ class PersonCreation extends Component {
                 let socialMediaAccountLink = [...this.state.socialMediaAccountLink];
                 socialMediaAccountLink[1] = '';
                 socialMediaInputDisabled[1] = true;
-                this.setState({socialMediaAccountLink: socialMediaAccountLink});
-                this.setState({socialMediaInputDisabled: socialMediaInputDisabled});
+                this.setState({ socialMediaAccountLink: socialMediaAccountLink });
+                this.setState({ socialMediaInputDisabled: socialMediaInputDisabled });
             } else {
                 socialMediaInputDisabled[1] = false;
-                this.setState({socialMediaInputDisabled: socialMediaInputDisabled});
+                this.setState({ socialMediaInputDisabled: socialMediaInputDisabled });
             };
         };
 
         if (event.target.parentElement.id === "social_media_dropdown3") {
             socialMediaSelection[2] = event.target.innerHTML;
-            this.setState({socialMediaSelection: socialMediaSelection});
+            this.setState({ socialMediaSelection: socialMediaSelection });
 
             if (event.target.innerHTML === "Select Social Media") {
                 let socialMediaAccountLink = [...this.state.socialMediaAccountLink];
                 socialMediaAccountLink[2] = '';
                 socialMediaInputDisabled[2] = true;
-                this.setState({socialMediaAccountLink: socialMediaAccountLink});
-                this.setState({socialMediaInputDisabled: socialMediaInputDisabled});
+                this.setState({ socialMediaAccountLink: socialMediaAccountLink });
+                this.setState({ socialMediaInputDisabled: socialMediaInputDisabled });
             } else {
                 socialMediaInputDisabled[2] = false;
-                this.setState({socialMediaInputDisabled: socialMediaInputDisabled});
+                this.setState({ socialMediaInputDisabled: socialMediaInputDisabled });
             };
         };
     };
@@ -259,20 +258,10 @@ class PersonCreation extends Component {
         this.setState({ socialMediaSelection: event.target.firstChild.data });
     };
 
-    handleResumeUpload = (event) => {
-        console.log(event.target);
-        console.log(event.target.files[0]);
-        let uploadedResumes = [...this.state.uploadedResumes];
-
-        let reader = new FileReader();
-        reader.readAsDataURL(event.target.files[0]);
-        reader.onload = (event) => {
-            console.warn("file data123 ", event.target.result);
-        };
-
-        uploadedResumes.push(event.target.files[0]);
-        this.setState({ uploadedResumes: uploadedResumes }, () => {
-            console.log(this.state.uploadedResumes);
+    // sets uploaded resume file to state
+    handleResumeUpload = (file) => {
+        this.setState({ uploadedResume: file }, () => {
+            console.log(this.state.uploadedResume);
         });
     };
 
@@ -299,6 +288,7 @@ class PersonCreation extends Component {
         let additionalPhone;
         let additionalEmail;
 
+        // Conditional phone input field
         if (this.state.extraPhone) {
             additionalPhone = 
             <div className="row form-row" style={{paddingLeft: "0", paddingRight: "0"}}>
@@ -319,6 +309,7 @@ class PersonCreation extends Component {
             </div>
         };
 
+        // Conditional email input field
         if (this.state.extraEmail) {
             additionalEmail = 
             <div className="row form-row" style={{paddingLeft: "0", paddingRight: "0"}}>
@@ -551,7 +542,7 @@ class PersonCreation extends Component {
 
                 {/* Upload resume section */}
                 <div className='row sm-person-creation-section' style={{borderRadius: "10px", boxShadow: "0px 3px 10px -2px rgba(0,0,0,0.75)", margin: "30px 0"}}>          
-                    <Dropzone />   
+                    <CustomDropZone handleResumeUpload={this.handleResumeUpload}/>   
                 </div>
 
                 {/* Submit form section */}
