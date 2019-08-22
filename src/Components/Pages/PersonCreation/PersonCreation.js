@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CustomDropZone from '../../Subcomponents/Dropzone/Dropzone';
 import './PersonCreation.css';
 
+
 class PersonCreation extends Component {
 
     state = {
@@ -509,6 +510,32 @@ class PersonCreation extends Component {
                             </div>
                         </div>
                     </form>
+                </div>
+
+                {/* Experience accordion component */}
+                <div className='row sm-person-creation-section' style={{paddingLeft: "0", paddingRight: "0"}}>
+                    <div className='row' style={{width: "100%", margin: "0"}}>
+                        <div className='col s12' style={{padding: "0"}}>
+                            <ul className='collapsible'>
+                                <li>
+                                    <div className='collapsible-header'>Skill</div>
+                                    <div className='collapsible-body'><span>Lorem ipsum dolor sit amet.</span></div>
+                                </li>
+                                <li>
+                                    <div className='collapsible-header'>Skill</div>
+                                    <div className='collapsible-body'><span>Lorem ipsum dolor sit amet.</span></div>
+                                </li>
+                                <li>
+                                    <div className='collapsible-header'>Experience Level</div>
+                                    <div className='collapsible-body'><span>Lorem ipsum dolor sit amet.</span></div>
+                                </li>
+                                <li>
+                                    <div className='collapsible-header'>Status</div>
+                                    <div className='collapsible-body'><span>Lorem ipsum dolor sit amet.</span></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Skill section */}
