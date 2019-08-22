@@ -26,8 +26,10 @@ class PersonCreation extends Component {
         secondaryEmail: null,
         secondaryEmailCheck: false,
         availableSocialMedias:[],
-        selectedSocialMedias: [],
-        socialMediaAccountLink: null,
+        socialMediaSelection1: null,
+        socialMediaSelection2: null,
+        socialMediaSelection3: null,
+        socialMediaAccountLink: [],
         availableSkills:[],
         selectedSkills:[],
         availableColleges:[],
@@ -46,48 +48,39 @@ class PersonCreation extends Component {
     enterInputFields = (event) => {
         switch (event.target.id) {
             case 'first_name':
-                console.log('first name changed');
                 this.setState({ firstName: event.target.value });
                 break;
 
             case 'last_name':
-                console.log('last name changed');
                 this.setState({ lastName: event.target.value });
                 break;
 
             case 'address':
-                console.log('address changed');
                 this.setState({ address: event.target.value });
                 break;
 
             case 'address1':
-                console.log('address1 changed');
                 this.setState({ address1: event.target.value });
                 break;
 
             case 'city':
-                console.log('city changed');
                 this.setState({ city: event.target.value });
                 break;
 
             case 'state':
-                console.log('state changed');
                 this.setState({ state: event.target.value });
                 break;
 
             case 'zip':
-                console.log('zip changed');
                 this.setState({ zip: event.target.value });
                 break;
 
             case 'primary_phone_number':
-                console.log('primary phone number changed');
                 // let phoneNum = event.target.value.replace(/\D[^\.]/g, "");
                 this.setState({ primaryPhone: event.target.value });
                 break;
 
             case 'primary_phone_check':
-                console.log('primary phone checkbox status changed');
                 if (this.state.secondaryPhoneCheck) {
                     this.setState({ primaryPhoneCheck: true, secondaryPhoneCheck: false });
                 } else {
@@ -96,12 +89,10 @@ class PersonCreation extends Component {
                 break;
 
             case 'secondary_phone_number':
-                console.log('secondary phone number changed');
                 this.setState({ secondaryPhone: event.target.value });
                 break;
 
             case 'secondary_phone_check':
-                console.log('secondary phone checkbox status changed');
                 if (this.state.primaryPhoneCheck) {
                     this.setState({ primaryPhoneCheck: false, secondaryPhoneCheck: true });
                 } else {
@@ -110,12 +101,10 @@ class PersonCreation extends Component {
                 break;
 
             case 'primary_email':
-                console.log('primary email changed');
                 this.setState({ primaryEmail: event.target.value });
                 break;
 
             case 'primary_email_check':
-                console.log('primary email checkbox status changed');
                 if (this.state.secondaryEmailCheck) {
                     this.setState({ primaryEmailCheck: true, secondaryEmailCheck: false });
                 } else {
@@ -124,12 +113,10 @@ class PersonCreation extends Component {
                 break;
 
             case 'secondary_email':
-                console.log('secondary email changed');
                 this.setState({ secondaryEmail: event.target.value });
                 break;
 
             case 'secondary_email_check':
-                console.log('secondary email checkbox status changed');
                 if (this.state.primaryEmailCheck) {
                     this.setState({
                         primaryEmailCheck: false,
@@ -141,7 +128,6 @@ class PersonCreation extends Component {
                 break;
 
             case 'social_media_account_link':
-                console.log('social media account link changed');
                 this.setState({ socialMediaAccountLink: event.target.value });
                 break;
 
@@ -174,7 +160,22 @@ class PersonCreation extends Component {
                 secondaryEmailCheck: null
             });
         };
-    }
+    };
+
+    selectSocialMedia = (event) => {
+        console.log(event.target.parentElement.id);
+        if (event.target.parentElement.id === "social_media_dropdown1") {
+            this.setState({socialMediaSelection1: event.target.innerHTML});
+        }
+        
+        if (event.target.parentElement.id === "social_media_dropdown2") {
+            this.setState({socialMediaSelection2: event.target.innerHTML});
+        }
+
+        if (event.target.parentElement.id === "social_media_dropdown3") {
+            this.setState({socialMediaSelection3: event.target.innerHTML});
+        }
+    };
 
     // adds or removes an skill badge
     addOrRemoveSkill = (event) => {
@@ -204,19 +205,6 @@ class PersonCreation extends Component {
     setSocialMediaSelection = (event) => {
         this.setState({ socialMediaSelection: event.target.firstChild.data });
     };
-
-    // adds or removes a social media element from social media dropdown list
-    addSocialMedia = (event) => {
-        console.log(event.target.innerHTML);
-        let selectedSocialMedias = [...this.state.selectedSocialMedias];
-        let availableSocialMedias = [...this.state.availableSocialMedias];
-
-        selectedSocialMedias.push(event.target.innerHTML);
-        availableSocialMedias.splice(availableSocialMedias.indexOf(event.target.innerHTML), 1);
-
-        this.setState({ selectedSocialMedias: selectedSocialMedias });
-        this.setState({ availableSocialMedias: availableSocialMedias });
-    }
 
     handleResumeUpload = (event) => {
         console.log(event.target);
@@ -250,7 +238,10 @@ class PersonCreation extends Component {
             availableSkills: availableSkills,
             availableColleges: availableColleges,
             availableSocialMedias: availableSocialMedias,
-            selectedSocialMedias: ['Social Media'],
+            socialMediaSelection1: 'Social Media',
+            socialMediaSelection2: 'Social Media',
+            socialMediaSelection3: 'Social Media',
+            selectedSocialMedias: ['Github', 'LinkedIn', 'Stack Overflow'],
             collegeSelection: 'University / College'
         });
     }
@@ -258,7 +249,6 @@ class PersonCreation extends Component {
     render() {
         let additionalPhone;
         let additionalEmail;
-        let socialMediaInputs;
 
         if (this.state.extraPhone) {
             additionalPhone = 
@@ -299,39 +289,6 @@ class PersonCreation extends Component {
                 </div>
             </div>
         };
-
-        socialMediaInputs = this.state.selectedSocialMedias.map((socialMedia, index) => {
-            return (
-                <form className='col s12 person-creation-form'>
-                    <div className="row form-row">
-                        <div className="input-field col form-column" style={{width: "40%"}}>
-                            <div className="dropdown-button">
-                                <a className='dropdown-trigger btn dropdown-text-logo' href='' data-target="social-media-dropdown">
-                                    <i className="material-icons" style={{marginTop: "auto", marginBottom: "auto", marginRight: "5px"}}>group</i>
-                                    <p>{this.state.selectedSocialMedias[index]}</p>
-                                    <i className="material-icons" style={{fontSize: "30px"}}>arrow_drop_down</i>
-                                </a>
-                                <ul id="social-media-dropdown" className='dropdown-content'>
-                                    {this.state.availableSocialMedias.map((socialMedia, index) => {
-                                    return  <li key={index} style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}} onClick={this.addSocialMedia}>{socialMedia}</li>;
-                                    })}
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div className="input-field col form-column" style={{width: "40%"}}>
-                            <input id="social_media_account_link" className="validate" type="text" placeholder="Account Link" maxLength="50" onChange={this.enterInputFields}/>
-                        </div>
-
-                        <div className="input-field col form-row" style={{width: "20%"}}>
-                            <a className="btn-floating btn waves-effect waves-light red" onClick={this.addSocialMediaInput}>
-                                <i className="material-icons">add</i></a>
-                            <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto", paddingLeft: "5px"}}>Add Another</span>
-                        </div>
-                    </div>
-                </form>
-            );
-        });
 
         return (
             <div className='person-creation-page'>
@@ -421,70 +378,74 @@ class PersonCreation extends Component {
 
                 {/* Social media section */}
                 <div className='row sm-person-creation-section' style={{flexDirection: "column", paddingLeft: "0", paddingRight: "0"}}>
-
-                    {/* {socialMediaInputs} */}
-
-                    {this.state.selectedSocialMedias.map((socialMedia, index) => {
-                        return (
-                            <form className='col s12 sm-person-creation-form' style={{paddingLeft: "0", paddingRight: "0"}}>
-                                <div className="row form-row" style={{justifyContent: "center", alignItems: "center"}}>
-                                    <div className="input-field col form-column" style={{padding: "0", width: "40%"}}>
-                                        <div className="dropdown-button">
-                                            <a className='dropdown-trigger btn dropdown-text-logo' style={{padding: "0", margin: "0"}} href="" data-target={socialMedia}>
-                                                <i className="material-icons" style={{marginTop: "auto", marginBottom: "auto", marginRight: "5px"}}>group</i>
-                                                <p>{this.state.selectedSocialMedias[index]}</p>
-                                                <i className="material-icons" style={{fontSize: "30px"}}>arrow_drop_down</i>
-                                            </a>
-                                            <ul id={socialMedia} className='dropdown-content'>
-                                                {this.state.availableSocialMedias.map((socialMedia, index) => {
-                                                return  <li key={index} style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}} onClick={this.addSocialMedia}>{socialMedia}</li>;
-                                                })}
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div className="input-field col form-column" style={{padding: "0 10px", width: "40%"}}>
-                                        <input id="social_media_account_link" className="validate" type="text" placeholder="Account Link" maxLength="100" onChange={this.enterInputFields}/>
-                                    </div>
-
-                                    <div className="input-field col form-row" style={{padding: "0", width: "20%"}}>
-                                        <a className="btn-floating btn waves-effect waves-light red" onClick={this.addSocialMediaInput}>
-                                            <i className="material-icons">add</i></a>
-                                        <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto", paddingLeft: "5px"}}>Add Another</span>
-                                    </div>
-                                </div>
-                            </form>
-                        );
-                    })}
-
-                    {/* <form className='col s12 person-creation-form'>
-                        <div className="row form-row">
-                            <div className="input-field col form-column" style={{width: "40%"}}>
+                    <form className='col s12 sm-person-creation-form' style={{paddingLeft: "0", paddingRight: "0"}}>
+                        <div className="row form-row" style={{justifyContent: "center", alignItems: "center"}}>
+                            <div className="input-field col form-column" style={{padding: "0", width: "40%"}}>
                                 <div className="dropdown-button">
-                                    <a className='dropdown-trigger btn dropdown-text-logo' href='' data-target='dropdown' closeOnClick={true}>
+                                    <a className='dropdown-trigger btn dropdown-text-logo' style={{padding: "0", margin: "0"}} href="" data-target='social_media_dropdown1'>
                                         <i className="material-icons" style={{marginTop: "auto", marginBottom: "auto", marginRight: "5px"}}>group</i>
-                                        <p>{this.state.selectedSocialMedias[0]}</p>
+                                        <p>{this.state.socialMediaSelection1}</p>
                                         <i className="material-icons" style={{fontSize: "30px"}}>arrow_drop_down</i>
                                     </a>
-                                    <ul id='dropdown' className='dropdown-content'>
+                                    <ul id='social_media_dropdown1' className='dropdown-content'>
                                         {this.state.availableSocialMedias.map((socialMedia, index) => {
-                                        return  <li key={index} style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}} onClick={this.addSocialMedia}>{socialMedia}</li>;
+                                        return  <li key={index} style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}} onClick={this.selectSocialMedia}>{socialMedia}</li>;
                                         })}
                                     </ul>
                                 </div>
                             </div>
 
-                            <div className="input-field col form-column" style={{width: "40%"}}>
-                                <input id="social_media_account_link" className="validate" type="text" placeholder="Account Link" maxLength="50" onChange={this.enterInputFields}/>
-                            </div>
-
-                            <div className="input-field col form-row" style={{width: "20%"}}>
-                                <a className="btn-floating btn waves-effect waves-light red" onClick={this.addSocialMediaInput}>
-                                    <i className="material-icons">add</i></a>
-                                <span style={{color:"#9e9e9e", marginTop: "auto", marginBottom: "auto", paddingLeft: "5px"}}>Add Another</span>
+                            <div className="input-field col form-column" style={{padding: "0 10px", width: "40%"}}>
+                                <input id="social_media_account_link1" className="validate" type="text" placeholder="Account Link" maxLength="100" onChange={this.enterInputFields}/>
                             </div>
                         </div>
-                    </form> */}
+                    </form>
+
+                    <form className='col s12 sm-person-creation-form' style={{paddingLeft: "0", paddingRight: "0"}}>
+                        <div className="row form-row" style={{justifyContent: "center", alignItems: "center"}}>
+                            <div className="input-field col form-column" style={{padding: "0", width: "40%"}}>
+                                <div className="dropdown-button">
+                                    <a className='dropdown-trigger btn dropdown-text-logo' style={{padding: "0", margin: "0"}} href="" data-target='social_media_dropdown2'>
+                                        <i className="material-icons" style={{marginTop: "auto", marginBottom: "auto", marginRight: "5px"}}>group</i>
+                                        <p>{this.state.socialMediaSelection2}</p>
+                                        <i className="material-icons" style={{fontSize: "30px"}}>arrow_drop_down</i>
+                                    </a>
+                                    <ul id='social_media_dropdown2' className='dropdown-content'>
+                                        {this.state.availableSocialMedias.map((socialMedia, index) => {
+                                        return  <li key={index} style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}} onClick={this.selectSocialMedia}>{socialMedia}</li>;
+                                        })}
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div className="input-field col form-column" style={{padding: "0 10px", width: "40%"}}>
+                                <input id="social_media_account_link2" className="validate" type="text" placeholder="Account Link" maxLength="100" onChange={this.enterInputFields}/>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form className='col s12 sm-person-creation-form' style={{paddingLeft: "0", paddingRight: "0"}}>
+                        <div className="row form-row" style={{justifyContent: "center", alignItems: "center"}}>
+                            <div className="input-field col form-column" style={{padding: "0", width: "40%"}}>
+                                <div className="dropdown-button">
+                                    <a className='dropdown-trigger btn dropdown-text-logo' style={{padding: "0", margin: "0"}} href="" data-target='social_media_dropdown3'>
+                                        <i className="material-icons" style={{marginTop: "auto", marginBottom: "auto", marginRight: "5px"}}>group</i>
+                                        <p>{this.state.socialMediaSelection3}</p>
+                                        <i className="material-icons" style={{fontSize: "30px"}}>arrow_drop_down</i>
+                                    </a>
+                                    <ul id='social_media_dropdown3' className='dropdown-content'>
+                                        {this.state.availableSocialMedias.map((socialMedia, index) => {
+                                        return  <li key={index} style={{fontSize:"20px", display:"flex", justifyContent:"center", alignItems:"center"}} onClick={this.selectSocialMedia}>{socialMedia}</li>;
+                                        })}
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div className="input-field col form-column" style={{padding: "0 10px", width: "40%"}}>
+                                <input id="social_media_account_link3" className="validate" type="text" placeholder="Account Link" maxLength="100" onChange={this.enterInputFields}/>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
                 {/* University/College section */}
