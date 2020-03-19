@@ -1,0 +1,17 @@
+div.collapsible-body p {
+    margin: 5px;
+    display: inline-block;
+}
+
+.checkbox-row {
+    text-align: left;
+}
+
+.collapsible-header i {
+    font-size: 15px;
+}
+
+[type="radio"]:checked+span:after, [type="checkbox"].filled-in:checked+span:after{
+    background-color: #f04e2f !important;
+    border-color:  #f04e2f !important;
+  }
